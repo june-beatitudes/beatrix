@@ -12,8 +12,6 @@ typedef void (*ivt_entry_t) (void);
 __attribute__ ((section (".ivt"))) const static ivt_entry_t IVT[] = {
         (ivt_entry_t)STACK_TOP,
         bea_kern_onreset,
-        NULL,
-        NULL,
 };
 
 #endif
