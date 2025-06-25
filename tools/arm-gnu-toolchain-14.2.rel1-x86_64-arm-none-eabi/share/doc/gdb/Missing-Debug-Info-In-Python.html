@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Copyright (C) 1988-2024 Free Software Foundation, Inc.
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3 or
+any later version published by the Free Software Foundation; with the
+Invariant Sections being "Free Software" and "Free Software Needs
+Free Documentation", with the Front-Cover Texts being "A GNU Manual,"
+and with the Back-Cover Texts as in (a) below.
+
+(a) The FSF's Back-Cover Text is: "You are free to copy and modify
+this GNU Manual.  Buying copies from GNU Press supports the FSF in
+developing GNU and promoting software freedom." -->
+<!-- Created by GNU Texinfo 6.5, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Missing Debug Info In Python (Debugging with GDB)</title>
+
+<meta name="description" content="Missing Debug Info In Python (Debugging with GDB)">
+<meta name="keywords" content="Missing Debug Info In Python (Debugging with GDB)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<link href="index.html#Top" rel="start" title="Top">
+<link href="Concept-Index.html#Concept-Index" rel="index" title="Concept Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Python-API.html#Python-API" rel="up" title="Python API">
+<link href="Python-Auto_002dloading.html#Python-Auto_002dloading" rel="next" title="Python Auto-loading">
+<link href="Disassembly-In-Python.html#Disassembly-In-Python" rel="prev" title="Disassembly In Python">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+blockquote.smallindentedblock {margin-right: 0em; font-size: smaller}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<a name="Missing-Debug-Info-In-Python"></a>
+<div class="header">
+<p>
+Previous: <a href="Disassembly-In-Python.html#Disassembly-In-Python" accesskey="p" rel="prev">Disassembly In Python</a>, Up: <a href="Python-API.html#Python-API" accesskey="u" rel="up">Python API</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Missing-Debug-Info-In-Python-1"></a>
+<h4 class="subsubsection">23.3.2.41 Missing Debug Info In Python</h4>
+<a name="index-python_002c-handle-missing-debug-information"></a>
+
+<p>When <small>GDB</small> encounters a new objfile (see <a href="Objfiles-In-Python.html#Objfiles-In-Python">Objfiles In Python</a>), e.g. the primary executable, or any shared libraries used
+by the inferior, <small>GDB</small> will attempt to load the corresponding
+debug information for that objfile.  The debug information might be
+found within the objfile itself, or within a separate objfile which
+<small>GDB</small> will automatically locate and load.
+</p>
+<p>Sometimes though, <small>GDB</small> might not find any debug information
+for an objfile, in this case the debugging experience will be
+restricted.
+</p>
+<p>If <small>GDB</small> fails to locate any debug information for a particular
+objfile, there is an opportunity for a Python extension to step in.  A
+Python extension can potentially locate the missing debug information
+using some platform- or project-specific steps, and inform
+<small>GDB</small> of its location.  Or a Python extension might provide
+some platform- or project-specific advice to the user about how to
+obtain the missing debug information.
+</p>
+<p>A missing debug information Python extension consists of a handler
+object which has the <code>name</code> and <code>enabled</code> attributes, and
+implements the <code>__call__</code> method.  When <small>GDB</small> encounters
+an objfile for which it is unable to find any debug information, it
+invokes the <code>__call__</code> method.  Full details of how handlers are
+written can be found below.
+</p>
+<a name="The-gdb_002emissing_005fdebug-Module"></a>
+<h4 class="subheading">The <code>gdb.missing_debug</code> Module</h4>
+
+<p><small>GDB</small> comes with a <code>gdb.missing_debug</code> module which
+contains the following class and global function:
+</p>
+<dl>
+<dt><a name="index-gdb_002emissing_005fdebug_002eMissingDebugHandler"></a>class: <strong>gdb.missing_debug.MissingDebugHandler</strong></dt>
+<dd>
+<p><code>MissingDebugHandler</code> is a base class from which user-created
+handlers can derive, though it is not required that handlers derive
+from this class, so long as any user created handler has the
+<code>name</code> and <code>enabled</code> attributes, and implements the
+<code>__call__</code> method.
+</p>
+<dl>
+<dt><a name="index-MissingDebugHandler_002e_005f_005finit_005f_005f"></a>Function: <strong>MissingDebugHandler.__init__</strong> <em>(name)</em></dt>
+<dd><p>The <var>name</var> is a string used to reference this missing debug
+handler within some <small>GDB</small> commands.  Valid names consist of the
+characters <code>[-_a-zA-Z0-9]</code>, creating a handler with an invalid
+name raises a <code>ValueError</code> exception.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-MissingDebugHandler_002e_005f_005fcall_005f_005f"></a>Function: <strong>MissingDebugHandler.__call__</strong> <em>(objfile)</em></dt>
+<dd><p>Sub-classes must override the <code>__call__</code> method.  The
+<var>objfile</var> argument will be a <code>gdb.Objfile</code>, this is the
+objfile for which <small>GDB</small> was unable to find any debug
+information.
+</p>
+<p>The return value from the <code>__call__</code> method indicates what
+<small>GDB</small> should do next.  The possible return values are:
+</p>
+<ul>
+<li> <code>None</code>
+
+<p>This indicates that this handler could not help with <var>objfile</var>,
+<small>GDB</small> should call any other registered handlers.
+</p>
+</li><li> <code>True</code>
+
+<p>This indicates that this handler has installed the debug information
+into a location where <small>GDB</small> would normally expect to find it
+when looking for separate debug information files (see <a href="Separate-Debug-Files.html#Separate-Debug-Files">Separate Debug Files</a>).  <small>GDB</small> will repeat the normal lookup process,
+which should now find the separate debug file.
+</p>
+<p>If <small>GDB</small> still doesn&rsquo;t find the separate debug information file
+after this second attempt, then the Python missing debug information
+handlers are not invoked a second time, this prevents a badly behaved
+handler causing <small>GDB</small> to get stuck in a loop.  <small>GDB</small>
+will continue without any debug information for <var>objfile</var>.
+</p>
+</li><li> <code>False</code>
+
+<p>This indicates that this handler has done everything that it intends
+to do with <var>objfile</var>, but no separate debug information can be
+found.  <small>GDB</small> will not call any other registered handlers for
+<var>objfile</var>.  <small>GDB</small> will continue without debugging
+information for <var>objfile</var>.
+</p>
+</li><li> A string
+
+<p>The returned string should contain a filename.  <small>GDB</small> will not
+call any further registered handlers, and will instead load the debug
+information from the file identified by the returned filename.
+</p></li></ul>
+
+<p>Invoking the <code>__call__</code> method from this base class will raise a
+<code>NotImplementedError</code> exception.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-MissingDebugHandler_002ename"></a>Variable: <strong>MissingDebugHandler.name</strong></dt>
+<dd><p>A read-only attribute which is a string, the name of this handler
+passed to the <code>__init__</code> method.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-MissingDebugHandler_002eenabled"></a>Variable: <strong>MissingDebugHandler.enabled</strong></dt>
+<dd><p>A modifiable attribute containing a boolean; when <code>True</code>, the
+handler is enabled, and will be used by <small>GDB</small>.  When
+<code>False</code>, the handler has been disabled, and will not be used.
+</p></dd></dl>
+</dd></dl>
+
+<dl>
+<dt><a name="index-gdb_002emissing_005fdebug_002eregister_005fhandler"></a>Function: <strong>gdb.missing_debug.register_handler</strong> <em>(locus, handler, replace=<code>False</code>)</em></dt>
+<dd><p>Register a new missing debug handler with <small>GDB</small>.
+</p>
+<p><var>handler</var> is an instance of a sub-class of
+<code>MissingDebugHandler</code>, or at least an instance of an object that
+has the same attributes and methods as <code>MissingDebugHandler</code>.
+</p>
+<p><var>locus</var> specifies to which handler list to prepend <var>handler</var>.
+It can be either a <code>gdb.Progspace</code> (see <a href="Progspaces-In-Python.html#Progspaces-In-Python">Progspaces In Python</a>)
+or <code>None</code>, in which case the handler is registered globally.  The
+newly registered <var>handler</var> will be called before any other handler
+from the same locus.  Two handlers in the same locus cannot have the
+same name, an attempt to add a handler with an already existing name
+raises an exception unless <var>replace</var> is <code>True</code>, in which case
+the old handler is deleted and the new handler is prepended to the
+selected handler list.
+</p>
+<p><small>GDB</small> first calls the handlers for the current program space,
+and then the globally registered handlers.  As soon as a handler
+returns a value other than <code>None</code>, no further handlers are called
+for this objfile.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Disassembly-In-Python.html#Disassembly-In-Python" accesskey="p" rel="prev">Disassembly In Python</a>, Up: <a href="Python-API.html#Python-API" accesskey="u" rel="up">Python API</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>
