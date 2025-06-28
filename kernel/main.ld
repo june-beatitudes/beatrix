@@ -45,6 +45,8 @@ SECTIONS {
         . = ALIGN(4);
     } >FLASH
 
+    .beatrix_version : { KEEP(*(.beatrix_version)) } >FLASH
+
     .ARM.extab : { *(.ARM.extab* .gnu.linkonce.armextab.*) } >FLASH
     .ARM : {
         __exidx_start = .;
@@ -100,30 +102,7 @@ SECTIONS {
         __bss_end__ = _ebss;
     } >RAM1
 
-    /* User_heap_stack section, used to check that there is enough RAM left */
-    /* DSECT: https://software-dl.ti.com/ccs/esd/documents/sdto_cgt_linker_special_section_types.html */
-    ._user_heap_stack(DSECT) : {
-        . = ALIGN(8);
-        __heap_start__ = .;
-        . = ORIGIN(RAM1) + LENGTH(RAM1) - _stack_size;
-        __heap_end__ = .;
-        . = . + _stack_size;
-        . = ALIGN(8);
-    } >RAM1
-
-    /* Free Flash space, that can be used for internal storage */
-    .free_flash(DSECT) : {
-        __free_flash_start__ = .;
-        . = ORIGIN(FLASH) + LENGTH(FLASH);
-    } >FLASH
-
     .ARM.attributes 0       : { *(.ARM.attributes) }
-    ._sram2a_start          : { . = ALIGN(4); __sram2a_start__ = .; } >RAM2A
-    MAPPING_TABLE (NOLOAD)  : { *(MAPPING_TABLE) } >RAM2A
-    MB_MEM1 (NOLOAD)        : { *(MB_MEM1) } >RAM2A
-    MB_MEM2 (NOLOAD)        : { _sMB_MEM2 = . ; *(MB_MEM2) ; _eMB_MEM2 = . ; } >RAM2A
-    ._sram2a_free           : { . = ALIGN(4); __sram2a_free__ = .; } >RAM2A
-    ._sram2b_start          : { . = ALIGN(4); __sram2b_start__ = .; } >RAM2B
 
     /* Default debug-related rules from ld */
 
