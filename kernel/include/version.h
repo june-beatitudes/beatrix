@@ -6,9 +6,10 @@
 #define BEA_VERSION_NAME_MAXLEN 31
 #define BEA_GIT_HASH_LEN 40
 
-struct bea_version {
-    char name[BEA_VERSION_NAME_MAXLEN];
-    char git_hash[BEA_GIT_HASH_LEN];
+struct bea_version
+{
+  char name[BEA_VERSION_NAME_MAXLEN];
+  char git_hash[BEA_GIT_HASH_LEN];
 };
 
 #endif
