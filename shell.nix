@@ -9,6 +9,7 @@
       ncurses
       zstd
       libtinfo
+      doxygen
     ]);
   runScript = "fish";
 }).env
