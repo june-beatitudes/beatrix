@@ -1,4 +1,5 @@
 #include <common.h>
+#include <pwr.h>
 #include <rcc.h>
 #include <rtc.h>
 
@@ -6,7 +7,7 @@ bool
 bea_rtc_initialize (enum bea_rtc_clksrc clock_source)
 {
   // Set PWR_CR flag so we can write to RTC registers at all
-  *((uint32_t *)0x58000400) |= (1 << 8);
+  *(BEA_PWR_BASE_ADDR + BEA_PWR_CR1_OFFSET) |= (1 << 8);
   // We need to initialize a different register in the RCC module than other
   // peripherals. Ain't that a pain?
   *(BEA_RCC_BASE_ADDR + BEA_RCC_BDCR_OFFSET) |= (1 << 15);
@@ -25,11 +26,12 @@ bea_rtc_initialize (enum bea_rtc_clksrc clock_source)
       break;
     }
   // Disarm the write protection on the RTC registers
-  *(BEA_RTC_BASE_ADDR + 0x09) = 0xCA;
-  *(BEA_RTC_BASE_ADDR + 0x09) = 0x53;
+  *(BEA_RTC_BASE_ADDR + BEA_RTC_WPR_OFFSET) = 0xCA;
+  *(BEA_RTC_BASE_ADDR + BEA_RTC_WPR_OFFSET) = 0x53;
   // Set the INIT flag to enter initialization mode
   *(BEA_RTC_BASE_ADDR + BEA_RTC_ISR_OFFSET) |= (1 << 7);
   // Poll the INITF flag to wait for initialization mode to begin
+  // TODO: add timeout (?)
   while (!(*(BEA_RTC_BASE_ADDR + BEA_RTC_ISR_OFFSET) & (1 << 6)))
     ;
   // Set the prescaler so we can actually measure things
@@ -37,23 +39,24 @@ bea_rtc_initialize (enum bea_rtc_clksrc clock_source)
   switch (clock_source)
     {
     case BEA_RTC_CLKSRC_HSE:
-      *(BEA_RTC_BASE_ADDR + BEA_RTC_PRER_OFFSET) |= (1499999);
+      // TODO: implement this
       break;
     case BEA_RTC_CLKSRC_LSE:
       *(BEA_RTC_BASE_ADDR + BEA_RTC_PRER_OFFSET) &= ~(0x3FFF);
       *(BEA_RTC_BASE_ADDR + BEA_RTC_PRER_OFFSET) |= (255);
       break;
     case BEA_RTC_CLKSRC_LSI:
-      *(BEA_RTC_BASE_ADDR + BEA_RTC_PRER_OFFSET) |= (31999);
+      // TODO: implement this
       break;
     }
   // Exit initialization mode
   *(BEA_RTC_BASE_ADDR + BEA_RTC_ISR_OFFSET) &= ~(1 << 7);
   // Wait for everything to go through
+  // TODO: add timeout (?)
   while (!(*(BEA_RTC_BASE_ADDR + BEA_RTC_ISR_OFFSET) & (1 << 5)))
     ;
   // Re-arm the write protection on the RTC registers
-  *(BEA_RTC_BASE_ADDR + 0x09) = 0xFF;
+  *(BEA_RTC_BASE_ADDR + BEA_RTC_WPR_OFFSET) = 0xFF;
   return true;
 }
 

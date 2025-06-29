@@ -8,6 +8,7 @@
 #define BEA_RTC_ISR_OFFSET 0x03
 #define BEA_RCC_BDCR_OFFSET 0x024
 #define BEA_RTC_PRER_OFFSET 0x04
+#define BEA_RTC_WPR_OFFSET 0x09
 /**
  * @brief Represents a clock source for the RTC subsystem to use (see RM0434
  * pp. 263)
