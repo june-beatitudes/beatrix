@@ -43,6 +43,7 @@ bea_rcc_enable_peripheral (enum bea_io_bank_t io_bank, uint8_t offset)
       reg_offset = 0x050;
       break;
     }
+  reg_offset /= sizeof (uint32_t);
   *(BEA_RCC_BASE_ADDR + reg_offset) |= (1 << offset);
   return true;
 }

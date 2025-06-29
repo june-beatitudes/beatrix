@@ -1,5 +1,6 @@
 #include <common.h>
 #include <isr.h>
+#include <rtc.h>
 
 static inline int __attribute__ ((always_inline))
 _bea_semihost_rq (int reason, void *arg)
@@ -28,8 +29,18 @@ bea_printk (const char *msg)
 void
 bea_main ()
 {
+  bea_rtc_initialize (BEA_RTC_CLKSRC_LSE);
+  const char msg_flash[] = "0 Hello, world!\n";
+  char *msg = (char *)0x20000000;
+  for (size_t i = 0; i < sizeof (msg_flash); ++i)
+    {
+      msg[i] = msg_flash[i];
+    }
   for (;;)
-    bea_printk ("Hello, world!\n");
+    {
+      msg[0] = '0' + bea_rtc_get_seconds ();
+      bea_printk (msg);
+    }
 }
 
 void

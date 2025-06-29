@@ -1,6 +1,10 @@
 #ifndef BEATRIX_PROCESSOR_H
 #define BEATRIX_PROCESSOR_H
 
+/**
+ * @brief Represents an I/O peripheral bank
+ *
+ */
 enum bea_io_bank_t
 {
   BEA_APB1,
