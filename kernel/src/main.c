@@ -27,19 +27,82 @@ bea_printk (const char *msg)
 #undef SYS_WRITE0
 
 void
+bea_string_copy (const char *from, char *to, size_t n)
+{
+  for (size_t i = 0; i < n; ++i)
+    {
+      to[i] = from[i];
+    }
+}
+
+const static char BEA_WEEKDAY_NAMES[7][4] = {
+  "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN",
+};
+
+const static char BEA_MONTH_NAMES[12][4] = {
+  "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+  "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
+};
+
+bool
+bea_krnl_datetime_to_str (const struct bea_datetime datetime, char *buf)
+{
+  if (!bea_datetime_is_valid (datetime))
+    {
+      return false;
+    }
+  char *cursor = buf;
+  bea_string_copy (BEA_WEEKDAY_NAMES[(size_t)datetime.dotw], cursor, 3);
+  cursor += 3;
+  *cursor = ' ';
+  cursor++;
+  bea_string_copy (BEA_MONTH_NAMES[(size_t)datetime.month], cursor, 3);
+  cursor += 3;
+  *cursor = ' ';
+  cursor++;
+  *cursor = '0' + datetime.day / 10;
+  cursor++;
+  *cursor = '0' + datetime.day % 10;
+  cursor++;
+  bea_string_copy (" 20", cursor, 3);
+  cursor += 3;
+  *cursor = '0' + datetime.year / 10;
+  cursor++;
+  *cursor = '0' + datetime.year % 10;
+  cursor++;
+  *cursor = ' ';
+  cursor++;
+  *cursor = '0' + datetime.hour / 10;
+  cursor++;
+  *cursor = '0' + datetime.hour % 10;
+  cursor++;
+  *cursor = ':';
+  cursor++;
+  *cursor = '0' + datetime.minute / 10;
+  cursor++;
+  *cursor = '0' + datetime.minute % 10;
+  cursor++;
+  *cursor = ':';
+  cursor++;
+  *cursor = '0' + datetime.second / 10;
+  cursor++;
+  *cursor = '0' + datetime.second % 10;
+  cursor++;
+  bea_string_copy (" UTC", cursor, 5);
+  return true;
+}
+
+void
 bea_main ()
 {
   bea_rtc_initialize (BEA_RTC_CLKSRC_LSE);
-  const char msg_flash[] = "0 Hello, world!\n";
-  char *msg = (char *)0x20000000;
-  for (size_t i = 0; i < sizeof (msg_flash); ++i)
-    {
-      msg[i] = msg_flash[i];
-    }
+  char buf[29];
   for (;;)
     {
-      msg[0] = '0' + bea_rtc_get_seconds ();
-      bea_printk (msg);
+      struct bea_datetime now = bea_rtc_get_datetime ();
+      bea_krnl_datetime_to_str (now, buf);
+      bea_printk (buf);
+      bea_printk ("\n");
     }
 }
 
