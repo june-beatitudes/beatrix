@@ -21,6 +21,8 @@
             libtinfo
             zsh
             bear
+	    doxygen
+	    doxygen_gui
           ]);
       };
     in

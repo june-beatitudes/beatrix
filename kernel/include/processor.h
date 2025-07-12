@@ -3,7 +3,6 @@
 
 /**
  * @brief Represents an I/O peripheral bank
- *
  */
 enum bea_io_bank_t
 {
@@ -19,7 +18,6 @@ enum bea_io_bank_t
  * @brief Enables the STM32WB55RGV hardware FPU. Must be called before *any*
  * floating point instructions are executed. Reference STMicroelectronics
  * PM0214 Rev. 10, pp. 257
- *
  */
 void bea_fpu_enable ();
 
