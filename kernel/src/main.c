@@ -1,6 +1,9 @@
+#include <ftoa.h>
 #include <isr.h>
+#include <processor.h>
 #include <rcc.h>
 #include <rtc.h>
+#include <stdbool.h>
 #include <stdlib.h>
 
 static inline int __attribute__ ((always_inline))
@@ -96,12 +99,16 @@ bea_krnl_datetime_to_str (const struct bea_datetime datetime, char *buf)
 void
 bea_main ()
 {
+  bea_fpu_enable ();
   bea_rtc_initialize (BEA_RTC_CLKSRC_LSE);
-  char buf[29];
+  char buf[9];
+  buf[8] = '\0';
+  float test = 3.141593;
   for (;;)
     {
-      struct bea_datetime now = bea_rtc_get_datetime ();
-      bea_krnl_datetime_to_str (now, buf);
+      // struct bea_datetime now = bea_rtc_get_datetime ();
+      // bea_krnl_datetime_to_str (now, buf);
+      bea_ftoa (test, buf, 8, false);
       bea_printk (buf);
       bea_printk ("\n");
     }
