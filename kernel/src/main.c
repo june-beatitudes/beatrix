@@ -1,6 +1,7 @@
-#include <common.h>
 #include <isr.h>
+#include <rcc.h>
 #include <rtc.h>
+#include <stdlib.h>
 
 static inline int __attribute__ ((always_inline))
 _bea_semihost_rq (int reason, void *arg)
@@ -49,7 +50,7 @@ bea_krnl_datetime_to_str (const struct bea_datetime datetime, char *buf)
 {
   if (!bea_datetime_is_valid (datetime))
     {
-      return false;
+      // return false;
     }
   char *cursor = buf;
   bea_string_copy (BEA_WEEKDAY_NAMES[(size_t)datetime.dotw], cursor, 3);

@@ -1,6 +1,8 @@
-#include <common.h>
 #include <processor.h>
 #include <rcc.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdlib.h>
 
 bool
 bea_rcc_enable_peripheral (enum bea_io_bank_t io_bank, uint8_t offset)

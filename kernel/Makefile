@@ -5,7 +5,7 @@ LD := ../tools/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eab
 FMT ?= clang-format
 SHELL := bash
 
-CFLAGS += -c -Wall -Werror -g -O0 -I./include -nostdlib -nostartfiles -march=armv7e-m -DBEA_GIT_HASH="\"$(GIT_HASH)\""
+CFLAGS += -c -Wall -Werror -g -O0 -I./include -nostdlib -nostartfiles -march=armv7e-m -DBEA_GIT_HASH="\"$(GIT_HASH)\"" -lm
 
 cfiles := $(wildcard src/*.c)
 ofiles := $(cfiles:.c=.o)

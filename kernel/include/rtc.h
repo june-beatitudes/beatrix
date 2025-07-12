@@ -1,7 +1,8 @@
 #ifndef BEATRIX_RTC_H
 #define BEATRIX_RTC_H
 
-#include <common.h>
+#include <stdbool.h>
+#include <stdint.h>
 
 #define BEA_RTC_BASE_ADDR (uint32_t *)(0x40002800)
 
@@ -100,6 +101,33 @@ struct bea_datetime
  * @return false The represented datetime is invalid
  */
 bool bea_datetime_is_valid (struct bea_datetime datetime);
+
+/**
+ * @brief Converts a standard Unix timestamp (seconds since the beginning of
+ * the year 1970) to a `bea_datetime`
+ *
+ * @param timestamp The timestamp in Unix format
+ * @param datetime_out A pointer to an uninitialized `bea_datetime` object,
+ * which will be filled out by the function
+ * @return true The conversion was successful
+ * @return false The conversion was unsuccessful due to a mismatch in
+ * representable ranges
+ */
+bool bea_unix_to_datetime (uint64_t timestamp,
+                           struct bea_datetime *datetime_out);
+
+/**
+ * @brief converts a `bea_datetime` to a Unix timestamp (seconds since the
+ * beginning of the year 1970)
+ *
+ * @param datetime The datetime in `bea_datetime` format
+ * @param timestamp_out A pointer to an uninitialized `uint64_t`, whose value
+ * will be filled in by the function
+ * @return true The conversion was successful
+ * @return false The conversion was unsuccessful because `datetime` is invalid
+ */
+bool bea_datetime_to_unix (struct bea_datetime datetime,
+                           uint64_t timestamp_out);
 
 #define BEA_RTC_TR_OFFSET 0x00
 #define BEA_RTC_DR_OFFSET 0x01

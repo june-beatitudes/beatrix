@@ -1,8 +1,9 @@
 #ifndef BEATRIX_RCC_H
 #define BEATRIX_RCC_H
 
-#include <common.h>
 #include <processor.h>
+#include <stdbool.h>
+#include <stdint.h>
 
 #define BEA_RCC_BASE_ADDR (uint32_t *)(0x58000000)
 

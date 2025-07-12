@@ -1,4 +1,3 @@
-#include <common.h>
 #include <version.h>
 
 #ifndef BEA_GIT_HASH

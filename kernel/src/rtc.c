@@ -1,7 +1,8 @@
-#include <common.h>
 #include <pwr.h>
 #include <rcc.h>
 #include <rtc.h>
+#include <stddef.h>
+#include <stdint.h>
 
 static bool
 bea_month_day_is_valid (struct bea_datetime datetime)
