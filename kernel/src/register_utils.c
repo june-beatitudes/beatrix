@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 __attribute__ ((always_inline)) inline void
-bea_set_reg_bits (uint32_t *base_addr, uint8_t msb, uint8_t lsb,
+bea_set_reg_bits (volatile uint32_t *base_addr, uint8_t msb, uint8_t lsb,
                   uint32_t value)
 {
   if (msb > 31 || msb < lsb)
@@ -21,7 +21,7 @@ bea_set_reg_bits (uint32_t *base_addr, uint8_t msb, uint8_t lsb,
 }
 
 __attribute__ ((always_inline)) inline uint32_t
-bea_get_reg_bits (uint32_t *base_addr, uint8_t msb, uint8_t lsb)
+bea_get_reg_bits (volatile uint32_t *base_addr, uint8_t msb, uint8_t lsb)
 {
   if (msb > 31 || msb < lsb)
     {

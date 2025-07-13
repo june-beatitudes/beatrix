@@ -88,10 +88,8 @@ bea_krnl_datetime_to_str (const struct bea_datetime datetime, char *buf)
   cursor++;
   *cursor = ':';
   cursor++;
-  *cursor = '0' + datetime.second / 10;
-  cursor++;
-  *cursor = '0' + datetime.second % 10;
-  cursor++;
+  bea_ftoa (datetime.second, cursor, 6, false);
+  cursor += 6;
   bea_string_copy (" UTC", cursor, 5);
   return true;
 }
@@ -100,15 +98,24 @@ void
 bea_main ()
 {
   bea_fpu_enable ();
-  bea_rtc_initialize (BEA_RTC_CLKSRC_LSE);
-  char buf[9];
-  buf[8] = '\0';
-  float test = 3.141593;
+  struct bea_datetime foo = {
+    .year = 25,
+    .month = BEA_MONTH_JULY,
+    .day = 12,
+    .dotw = BEA_DOTW_SATURDAY,
+    .hour = 21,
+    .minute = 30,
+    .second = 0.0f,
+  };
+  bea_rtc_initialize (BEA_RTC_CLKSRC_LSE, foo, 256);
+  char buf[30];
+  buf[29] = '\0';
+  // float test = 3.141593;
   for (;;)
     {
-      // struct bea_datetime now = bea_rtc_get_datetime ();
-      // bea_krnl_datetime_to_str (now, buf);
-      bea_ftoa (test, buf, 8, false);
+      struct bea_datetime now = bea_rtc_get_datetime ();
+      bea_krnl_datetime_to_str (now, buf);
+      // bea_ftoa (test, buf, 8, false);
       bea_printk (buf);
       bea_printk ("\n");
     }

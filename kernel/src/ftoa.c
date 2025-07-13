@@ -42,7 +42,7 @@ bea_ftoa (float x, char *buf, size_t n_available, bool include_positive_sign)
   char *cursor = buf;
   for (int32_t i = integral_length - 1; i >= 0; --i)
     {
-      cursor[i] = lroundf (remainderf (integral_part, 10.0f)) + '0';
+      cursor[i] = lroundf (fmodf (integral_part, 10.0f)) + '0';
       integral_part = floorf (integral_part / 10.0f);
     }
 

@@ -5,7 +5,7 @@ LD := ../tools/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eab
 FMT ?= clang-format
 SHELL := bash
 
-CFLAGS += -c -Wall -Werror -g -O0 -I./include -ffreestanding -fno-math-errno -nostdlib -mfloat-abi=hard -march=armv7e-m+fp -DBEA_GIT_HASH="\"$(GIT_HASH)\""
+CFLAGS += -c -Wall -Werror -g -O0 -I./include -ffreestanding -nostartfiles -fno-math-errno -nostdlib -mfloat-abi=hard -march=armv7e-m+fp -DBEA_GIT_HASH="\"$(GIT_HASH)\""
 LIBM += ../tools/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a
 LIBGCC += ../tools/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/thumb/v7e-m+fp/hard/libgcc.a
 

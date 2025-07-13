@@ -15,7 +15,7 @@
  * @param value The value to write into that range of the register. Only the
  * lowest `(1 + msb - lsb)` bits will be written, all others will be discarded
  */
-void bea_set_reg_bits (uint32_t *base_addr, uint8_t msb, uint8_t lsb,
+void bea_set_reg_bits (volatile uint32_t *base_addr, uint8_t msb, uint8_t lsb,
                        uint32_t value);
 
 /**
@@ -30,6 +30,7 @@ void bea_set_reg_bits (uint32_t *base_addr, uint8_t msb, uint8_t lsb,
  * copied to. Only the lowest `(1 + msb - lsb)` will be significant, all higher
  * bits will simply be set to zero
  */
-uint32_t bea_get_reg_bits (uint32_t *base_addr, uint8_t msb, uint8_t lsb);
+uint32_t bea_get_reg_bits (volatile uint32_t *base_addr, uint8_t msb,
+                           uint8_t lsb);
 
 #endif
