@@ -25,3 +25,7 @@ src/%.o: src/%.c
 
 format: $(cfiles) $(hfiles)
 	clang-format $^ -i
+
+docs: $(cfiles) $(hfiles) Doxyfile
+	rm -rf docs/*
+	doxygen
