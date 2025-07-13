@@ -1,5 +1,6 @@
 #include <pwr.h>
 #include <rcc.h>
+#include <register_utils.h>
 #include <rtc.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -67,28 +68,29 @@ struct bea_datetime
 bea_rtc_get_datetime ()
 {
   struct bea_datetime result;
-  uint32_t tr_contents
-      = *(BEA_RTC_BASE_ADDR + BEA_RTC_TR_OFFSET); // Time register
-  uint32_t dr_contents
-      = *(BEA_RTC_BASE_ADDR + BEA_RTC_DR_OFFSET); // Date register
+  uint32_t *t_reg = BEA_RTC_BASE_ADDR + BEA_RTC_TR_OFFSET; // Time register
+  uint32_t *d_reg = BEA_RTC_BASE_ADDR + BEA_RTC_DR_OFFSET; // Date register
   // Extract the time, which is given in bitpacked BCD format for some
   // God-forsaken reason
-  result.second = (tr_contents & 0xF) + 10 * ((tr_contents & 0xF0) >> 4);
+  result.second
+      = bea_get_reg_bits (t_reg, 3, 0) + 10 * bea_get_reg_bits (t_reg, 7, 4);
   result.minute
-      = ((tr_contents & 0xF00) >> 8) + 10 * ((tr_contents & 0xF000) >> 12);
-  result.hour = ((tr_contents & 0xF0000) >> 16)
-                + 10 * ((tr_contents & 0x300000) >> 20);
-  if ((tr_contents & 0x400000) != 0)
+      = bea_get_reg_bits (t_reg, 11, 8) + 10 * bea_get_reg_bits (t_reg, 15, 9);
+  result.hour = bea_get_reg_bits (t_reg, 19, 16)
+                + 10 * bea_get_reg_bits (t_reg, 23, 20);
+  if (bea_get_reg_bits (t_reg, 24, 24) != 0)
     {
       result.hour += 12;
     }
   // Extract the date, which is in a similarly God-forsaken format
-  result.day = (dr_contents & 0xF) + 10 * ((dr_contents & 0xF0) >> 4);
-  result.month = (enum bea_month) ((((dr_contents & 0xF00) >> 8) - 1)
-                                   + 10 * ((dr_contents & 0x1000) >> 12));
-  result.dotw = (enum bea_dotw) (((dr_contents & 0xE000) >> 13) - 1);
-  result.year = ((dr_contents & 0xF0000) >> 16)
-                + 10 * ((dr_contents & 0xF00000) >> 20);
+  result.day
+      = bea_get_reg_bits (d_reg, 3, 0) + 10 * bea_get_reg_bits (d_reg, 7, 4);
+  result.month
+      = (enum bea_month) (bea_get_reg_bits (d_reg, 11, 8)
+                          + 10 * bea_get_reg_bits (d_reg, 12, 12) - 1);
+  result.dotw = (enum bea_dotw) (bea_get_reg_bits (d_reg, 15, 13) - 1);
+  result.year = bea_get_reg_bits (d_reg, 19, 16)
+                + 10 * bea_get_reg_bits (d_reg, 23, 20);
   return result;
 }
 
@@ -96,55 +98,55 @@ bool
 bea_rtc_initialize (enum bea_rtc_clksrc clock_source)
 {
   // Set PWR_CR flag so we can write to RTC registers at all
-  *(BEA_PWR_BASE_ADDR + BEA_PWR_CR1_OFFSET) |= (1 << 8);
+  bea_set_reg_bits (BEA_PWR_BASE_ADDR + BEA_PWR_CR1_OFFSET, 8, 8, 1);
   // We need to initialize a different register in the RCC module than other
   // peripherals. Ain't that a pain?
-  *(BEA_RCC_BASE_ADDR + BEA_RCC_BDCR_OFFSET) |= (1 << 15);
+  uint32_t *bdcr_reg = BEA_RCC_BASE_ADDR + BEA_RCC_BDCR_OFFSET;
+  bea_set_reg_bits (bdcr_reg, 15, 15, 1);
   switch (clock_source)
     {
     case BEA_RTC_CLKSRC_HSE:
-      *(BEA_RCC_BASE_ADDR + BEA_RCC_BDCR_OFFSET) |= (0b11 << 8);
+      bea_set_reg_bits (bdcr_reg, 9, 8, 0b11);
       break;
     case BEA_RTC_CLKSRC_LSE:
-      *(BEA_RCC_BASE_ADDR + BEA_RCC_BDCR_OFFSET) &= ~(0b10 << 8);
-      *(BEA_RCC_BASE_ADDR + BEA_RCC_BDCR_OFFSET) |= (0b01 << 8);
+      bea_set_reg_bits (bdcr_reg, 9, 8, 0b01);
       break;
     case BEA_RTC_CLKSRC_LSI:
-      *(BEA_RCC_BASE_ADDR + BEA_RCC_BDCR_OFFSET) &= ~(0b01 << 8);
-      *(BEA_RCC_BASE_ADDR + BEA_RCC_BDCR_OFFSET) |= (0b10 << 8);
+      bea_set_reg_bits (bdcr_reg, 9, 8, 0b10);
       break;
     }
   // Disarm the write protection on the RTC registers
-  *(BEA_RTC_BASE_ADDR + BEA_RTC_WPR_OFFSET) = 0xCA;
-  *(BEA_RTC_BASE_ADDR + BEA_RTC_WPR_OFFSET) = 0x53;
+  bea_set_reg_bits (BEA_RTC_BASE_ADDR + BEA_RTC_WPR_OFFSET, 31, 0, 0xCA);
+  bea_set_reg_bits (BEA_RTC_BASE_ADDR + BEA_RTC_WPR_OFFSET, 31, 0, 0x53);
   // Set the INIT flag to enter initialization mode
-  *(BEA_RTC_BASE_ADDR + BEA_RTC_ISR_OFFSET) |= (1 << 7);
+  uint32_t *isr_reg = BEA_RTC_BASE_ADDR + BEA_RTC_ISR_OFFSET;
+  bea_set_reg_bits (isr_reg, 7, 7, 1);
   // Poll the INITF flag to wait for initialization mode to begin
   // TODO: add timeout (?)
-  while (!(*(BEA_RTC_BASE_ADDR + BEA_RTC_ISR_OFFSET) & (1 << 6)))
+  while (bea_get_reg_bits (isr_reg, 6, 6) == 0)
     ;
   // Set the prescaler so we can actually measure things
-  *(BEA_RTC_BASE_ADDR + BEA_RTC_PRER_OFFSET) &= ~0x7FFF;
+  uint32_t *prescale_reg = BEA_RTC_BASE_ADDR + BEA_RTC_PRER_OFFSET;
   switch (clock_source)
     {
     case BEA_RTC_CLKSRC_HSE:
       // TODO: implement this
       break;
     case BEA_RTC_CLKSRC_LSE:
-      *(BEA_RTC_BASE_ADDR + BEA_RTC_PRER_OFFSET) &= ~(0x3FFF);
-      *(BEA_RTC_BASE_ADDR + BEA_RTC_PRER_OFFSET) |= (255);
+      bea_set_reg_bits (prescale_reg, 22, 16, 127);
+      bea_set_reg_bits (prescale_reg, 14, 0, 255);
       break;
     case BEA_RTC_CLKSRC_LSI:
       // TODO: implement this
       break;
     }
   // Exit initialization mode
-  *(BEA_RTC_BASE_ADDR + BEA_RTC_ISR_OFFSET) &= ~(1 << 7);
+  bea_set_reg_bits (isr_reg, 7, 7, 0);
   // Wait for everything to go through(
   // TODO: add timeout (?)
-  while (!(*(BEA_RTC_BASE_ADDR + BEA_RTC_ISR_OFFSET) & (1 << 5)))
+  while (bea_get_reg_bits (isr_reg, 5, 5) == 0)
     ;
   // Re-arm the write protection on the RTC registers
-  *(BEA_RTC_BASE_ADDR + BEA_RTC_WPR_OFFSET) = 0xFF;
+  bea_set_reg_bits (BEA_RTC_BASE_ADDR + BEA_RTC_WPR_OFFSET, 31, 0, 0xFF);
   return true;
 }
