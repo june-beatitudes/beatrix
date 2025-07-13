@@ -1,5 +1,10 @@
-#include <common.h>
+#include <ftoa.h>
 #include <isr.h>
+#include <processor.h>
+#include <rcc.h>
+#include <rtc.h>
+#include <stdbool.h>
+#include <stdlib.h>
 
 static inline int __attribute__ ((always_inline))
 _bea_semihost_rq (int reason, void *arg)
@@ -26,10 +31,94 @@ bea_printk (const char *msg)
 #undef SYS_WRITE0
 
 void
+bea_string_copy (const char *from, char *to, size_t n)
+{
+  for (size_t i = 0; i < n; ++i)
+    {
+      to[i] = from[i];
+    }
+}
+
+const static char BEA_WEEKDAY_NAMES[7][4] = {
+  "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN",
+};
+
+const static char BEA_MONTH_NAMES[12][4] = {
+  "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+  "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
+};
+
+bool
+bea_krnl_datetime_to_str (const struct bea_datetime datetime, char *buf)
+{
+  if (!bea_datetime_is_valid (datetime))
+    {
+      // return false;
+    }
+  char *cursor = buf;
+  bea_string_copy (BEA_WEEKDAY_NAMES[(size_t)datetime.dotw], cursor, 3);
+  cursor += 3;
+  *cursor = ' ';
+  cursor++;
+  bea_string_copy (BEA_MONTH_NAMES[(size_t)datetime.month], cursor, 3);
+  cursor += 3;
+  *cursor = ' ';
+  cursor++;
+  *cursor = '0' + datetime.day / 10;
+  cursor++;
+  *cursor = '0' + datetime.day % 10;
+  cursor++;
+  bea_string_copy (" 20", cursor, 3);
+  cursor += 3;
+  *cursor = '0' + datetime.year / 10;
+  cursor++;
+  *cursor = '0' + datetime.year % 10;
+  cursor++;
+  *cursor = ' ';
+  cursor++;
+  *cursor = '0' + datetime.hour / 10;
+  cursor++;
+  *cursor = '0' + datetime.hour % 10;
+  cursor++;
+  *cursor = ':';
+  cursor++;
+  *cursor = '0' + datetime.minute / 10;
+  cursor++;
+  *cursor = '0' + datetime.minute % 10;
+  cursor++;
+  *cursor = ':';
+  cursor++;
+  bea_ftoa (datetime.second, cursor, 6, false);
+  cursor += 6;
+  bea_string_copy (" UTC", cursor, 5);
+  return true;
+}
+
+void
 bea_main ()
 {
+  bea_fpu_enable ();
+  struct bea_datetime foo = {
+    .year = 25,
+    .month = BEA_MONTH_JULY,
+    .day = 12,
+    .dotw = BEA_DOTW_SATURDAY,
+    .hour = 21,
+    .minute = 30,
+    .second = 0.0f,
+  };
+  bea_rtc_initialize (BEA_RTC_CLKSRC_LSE, foo, 256);
+  char buf[30];
+  buf[29] = '\0';
+  // float test = 3.141593;
   for (;;)
-    bea_printk ("Hello, world!\n");
+    {
+      struct bea_datetime now = bea_rtc_get_datetime ();
+      bea_krnl_datetime_to_str (now, buf);
+      // bea_ftoa (test, buf, 8, false);
+      bea_printk (buf);
+      bea_printk ("\n");
+    }
 }
 
 void
