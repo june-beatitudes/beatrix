@@ -26,9 +26,6 @@ void bea_set_reg_bits (volatile uint32_t *base_addr, uint8_t msb, uint8_t lsb,
  * @param base_addr The base memory address of the register
  * @param msb The "highest" bit (inclusive) to read, zero-indexed, big-endian
  * @param lsb The "lowest" bit (inclusive) to read, zero-indexed, big-endian
- * @param out A pointer to a location in memory where the register bits will be
- * copied to. Only the lowest `(1 + msb - lsb)` will be significant, all higher
- * bits will simply be set to zero
  */
 uint32_t bea_get_reg_bits (volatile uint32_t *base_addr, uint8_t msb,
                            uint8_t lsb);

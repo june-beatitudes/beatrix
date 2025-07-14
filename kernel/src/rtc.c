@@ -1,3 +1,4 @@
+#include <ftoa.h>
 #include <math.h>
 #include <pwr.h>
 #include <rcc.h>
@@ -5,6 +6,7 @@
 #include <rtc.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <string.h>
 
 static bool
 bea_month_day_is_valid (struct bea_datetime datetime)
@@ -63,6 +65,58 @@ bea_datetime_is_valid (struct bea_datetime datetime)
       return false;
     }
   return bea_month_day_is_valid (datetime);
+}
+
+/// Names of weekdays in ISO order, truncated to 3 characters
+const static char BEA_WEEKDAY_NAMES[7][4] = {
+  "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN",
+};
+
+/// Names of months in ISO order, truncated to 3 characters
+const static char BEA_MONTH_NAMES[12][4] = {
+  "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+  "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
+};
+
+void
+bea_datetime_to_kstrz (const struct bea_datetime datetime, char *buf)
+{
+  char *cursor = buf;
+  bea_strncpy (BEA_WEEKDAY_NAMES[(size_t)datetime.dotw], cursor, 3);
+  cursor += 3;
+  *cursor = ' ';
+  cursor++;
+  bea_strncpy (BEA_MONTH_NAMES[(size_t)datetime.month], cursor, 3);
+  cursor += 3;
+  *cursor = ' ';
+  cursor++;
+  *cursor = '0' + datetime.day / 10;
+  cursor++;
+  *cursor = '0' + datetime.day % 10;
+  cursor++;
+  bea_strncpy (" 20", cursor, 3);
+  cursor += 3;
+  *cursor = '0' + datetime.year / 10;
+  cursor++;
+  *cursor = '0' + datetime.year % 10;
+  cursor++;
+  *cursor = ' ';
+  cursor++;
+  *cursor = '0' + datetime.hour / 10;
+  cursor++;
+  *cursor = '0' + datetime.hour % 10;
+  cursor++;
+  *cursor = ':';
+  cursor++;
+  *cursor = '0' + datetime.minute / 10;
+  cursor++;
+  *cursor = '0' + datetime.minute % 10;
+  cursor++;
+  *cursor = ':';
+  cursor++;
+  bea_ftoa (datetime.second, cursor, 6, false);
+  cursor += 6;
+  bea_strncpy (" UTC", cursor, 5);
 }
 
 struct bea_datetime

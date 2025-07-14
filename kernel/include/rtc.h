@@ -74,6 +74,22 @@ struct bea_datetime
  */
 bool bea_datetime_is_valid (struct bea_datetime datetime);
 
+#define BEA_DATETIME_KSTRZ_LEN 31
+
+/**
+ * @brief Fills a buffer of at least 31 chars (please just use
+ * `BEA_DATETIME_KSTRZ_LEN`) with a null terminated string in BEATRIX kernel
+ * format
+ *
+ * The BEATRIX kernel format is loosely based on ISO and is "WDY MON DY YEAR
+ * HR:MN:SECOND UTC", with seconds being given with 5 significant figures of
+ * precision and a decimal point.
+ *
+ * @param datetime The datetime to use
+ * @param buf The buffer to fill
+ */
+void bea_datetime_to_kstrz (const struct bea_datetime datetime, char *buf);
+
 /**
  * @brief Converts a standard Unix timestamp (seconds since the beginning of
  * the year 1970) to a `bea_datetime`
