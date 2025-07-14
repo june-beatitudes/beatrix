@@ -1,5 +1,5 @@
 #include <ftoa.h>
-#include <math.h>
+#include <openlibm_math.h>
 #include <stdbool.h>
 #include <stdint.h>
 

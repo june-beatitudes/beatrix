@@ -2,12 +2,15 @@
   description = "BEATRIX Build Environment";
 
   inputs = {
-    # AS OF 2025-07-04: using 24.11 because libtinfo is broken on 25.05 and unstable
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
   outputs =
-    { self, nixpkgs, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -15,18 +18,22 @@
         name = "bea-tooling-env";
         targetPkgs =
           pkgs:
-          (with pkgs; [
-            zstd
-            ncurses
-            libtinfo
-            zsh
-            bear
-	    doxygen
-	    doxygen_gui
-          ]);
+          (
+           with pkgs; [
+              zstd
+              zsh
+              bear
+              pandoc
+	      libz
+	      doxygen
+	      doxygen_gui
+	      uv
+            ]
+          );
       };
     in
     {
       devShells.${system}.default = fhs.env;
     };
 }
+

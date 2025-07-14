@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief Functionality for converting floats to strings inside the kernel,
+ * used primarily for logging
+ * @author Juniper Beatitudes
+ */
+
 #ifndef BEA_FTOA_H
 #define BEA_FTOA_H
 
