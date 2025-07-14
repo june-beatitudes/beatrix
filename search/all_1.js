@@ -78,6 +78,6 @@ var searchData=
   ['bea_5funix_5fto_5fdatetime_75',['bea_unix_to_datetime',['../rtc_8h.html#a637f47f6df6e71aa34b4c8a0786b943f',1,'rtc.h']]],
   ['bea_5fversion_76',['bea_version',['../structbea__version.html',1,'']]],
   ['bea_5fversion_5fname_5fmaxlen_77',['BEA_VERSION_NAME_MAXLEN',['../version_8h.html#ac3cf97780e63b7c75fc05243b9165923',1,'version.h']]],
-  ['beatrix_20kernel_78',['BEATRIX Kernel',['../md_kernel_2README.html',1,'']]],
+  ['beatrix_20kernel_78',['BEATRIX Kernel',['../index.html',1,'']]],
   ['beatrix_5fversion_79',['BEATRIX_VERSION',['../version_8c.html#a47bfcbd43d6757b029a11cd849f8ef14',1,'version.c']]]
 ];

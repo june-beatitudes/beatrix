@@ -193,7 +193,10 @@ html {
 --invariant-color-text: #265532;
 }
 
-html.dark-mode {
+@media (prefers-color-scheme: dark) {
+  html:not(.dark-mode) {
+    color-scheme: dark;
+
 /* page base colors */
 --page-background-color: black;
 --page-foreground-color: #C9D1D9;
@@ -384,8 +387,7 @@ html.dark-mode {
 --invariant-color-bg: #303a35;
 --invariant-color-hl: #76ce96;
 --invariant-color-text: #cceed5;
-}
-
+}}
 body {
     background-color: var(--page-background-color);
     color: var(--page-foreground-color);

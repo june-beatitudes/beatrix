@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kernel_0',['BEATRIX Kernel',['../md_kernel_2README.html',1,'']]]
+  ['kernel_0',['BEATRIX Kernel',['../index.html',1,'']]]
 ];
