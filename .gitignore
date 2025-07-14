@@ -1,6 +1,5 @@
 kernel/build
 kernel/wip
-kernel/docs
 kernel/compile_commands.json
 kernel/.cache
 .vscode
