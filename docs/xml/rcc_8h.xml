@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="rcc_8h" kind="file" language="C++">
+    <compoundname>rcc.h</compoundname>
+    <includes refid="processor_8h" local="no">processor.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stdint.h</includes>
+    <includedby refid="main_8c" local="no">kernel/src/main.c</includedby>
+    <includedby refid="rcc_8c" local="no">kernel/src/rcc.c</includedby>
+    <includedby refid="rtc_8c" local="no">kernel/src/rtc.c</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>processor.h</label>
+        <link refid="processor_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>kernel/include/rcc.h</label>
+        <link refid="rcc_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>stdbool.h</label>
+      </node>
+      <node id="3">
+        <label>stdint.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>kernel/include/rcc.h</label>
+        <link refid="rcc_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>kernel/src/main.c</label>
+        <link refid="main_8c"/>
+      </node>
+      <node id="3">
+        <label>kernel/src/rcc.c</label>
+        <link refid="rcc_8c"/>
+      </node>
+      <node id="4">
+        <label>kernel/src/rtc.c</label>
+        <link refid="rtc_8c"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="rcc_8h_1afd632f112bc5ac1d4313c20cdab75010" prot="public" static="no">
+        <name>BEA_RCC_BASE_ADDR</name>
+        <initializer>(uint32_t *)(0x58000000)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rcc.h" line="8" column="9" bodyfile="kernel/include/rcc.h" bodystart="8" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="rcc_8h_1a6f702c69c1dce35582726441c9a453ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool bea_rcc_enable_peripheral</definition>
+        <argsstring>(enum bea_io_bank_t io_bank, uint8_t offset)</argsstring>
+        <name>bea_rcc_enable_peripheral</name>
+        <param>
+          <type>enum <ref refid="processor_8h_1a7f4f0a57c76fba097804c0372aa7a0c2" kindref="member">bea_io_bank_t</ref></type>
+          <declname>io_bank</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+<para>Enable a specific peripheral in the RCC subsystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>io_bank</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The I/O bank the peripheral is in (e.g., AHB1, AHB2, etc.) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The offset of the peripheral in the bank&apos;s register. APB1 has two registers; to access the second register, pass in the offset in that register plus 32 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true Peripheral enable successful (within reason to check) </para>
+</simplesect>
+<simplesect kind="return"><para>false Peripheral enable unsuccessful </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rcc.h" line="20" column="6" bodyfile="kernel/src/rcc.c" bodystart="7" bodyend="50" declfile="kernel/include/rcc.h" declline="20" declcolumn="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>BEATRIX_RCC_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEATRIX_RCC_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="processor_8h" kindref="compound">processor.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8" refid="rcc_8h_1afd632f112bc5ac1d4313c20cdab75010" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEA_RCC_BASE_ADDR<sp/>(uint32_t<sp/>*)(0x58000000)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="rcc_8h_1a6f702c69c1dce35582726441c9a453ee" kindref="member">bea_rcc_enable_peripheral</ref><sp/>(</highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="processor_8h_1a7f4f0a57c76fba097804c0372aa7a0c2" kindref="member">bea_io_bank_t</ref><sp/>io_bank,<sp/>uint8_t<sp/>offset);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="kernel/include/rcc.h"/>
+  </compounddef>
+</doxygen>

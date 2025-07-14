@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="isr_8h" kind="file" language="C++">
+    <compoundname>isr.h</compoundname>
+    <includedby refid="main_8c" local="no">kernel/src/main.c</includedby>
+    <invincdepgraph>
+      <node id="1">
+        <label>kernel/include/isr.h</label>
+        <link refid="isr_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>kernel/src/main.c</label>
+        <link refid="main_8c"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="isr_8h_1a6d626fdf464bc6f2160d0bc92243b027" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* isr_t) (void)</definition>
+        <argsstring>)(void)</argsstring>
+        <name>isr_t</name>
+        <briefdescription>
+<para>Represents an ISR. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/isr.h" line="8" column="9" bodyfile="kernel/include/isr.h" bodystart="8" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>BEATRIX_ISR_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEATRIX_ISR_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8" refid="isr_8h_1a6d626fdf464bc6f2160d0bc92243b027" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>void<sp/>(*<ref refid="isr_8h_1a6d626fdf464bc6f2160d0bc92243b027" kindref="member">isr_t</ref>)<sp/>(void);</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="kernel/include/isr.h"/>
+  </compounddef>
+</doxygen>

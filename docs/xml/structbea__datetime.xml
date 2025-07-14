@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structbea__datetime" kind="struct" language="C++" prot="public">
+    <compoundname>bea_datetime</compoundname>
+    <includes refid="rtc_8h" local="no">rtc.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structbea__datetime_1a492668fc6368f762a22333ada6647c5a" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t bea_datetime::year</definition>
+        <argsstring></argsstring>
+        <name>year</name>
+        <qualifiedname>bea_datetime::year</qualifiedname>
+        <briefdescription>
+<para>Years since 2000. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="58" column="11" bodyfile="kernel/include/rtc.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbea__datetime_1a39060ca586b6954fcba1ce5bb3f92cfb" prot="public" static="no" mutable="no">
+        <type>enum <ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1" kindref="member">bea_month</ref></type>
+        <definition>enum bea_month bea_datetime::month</definition>
+        <argsstring></argsstring>
+        <name>month</name>
+        <qualifiedname>bea_datetime::month</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="59" column="17" bodyfile="kernel/include/rtc.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbea__datetime_1a8770c15ef1dad83a7942eb22de549b99" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t bea_datetime::day</definition>
+        <argsstring></argsstring>
+        <name>day</name>
+        <qualifiedname>bea_datetime::day</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="60" column="11" bodyfile="kernel/include/rtc.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbea__datetime_1a9f2e1b0c7d147a6ba40edb3f9c6607e4" prot="public" static="no" mutable="no">
+        <type>enum <ref refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674" kindref="member">bea_dotw</ref></type>
+        <definition>enum bea_dotw bea_datetime::dotw</definition>
+        <argsstring></argsstring>
+        <name>dotw</name>
+        <qualifiedname>bea_datetime::dotw</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="61" column="16" bodyfile="kernel/include/rtc.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbea__datetime_1a0631f507f068a1d2d07519e9bdc1dc10" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t bea_datetime::hour</definition>
+        <argsstring></argsstring>
+        <name>hour</name>
+        <qualifiedname>bea_datetime::hour</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="62" column="11" bodyfile="kernel/include/rtc.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbea__datetime_1a6c89c9c3c828dc79b8fe429b7ca8bf3c" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t bea_datetime::minute</definition>
+        <argsstring></argsstring>
+        <name>minute</name>
+        <qualifiedname>bea_datetime::minute</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="63" column="11" bodyfile="kernel/include/rtc.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbea__datetime_1ac58a64dddca3b47be2ee6f8473f05c3c" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float bea_datetime::second</definition>
+        <argsstring></argsstring>
+        <name>second</name>
+        <qualifiedname>bea_datetime::second</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="64" column="9" bodyfile="kernel/include/rtc.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Represents a single point in time in the Gregorian calendar. Years begin at 2000 (since the RTC hardware can&apos;t represent anything earlier than that), and hours are in 24-hour time. Always in UTC because the IANA timezone database is in itself bigger than the amount of flash we have to work with. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="kernel/include/rtc.h" line="55" column="1" bodyfile="kernel/include/rtc.h" bodystart="56" bodyend="65"/>
+    <listofallmembers>
+      <member refid="structbea__datetime_1a8770c15ef1dad83a7942eb22de549b99" prot="public" virt="non-virtual"><scope>bea_datetime</scope><name>day</name></member>
+      <member refid="structbea__datetime_1a9f2e1b0c7d147a6ba40edb3f9c6607e4" prot="public" virt="non-virtual"><scope>bea_datetime</scope><name>dotw</name></member>
+      <member refid="structbea__datetime_1a0631f507f068a1d2d07519e9bdc1dc10" prot="public" virt="non-virtual"><scope>bea_datetime</scope><name>hour</name></member>
+      <member refid="structbea__datetime_1a6c89c9c3c828dc79b8fe429b7ca8bf3c" prot="public" virt="non-virtual"><scope>bea_datetime</scope><name>minute</name></member>
+      <member refid="structbea__datetime_1a39060ca586b6954fcba1ce5bb3f92cfb" prot="public" virt="non-virtual"><scope>bea_datetime</scope><name>month</name></member>
+      <member refid="structbea__datetime_1ac58a64dddca3b47be2ee6f8473f05c3c" prot="public" virt="non-virtual"><scope>bea_datetime</scope><name>second</name></member>
+      <member refid="structbea__datetime_1a492668fc6368f762a22333ada6647c5a" prot="public" virt="non-virtual"><scope>bea_datetime</scope><name>year</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

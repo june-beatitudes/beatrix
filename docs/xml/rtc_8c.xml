@@ -1,0 +1,639 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="rtc_8c" kind="file" language="C++">
+    <compoundname>rtc.c</compoundname>
+    <includes refid="ftoa_8h" local="no">ftoa.h</includes>
+    <includes local="no">math.h</includes>
+    <includes refid="pwr_8h" local="no">pwr.h</includes>
+    <includes refid="rcc_8h" local="no">rcc.h</includes>
+    <includes refid="register__utils_8h" local="no">register_utils.h</includes>
+    <includes refid="rtc_8h" local="no">rtc.h</includes>
+    <includes local="no">stddef.h</includes>
+    <includes local="no">stdint.h</includes>
+    <includes refid="string_8h" local="no">string.h</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>ftoa.h</label>
+        <link refid="ftoa_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>processor.h</label>
+        <link refid="processor_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>pwr.h</label>
+        <link refid="pwr_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>rcc.h</label>
+        <link refid="rcc_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>register_utils.h</label>
+        <link refid="register__utils_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>rtc.h</label>
+        <link refid="rtc_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>string.h</label>
+        <link refid="string_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>kernel/src/rtc.c</label>
+        <link refid="rtc_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>math.h</label>
+      </node>
+      <node id="3">
+        <label>stdbool.h</label>
+      </node>
+      <node id="4">
+        <label>stddef.h</label>
+      </node>
+      <node id="7">
+        <label>stdint.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="rtc_8c_1a095103c66f0c373c2085a04cf6412068" prot="public" static="yes" mutable="no">
+        <type>const char</type>
+        <definition>const char BEA_WEEKDAY_NAMES[7][4]</definition>
+        <argsstring>[7][4]</argsstring>
+        <name>BEA_WEEKDAY_NAMES</name>
+        <initializer>= {
+  &quot;MON&quot;, &quot;TUE&quot;, &quot;WED&quot;, &quot;THU&quot;, &quot;FRI&quot;, &quot;SAT&quot;, &quot;SUN&quot;,
+}</initializer>
+        <briefdescription>
+<para>Names of weekdays in ISO order, truncated to 3 characters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/src/rtc.c" line="71" column="19" bodyfile="kernel/src/rtc.c" bodystart="71" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="variable" id="rtc_8c_1a0a988f572a627cd2323b50793c279876" prot="public" static="yes" mutable="no">
+        <type>const char</type>
+        <definition>const char BEA_MONTH_NAMES[12][4]</definition>
+        <argsstring>[12][4]</argsstring>
+        <name>BEA_MONTH_NAMES</name>
+        <initializer>= {
+  &quot;JAN&quot;, &quot;FEB&quot;, &quot;MAR&quot;, &quot;APR&quot;, &quot;MAY&quot;, &quot;JUN&quot;,
+  &quot;JUL&quot;, &quot;AUG&quot;, &quot;SEP&quot;, &quot;OCT&quot;, &quot;NOV&quot;, &quot;DEC&quot;,
+}</initializer>
+        <briefdescription>
+<para>Names of months in ISO order, truncated to 3 characters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/src/rtc.c" line="76" column="19" bodyfile="kernel/src/rtc.c" bodystart="76" bodyend="79"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="rtc_8c_1aeccefc8e82f8c8d7f9d50c666ef44c39" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool bea_month_day_is_valid</definition>
+        <argsstring>(struct bea_datetime datetime)</argsstring>
+        <name>bea_month_day_is_valid</name>
+        <param>
+          <type>struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></type>
+          <declname>datetime</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/src/rtc.c" line="12" column="1" bodyfile="kernel/src/rtc.c" bodystart="12" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="rtc_8c_1ab6ff20318ac77751c215ab5a091726dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool bea_datetime_is_valid</definition>
+        <argsstring>(struct bea_datetime datetime)</argsstring>
+        <name>bea_datetime_is_valid</name>
+        <param>
+          <type>struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></type>
+          <declname>datetime</declname>
+        </param>
+        <briefdescription>
+<para>Checks whether a <computeroutput>struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></computeroutput> represents a valid point in time in the Gregorian calendar. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>datetime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The datetime to check </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true The represented datetime is valid </para>
+</simplesect>
+<simplesect kind="return"><para>false The represented datetime is invalid </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/src/rtc.c" line="53" column="1" bodyfile="kernel/src/rtc.c" bodystart="53" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="rtc_8c_1a72426f7ac9905f8b80c87355e3cdc124" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void bea_datetime_to_kstrz</definition>
+        <argsstring>(const struct bea_datetime datetime, char *buf)</argsstring>
+        <name>bea_datetime_to_kstrz</name>
+        <param>
+          <type>const struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></type>
+          <declname>datetime</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+<para>Fills a buffer of at least 31 chars (please just use <computeroutput>BEA_DATETIME_KSTRZ_LEN</computeroutput>) with a null terminated string in BEATRIX kernel format. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The BEATRIX kernel format is loosely based on ISO and is &quot;WDY MON DY YEAR
+HR:MN:SECOND UTC&quot;, with seconds being given with 5 significant figures of precision and a decimal point.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>datetime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The datetime to use </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The buffer to fill </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/src/rtc.c" line="82" column="1" bodyfile="kernel/src/rtc.c" bodystart="82" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="rtc_8c_1a58d53e77d4fd1a5835050704ab10f3b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></type>
+        <definition>struct bea_datetime bea_rtc_get_datetime</definition>
+        <argsstring>()</argsstring>
+        <name>bea_rtc_get_datetime</name>
+        <briefdescription>
+<para>Reads the current date and time according to the RTC. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref> The returned date and time values </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/src/rtc.c" line="123" column="1" bodyfile="kernel/src/rtc.c" bodystart="123" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="rtc_8c_1aa2ac37e9f13589d6c1963b089319efd2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool bea_rtc_init_prescaler</definition>
+        <argsstring>(enum bea_rtc_clksrc clock_source, uint32_t subsec_freq)</argsstring>
+        <name>bea_rtc_init_prescaler</name>
+        <param>
+          <type>enum <ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41" kindref="member">bea_rtc_clksrc</ref></type>
+          <declname>clock_source</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>subsec_freq</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/src/rtc.c" line="161" column="1" bodyfile="kernel/src/rtc.c" bodystart="161" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="function" id="rtc_8c_1a0769de8db989497497906ce05eb5f007" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool bea_rtc_set_datetime</definition>
+        <argsstring>(struct bea_datetime datetime)</argsstring>
+        <name>bea_rtc_set_datetime</name>
+        <param>
+          <type>struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></type>
+          <declname>datetime</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/src/rtc.c" line="200" column="1" bodyfile="kernel/src/rtc.c" bodystart="200" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="rtc_8c_1a92fd61b7036c4a430ae9573180da4856" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool bea_rtc_initialize</definition>
+        <argsstring>(enum bea_rtc_clksrc clock_source, struct bea_datetime start_time, uint32_t subsec_freq)</argsstring>
+        <name>bea_rtc_initialize</name>
+        <param>
+          <type>enum <ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41" kindref="member">bea_rtc_clksrc</ref></type>
+          <declname>clock_source</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></type>
+          <declname>start_time</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>subsec_frequency</declname>
+          <defname>subsec_freq</defname>
+        </param>
+        <briefdescription>
+<para>Initialize the RTC subsystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>clock_source</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Clock source for the RTC subsystem to use (see STMicroelectronics RM0434 pp. 263) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start_time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at initialization </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>subsec_frequency</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum frequency (in Hertz) the RTC can resolve. Validity depends on the clock source; reference page mentioned above </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true No error encountered </para>
+</simplesect>
+<simplesect kind="return"><para>false Error encountered</para>
+</simplesect>
+<xrefsect id="todo_1_todo000002"><xreftitle>Todo</xreftitle><xrefdescription><para>Add timeout for INITF flag </para>
+<para>Add timeout for initialization completion </para>
+<para>Add less opaque error return </para>
+</xrefdescription></xrefsect></para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/src/rtc.c" line="234" column="1" bodyfile="kernel/src/rtc.c" bodystart="234" bodyend="286"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;<ref refid="ftoa_8h" kindref="compound">ftoa.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;math.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="pwr_8h" kindref="compound">pwr.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="rcc_8h" kindref="compound">rcc.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="register__utils_8h" kindref="compound">register_utils.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="rtc_8h" kindref="compound">rtc.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="string_8h" kindref="compound">string.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="rtc_8c_1aeccefc8e82f8c8d7f9d50c666ef44c39" refkind="member"><highlight class="normal"><ref refid="rtc_8c_1aeccefc8e82f8c8d7f9d50c666ef44c39" kindref="member">bea_month_day_is_valid</ref><sp/>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref><sp/>datetime)</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Remember<sp/>here<sp/>that<sp/>`datetime.year`<sp/>is<sp/>a<sp/>`uint8_t`<sp/>with<sp/>0<sp/>representing<sp/>the</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>year<sp/>2000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_leap_year<sp/>=<sp/>(datetime.<ref refid="structbea__datetime_1a492668fc6368f762a22333ada6647c5a" kindref="member">year</ref><sp/>%<sp/>4<sp/>==<sp/>0)</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>((datetime.<ref refid="structbea__datetime_1a492668fc6368f762a22333ada6647c5a" kindref="member">year</ref><sp/>%<sp/>100<sp/>!=<sp/>0)<sp/>||<sp/>(datetime.<ref refid="structbea__datetime_1a492668fc6368f762a22333ada6647c5a" kindref="member">year</ref><sp/>==<sp/>0));</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674" kindref="member">bea_dotw</ref><sp/>dotw;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(datetime.<ref refid="structbea__datetime_1a492668fc6368f762a22333ada6647c5a" kindref="member">year</ref><sp/>==<sp/>0)</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Our<sp/>upcoming<sp/>formula<sp/>breaks<sp/>for<sp/>2000<sp/>and<sp/>2000<sp/>only,<sp/>let&apos;s<sp/>do<sp/>something</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>different.<sp/>The<sp/>first<sp/>day<sp/>of<sp/>2000<sp/>was<sp/>a<sp/>Saturday,<sp/>and<sp/>2000<sp/>was<sp/>a<sp/>leap</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>year</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>uint16_t<sp/>doty<sp/>=<sp/>datetime.<ref refid="structbea__datetime_1a8770c15ef1dad83a7942eb22de549b99" kindref="member">day</ref>;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>(size_t)datetime.<ref refid="structbea__datetime_1a39060ca586b6954fcba1ce5bb3f92cfb" kindref="member">month</ref>;<sp/>++i)</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>doty<sp/>+=<sp/><ref refid="rtc_8h_1a75ba894d90e036747dbd68b273d23906" kindref="member">BEA_MONTH_LENGTHS_LEAP</ref>[i];</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>dotw<sp/>=<sp/>(</highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674" kindref="member">bea_dotw</ref>)<sp/>(((</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">)<ref refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674ad032cc927089d86673324a5933964cf2" kindref="member">BEA_DOTW_SATURDAY</ref><sp/>+<sp/>doty<sp/>-<sp/>1)<sp/>%<sp/>7);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Use<sp/>Zeller&apos;s<sp/>congruence.<sp/>I<sp/>hate<sp/>this<sp/>formula<sp/>because<sp/>it&apos;s<sp/>ugly<sp/>as<sp/>sin</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>and<sp/>I<sp/>had<sp/>to<sp/>steal<sp/>it<sp/>from<sp/>Wikipedia,<sp/>but<sp/>it<sp/>is<sp/>very<sp/>efficient.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/>year_adj</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>((uint8_t)datetime.<ref refid="structbea__datetime_1a39060ca586b6954fcba1ce5bb3f92cfb" kindref="member">month</ref><sp/>&lt;<sp/>3)<sp/>?<sp/>datetime.<ref refid="structbea__datetime_1a492668fc6368f762a22333ada6647c5a" kindref="member">year</ref><sp/>-<sp/>1<sp/>:<sp/>datetime.<ref refid="structbea__datetime_1a492668fc6368f762a22333ada6647c5a" kindref="member">year</ref>;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/>month_adj<sp/>=<sp/>((uint8_t)datetime.<ref refid="structbea__datetime_1a39060ca586b6954fcba1ce5bb3f92cfb" kindref="member">month</ref><sp/>&lt;<sp/>3)</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>?<sp/>(uint8_t)datetime.<ref refid="structbea__datetime_1a39060ca586b6954fcba1ce5bb3f92cfb" kindref="member">month</ref><sp/>+<sp/>1</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>(uint8_t)datetime.<ref refid="structbea__datetime_1a39060ca586b6954fcba1ce5bb3f92cfb" kindref="member">month</ref><sp/>+<sp/>13;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/>zeller_dotw<sp/>=<sp/>((datetime.<ref refid="structbea__datetime_1a8770c15ef1dad83a7942eb22de549b99" kindref="member">day</ref><sp/>+<sp/>(13<sp/>*<sp/>(month_adj<sp/>+<sp/>1))<sp/>/<sp/>5</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>+<sp/>(year_adj<sp/>%<sp/>100)<sp/>+<sp/>(year_adj<sp/>%<sp/>100)<sp/>/<sp/>4</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>+<sp/>(year_adj<sp/>/<sp/>100)<sp/>/<sp/>4<sp/>+<sp/>(year_adj<sp/>/<sp/>100)<sp/>*<sp/>5)</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>7);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>dotw<sp/>=<sp/>(</highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674" kindref="member">bea_dotw</ref>)<sp/>((zeller_dotw<sp/>+<sp/>5)<sp/>%<sp/>7<sp/>+<sp/>1);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>uint8_t<sp/>days_in_month</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>is_leap_year<sp/>?<sp/><ref refid="rtc_8h_1a75ba894d90e036747dbd68b273d23906" kindref="member">BEA_MONTH_LENGTHS_LEAP</ref>[(uint8_t)datetime.<ref refid="structbea__datetime_1a39060ca586b6954fcba1ce5bb3f92cfb" kindref="member">month</ref>]</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="rtc_8h_1a9a407050f95cd5f2379a6b1ff40eb3c2" kindref="member">BEA_MONTH_LENGTHS_NONLEAP</ref>[(uint8_t)datetime.<ref refid="structbea__datetime_1a39060ca586b6954fcba1ce5bb3f92cfb" kindref="member">month</ref>];</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(datetime.<ref refid="structbea__datetime_1a8770c15ef1dad83a7942eb22de549b99" kindref="member">day</ref><sp/>&lt;=<sp/>days_in_month<sp/>&amp;&amp;<sp/>datetime.<ref refid="structbea__datetime_1a9f2e1b0c7d147a6ba40edb3f9c6607e4" kindref="member">dotw</ref><sp/>==<sp/>dotw);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="rtc_8c_1ab6ff20318ac77751c215ab5a091726dc" refkind="member"><highlight class="normal"><ref refid="rtc_8c_1ab6ff20318ac77751c215ab5a091726dc" kindref="member">bea_datetime_is_valid</ref><sp/>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref><sp/>datetime)</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(datetime.<ref refid="structbea__datetime_1a0631f507f068a1d2d07519e9bdc1dc10" kindref="member">hour</ref><sp/>&gt;=<sp/>24)</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(datetime.<ref refid="structbea__datetime_1a6c89c9c3c828dc79b8fe429b7ca8bf3c" kindref="member">minute</ref><sp/>&gt;=<sp/>60)</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(datetime.<ref refid="structbea__datetime_1ac58a64dddca3b47be2ee6f8473f05c3c" kindref="member">second</ref><sp/>&gt;=<sp/>60.0f)</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="rtc_8c_1aeccefc8e82f8c8d7f9d50c666ef44c39" kindref="member">bea_month_day_is_valid</ref><sp/>(datetime);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="rtc_8c_1a095103c66f0c373c2085a04cf6412068" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="rtc_8c_1a095103c66f0c373c2085a04cf6412068" kindref="member">BEA_WEEKDAY_NAMES</ref>[7][4]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/></highlight><highlight class="stringliteral">&quot;MON&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;TUE&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;WED&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;THU&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;FRI&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;SAT&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;SUN&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="73"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="rtc_8c_1a0a988f572a627cd2323b50793c279876" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="rtc_8c_1a0a988f572a627cd2323b50793c279876" kindref="member">BEA_MONTH_NAMES</ref>[12][4]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/></highlight><highlight class="stringliteral">&quot;JAN&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;FEB&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;MAR&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;APR&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;MAY&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;JUN&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/></highlight><highlight class="stringliteral">&quot;JUL&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;AUG&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;SEP&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;OCT&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;NOV&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;DEC&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="79"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82" refid="rtc_8c_1a72426f7ac9905f8b80c87355e3cdc124" refkind="member"><highlight class="normal"><ref refid="rtc_8c_1a72426f7ac9905f8b80c87355e3cdc124" kindref="member">bea_datetime_to_kstrz</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref><sp/>datetime,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buf)</highlight></codeline>
+<codeline lineno="83"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*cursor<sp/>=<sp/>buf;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><ref refid="string_8c_1a6586738b68d8ddea5f0d8a2ffd6b9024" kindref="member">bea_strncpy</ref><sp/>(<ref refid="rtc_8c_1a095103c66f0c373c2085a04cf6412068" kindref="member">BEA_WEEKDAY_NAMES</ref>[(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">)datetime.<ref refid="structbea__datetime_1a9f2e1b0c7d147a6ba40edb3f9c6607e4" kindref="member">dotw</ref>],<sp/>cursor,<sp/>3);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>cursor<sp/>+=<sp/>3;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/>*cursor<sp/>=<sp/></highlight><highlight class="charliteral">&apos;<sp/>&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>cursor++;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><ref refid="string_8c_1a6586738b68d8ddea5f0d8a2ffd6b9024" kindref="member">bea_strncpy</ref><sp/>(<ref refid="rtc_8c_1a0a988f572a627cd2323b50793c279876" kindref="member">BEA_MONTH_NAMES</ref>[(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">)datetime.<ref refid="structbea__datetime_1a39060ca586b6954fcba1ce5bb3f92cfb" kindref="member">month</ref>],<sp/>cursor,<sp/>3);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>cursor<sp/>+=<sp/>3;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/>*cursor<sp/>=<sp/></highlight><highlight class="charliteral">&apos;<sp/>&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>cursor++;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>*cursor<sp/>=<sp/></highlight><highlight class="charliteral">&apos;0&apos;</highlight><highlight class="normal"><sp/>+<sp/>datetime.<ref refid="structbea__datetime_1a8770c15ef1dad83a7942eb22de549b99" kindref="member">day</ref><sp/>/<sp/>10;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>cursor++;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/>*cursor<sp/>=<sp/></highlight><highlight class="charliteral">&apos;0&apos;</highlight><highlight class="normal"><sp/>+<sp/>datetime.<ref refid="structbea__datetime_1a8770c15ef1dad83a7942eb22de549b99" kindref="member">day</ref><sp/>%<sp/>10;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/>cursor++;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><ref refid="string_8c_1a6586738b68d8ddea5f0d8a2ffd6b9024" kindref="member">bea_strncpy</ref><sp/>(</highlight><highlight class="stringliteral">&quot;<sp/>20&quot;</highlight><highlight class="normal">,<sp/>cursor,<sp/>3);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/>cursor<sp/>+=<sp/>3;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/>*cursor<sp/>=<sp/></highlight><highlight class="charliteral">&apos;0&apos;</highlight><highlight class="normal"><sp/>+<sp/>datetime.<ref refid="structbea__datetime_1a492668fc6368f762a22333ada6647c5a" kindref="member">year</ref><sp/>/<sp/>10;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>cursor++;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>*cursor<sp/>=<sp/></highlight><highlight class="charliteral">&apos;0&apos;</highlight><highlight class="normal"><sp/>+<sp/>datetime.<ref refid="structbea__datetime_1a492668fc6368f762a22333ada6647c5a" kindref="member">year</ref><sp/>%<sp/>10;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>cursor++;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/>*cursor<sp/>=<sp/></highlight><highlight class="charliteral">&apos;<sp/>&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/>cursor++;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>*cursor<sp/>=<sp/></highlight><highlight class="charliteral">&apos;0&apos;</highlight><highlight class="normal"><sp/>+<sp/>datetime.<ref refid="structbea__datetime_1a0631f507f068a1d2d07519e9bdc1dc10" kindref="member">hour</ref><sp/>/<sp/>10;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/>cursor++;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>*cursor<sp/>=<sp/></highlight><highlight class="charliteral">&apos;0&apos;</highlight><highlight class="normal"><sp/>+<sp/>datetime.<ref refid="structbea__datetime_1a0631f507f068a1d2d07519e9bdc1dc10" kindref="member">hour</ref><sp/>%<sp/>10;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>cursor++;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>*cursor<sp/>=<sp/></highlight><highlight class="charliteral">&apos;:&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/>cursor++;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/>*cursor<sp/>=<sp/></highlight><highlight class="charliteral">&apos;0&apos;</highlight><highlight class="normal"><sp/>+<sp/>datetime.<ref refid="structbea__datetime_1a6c89c9c3c828dc79b8fe429b7ca8bf3c" kindref="member">minute</ref><sp/>/<sp/>10;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/>cursor++;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/>*cursor<sp/>=<sp/></highlight><highlight class="charliteral">&apos;0&apos;</highlight><highlight class="normal"><sp/>+<sp/>datetime.<ref refid="structbea__datetime_1a6c89c9c3c828dc79b8fe429b7ca8bf3c" kindref="member">minute</ref><sp/>%<sp/>10;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/>cursor++;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/>*cursor<sp/>=<sp/></highlight><highlight class="charliteral">&apos;:&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>cursor++;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><ref refid="ftoa_8c_1af88c692bed6c2451087855d999da59f6" kindref="member">bea_ftoa</ref><sp/>(datetime.<ref refid="structbea__datetime_1ac58a64dddca3b47be2ee6f8473f05c3c" kindref="member">second</ref>,<sp/>cursor,<sp/>6,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/>cursor<sp/>+=<sp/>6;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><ref refid="string_8c_1a6586738b68d8ddea5f0d8a2ffd6b9024" kindref="member">bea_strncpy</ref><sp/>(</highlight><highlight class="stringliteral">&quot;<sp/>UTC&quot;</highlight><highlight class="normal">,<sp/>cursor,<sp/>5);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></highlight></codeline>
+<codeline lineno="123" refid="rtc_8c_1a58d53e77d4fd1a5835050704ab10f3b2" refkind="member"><highlight class="normal"><ref refid="rtc_8c_1a58d53e77d4fd1a5835050704ab10f3b2" kindref="member">bea_rtc_get_datetime</ref><sp/>()</highlight></codeline>
+<codeline lineno="124"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref><sp/>result;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/>uint32_t<sp/>*t_reg<sp/>=<sp/><ref refid="rtc_8h_1aa4e35b2201d956f267436f5ba2fd8c89" kindref="member">BEA_RTC_BASE_ADDR</ref><sp/>+<sp/><ref refid="rtc_8h_1a656bfb6152f934923527efc53af7044b" kindref="member">BEA_RTC_TR_OFFSET</ref>;<sp/></highlight><highlight class="comment">//<sp/>Time<sp/>register</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>uint32_t<sp/>*d_reg<sp/>=<sp/><ref refid="rtc_8h_1aa4e35b2201d956f267436f5ba2fd8c89" kindref="member">BEA_RTC_BASE_ADDR</ref><sp/>+<sp/><ref refid="rtc_8h_1aee2ff170abde8bdd9e805df5a2c473f7" kindref="member">BEA_RTC_DR_OFFSET</ref>;<sp/></highlight><highlight class="comment">//<sp/>Date<sp/>register</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>uint32_t<sp/>second_integral</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(<ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(t_reg,<sp/>3,<sp/>0)<sp/>+<sp/>10<sp/>*<sp/><ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(t_reg,<sp/>6,<sp/>4));</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>uint32_t<sp/>prescaler_sync_factor</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(<ref refid="rtc_8h_1aa4e35b2201d956f267436f5ba2fd8c89" kindref="member">BEA_RTC_BASE_ADDR</ref><sp/>+<sp/><ref refid="rtc_8h_1a05dee0783324f86ac3b05aa117e66d57" kindref="member">BEA_RTC_PRER_OFFSET</ref>,<sp/>14,<sp/>0);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>second_fractional</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>((float)prescaler_sync_factor</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>(float)<ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(<ref refid="rtc_8h_1aa4e35b2201d956f267436f5ba2fd8c89" kindref="member">BEA_RTC_BASE_ADDR</ref><sp/>+<sp/><ref refid="rtc_8h_1a16b73eae23a64baa1342135d9e986dde" kindref="member">BEA_RTC_SSR_OFFSET</ref>,<sp/>15,</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0))</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">)prescaler_sync_factor<sp/>+<sp/>1.0f);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/>result.<ref refid="structbea__datetime_1ac58a64dddca3b47be2ee6f8473f05c3c" kindref="member">second</ref><sp/>=<sp/>(float)second_integral<sp/>+<sp/>second_fractional;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/>result.<ref refid="structbea__datetime_1a6c89c9c3c828dc79b8fe429b7ca8bf3c" kindref="member">minute</ref><sp/>=<sp/><ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(t_reg,<sp/>11,<sp/>8)</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>+<sp/>10<sp/>*<sp/><ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(t_reg,<sp/>14,<sp/>12);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/>result.<ref refid="structbea__datetime_1a0631f507f068a1d2d07519e9bdc1dc10" kindref="member">hour</ref><sp/>=<sp/><ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(t_reg,<sp/>19,<sp/>16)</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>+<sp/>10<sp/>*<sp/><ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(t_reg,<sp/>21,<sp/>20);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(t_reg,<sp/>22,<sp/>22)<sp/>!=<sp/>0)</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>result.<ref refid="structbea__datetime_1a0631f507f068a1d2d07519e9bdc1dc10" kindref="member">hour</ref><sp/>+=<sp/>12;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Extract<sp/>the<sp/>date,<sp/>which<sp/>is<sp/>in<sp/>a<sp/>similarly<sp/>God-forsaken<sp/>format</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/>result.<ref refid="structbea__datetime_1a8770c15ef1dad83a7942eb22de549b99" kindref="member">day</ref></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(d_reg,<sp/>3,<sp/>0)<sp/>+<sp/>10<sp/>*<sp/><ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(d_reg,<sp/>5,<sp/>4);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/>result.<ref refid="structbea__datetime_1a39060ca586b6954fcba1ce5bb3f92cfb" kindref="member">month</ref></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(</highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1" kindref="member">bea_month</ref>)<sp/>(<ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(d_reg,<sp/>11,<sp/>8)</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>+<sp/>10<sp/>*<sp/><ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(d_reg,<sp/>12,<sp/>12)<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/>result.<ref refid="structbea__datetime_1a9f2e1b0c7d147a6ba40edb3f9c6607e4" kindref="member">dotw</ref><sp/>=<sp/>(</highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674" kindref="member">bea_dotw</ref>)<sp/>(<ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(d_reg,<sp/>15,<sp/>13)<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/>result.<ref refid="structbea__datetime_1a492668fc6368f762a22333ada6647c5a" kindref="member">year</ref><sp/>=<sp/><ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(d_reg,<sp/>19,<sp/>16)</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>+<sp/>10<sp/>*<sp/><ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(d_reg,<sp/>23,<sp/>20);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="161" refid="rtc_8c_1aa2ac37e9f13589d6c1963b089319efd2" refkind="member"><highlight class="normal"><ref refid="rtc_8c_1aa2ac37e9f13589d6c1963b089319efd2" kindref="member">bea_rtc_init_prescaler</ref><sp/>(</highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41" kindref="member">bea_rtc_clksrc</ref><sp/>clock_source,<sp/>uint32_t<sp/>subsec_freq)</highlight></codeline>
+<codeline lineno="162"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>rtc_clock_freq<sp/>=<sp/>32768.0f;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(clock_source)</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41a6cb0b8d31d7921bc4d91fa425f8e1e8e" kindref="member">BEA_RTC_CLKSRC_HSE</ref>:</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>rtc_clock_freq<sp/>=<sp/>1000000.0f;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41af026b52870b04a0719d7ce2da1787b7a" kindref="member">BEA_RTC_CLKSRC_LSE</ref>:</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>rtc_clock_freq<sp/>=<sp/>32768.0f;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41a41ed13532a638a6557488e5fe047d16f" kindref="member">BEA_RTC_CLKSRC_LSI</ref>:</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>rtc_clock_freq<sp/>=<sp/>32000.0f;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Either<sp/>of<sp/>these<sp/>will<sp/>indicate<sp/>that<sp/>the<sp/>subsecond<sp/>frequency<sp/>is<sp/>just<sp/>too</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>fast</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">)subsec_freq<sp/>&gt;<sp/>rtc_clock_freq)</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(subsec_freq<sp/>-<sp/>1<sp/>&gt;=<sp/>(1<sp/>&lt;&lt;<sp/>15))</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(<ref refid="rtc_8h_1aa4e35b2201d956f267436f5ba2fd8c89" kindref="member">BEA_RTC_BASE_ADDR</ref><sp/>+<sp/><ref refid="rtc_8h_1a05dee0783324f86ac3b05aa117e66d57" kindref="member">BEA_RTC_PRER_OFFSET</ref>,<sp/>14,<sp/>0,</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>subsec_freq<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>async_factor_f<sp/>=<sp/>(rtc_clock_freq<sp/>/<sp/>subsec_freq)<sp/>-<sp/>1.0f;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(async_factor_f<sp/>&gt;=<sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">)(1<sp/>&lt;&lt;<sp/>7))</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/>uint32_t<sp/>async_factor_u<sp/>=<sp/>(uint32_t)lroundf<sp/>(async_factor_f);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(<ref refid="rtc_8h_1aa4e35b2201d956f267436f5ba2fd8c89" kindref="member">BEA_RTC_BASE_ADDR</ref><sp/>+<sp/><ref refid="rtc_8h_1a05dee0783324f86ac3b05aa117e66d57" kindref="member">BEA_RTC_PRER_OFFSET</ref>,<sp/>22,<sp/>16,</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>async_factor_u);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="197"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="200" refid="rtc_8c_1a0769de8db989497497906ce05eb5f007" refkind="member"><highlight class="normal"><ref refid="rtc_8c_1a0769de8db989497497906ce05eb5f007" kindref="member">bea_rtc_set_datetime</ref><sp/>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref><sp/>datetime)</highlight></codeline>
+<codeline lineno="201"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="rtc_8c_1ab6ff20318ac77751c215ab5a091726dc" kindref="member">bea_datetime_is_valid</ref><sp/>(datetime))</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>return<sp/>false;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/>uint32_t<sp/>*t_reg<sp/>=<sp/><ref refid="rtc_8h_1aa4e35b2201d956f267436f5ba2fd8c89" kindref="member">BEA_RTC_BASE_ADDR</ref><sp/>+<sp/><ref refid="rtc_8h_1a656bfb6152f934923527efc53af7044b" kindref="member">BEA_RTC_TR_OFFSET</ref>;<sp/></highlight><highlight class="comment">//<sp/>Time<sp/>register</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/>uint32_t<sp/>*d_reg<sp/>=<sp/><ref refid="rtc_8h_1aa4e35b2201d956f267436f5ba2fd8c89" kindref="member">BEA_RTC_BASE_ADDR</ref><sp/>+<sp/><ref refid="rtc_8h_1aee2ff170abde8bdd9e805df5a2c473f7" kindref="member">BEA_RTC_DR_OFFSET</ref>;<sp/></highlight><highlight class="comment">//<sp/>Date<sp/>register</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/>uint32_t<sp/>nearest_second<sp/>=<sp/>lroundf<sp/>(floorf<sp/>(datetime.<ref refid="structbea__datetime_1ac58a64dddca3b47be2ee6f8473f05c3c" kindref="member">second</ref>));</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(t_reg,<sp/>3,<sp/>0,<sp/>nearest_second<sp/>%<sp/>10);</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(t_reg,<sp/>6,<sp/>4,<sp/>nearest_second<sp/>/<sp/>10);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(t_reg,<sp/>11,<sp/>8,<sp/>datetime.<ref refid="structbea__datetime_1a6c89c9c3c828dc79b8fe429b7ca8bf3c" kindref="member">minute</ref><sp/>%<sp/>10);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(t_reg,<sp/>14,<sp/>12,<sp/>datetime.<ref refid="structbea__datetime_1a6c89c9c3c828dc79b8fe429b7ca8bf3c" kindref="member">minute</ref><sp/>/<sp/>10);</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(t_reg,<sp/>19,<sp/>16,<sp/>datetime.<ref refid="structbea__datetime_1a0631f507f068a1d2d07519e9bdc1dc10" kindref="member">hour</ref><sp/>%<sp/>10);</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(t_reg,<sp/>21,<sp/>20,<sp/>datetime.<ref refid="structbea__datetime_1a0631f507f068a1d2d07519e9bdc1dc10" kindref="member">hour</ref><sp/>/<sp/>10);</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(t_reg,<sp/>22,<sp/>22,<sp/>0);</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/>uint32_t<sp/>d_reg_val<sp/>=<sp/>0x0;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(&amp;d_reg_val,<sp/>3,<sp/>0,<sp/>datetime.<ref refid="structbea__datetime_1a8770c15ef1dad83a7942eb22de549b99" kindref="member">day</ref><sp/>%<sp/>10);</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(&amp;d_reg_val,<sp/>5,<sp/>4,<sp/>datetime.<ref refid="structbea__datetime_1a8770c15ef1dad83a7942eb22de549b99" kindref="member">day</ref><sp/>/<sp/>10);</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/>uint32_t<sp/>month_adjusted<sp/>=<sp/>(uint32_t)datetime.<ref refid="structbea__datetime_1a39060ca586b6954fcba1ce5bb3f92cfb" kindref="member">month</ref><sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(&amp;d_reg_val,<sp/>11,<sp/>8,<sp/>month_adjusted<sp/>%<sp/>10);</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(&amp;d_reg_val,<sp/>12,<sp/>12,<sp/>month_adjusted<sp/>/<sp/>10);</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dotw_adjusted<sp/>=<sp/>(uint32_t)datetime.<ref refid="structbea__datetime_1a9f2e1b0c7d147a6ba40edb3f9c6607e4" kindref="member">dotw</ref><sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(&amp;d_reg_val,<sp/>15,<sp/>13,<sp/>dotw_adjusted);</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(&amp;d_reg_val,<sp/>19,<sp/>16,<sp/>datetime.<ref refid="structbea__datetime_1a492668fc6368f762a22333ada6647c5a" kindref="member">year</ref><sp/>%<sp/>10);</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(&amp;d_reg_val,<sp/>23,<sp/>20,<sp/>datetime.<ref refid="structbea__datetime_1a492668fc6368f762a22333ada6647c5a" kindref="member">year</ref><sp/>/<sp/>10);</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(d_reg,<sp/>31,<sp/>0,<sp/>d_reg_val);</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="231"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="234" refid="rtc_8c_1a92fd61b7036c4a430ae9573180da4856" refkind="member"><highlight class="normal"><ref refid="rtc_8c_1a92fd61b7036c4a430ae9573180da4856" kindref="member">bea_rtc_initialize</ref><sp/>(</highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41" kindref="member">bea_rtc_clksrc</ref><sp/>clock_source,</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref><sp/>start_time,<sp/>uint32_t<sp/>subsec_freq)</highlight></codeline>
+<codeline lineno="236"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/>uint32_t<sp/>*bdcr_reg<sp/>=<sp/><ref refid="rcc_8h_1afd632f112bc5ac1d4313c20cdab75010" kindref="member">BEA_RCC_BASE_ADDR</ref><sp/>+<sp/><ref refid="rtc_8h_1a6ef853b1002e0b01a7bb2e4d8a58b066" kindref="member">BEA_RCC_BDCR_OFFSET</ref>;</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Set<sp/>PWR_CR<sp/>flag<sp/>so<sp/>we<sp/>can<sp/>write<sp/>to<sp/>RTC<sp/>registers<sp/>at<sp/>all</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/>uint32_t<sp/>*pwr_reg<sp/>=<sp/><ref refid="pwr_8h_1a315b16787fa22c022f9d09c6bbc920a0" kindref="member">BEA_PWR_BASE_ADDR</ref><sp/>+<sp/><ref refid="pwr_8h_1a0595b1b4187282b0de7a571c03c9de63" kindref="member">BEA_PWR_CR1_OFFSET</ref>;</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(pwr_reg,<sp/>8,<sp/>8,<sp/>1);</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(bdcr_reg,<sp/>16,<sp/>16,<sp/>1);</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(pwr_reg,<sp/>8,<sp/>8,<sp/>1);</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(bdcr_reg,<sp/>16,<sp/>16,<sp/>0);</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>We<sp/>need<sp/>to<sp/>initialize<sp/>a<sp/>different<sp/>register<sp/>in<sp/>the<sp/>RCC<sp/>module<sp/>than<sp/>other</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>peripherals.<sp/>Ain&apos;t<sp/>that<sp/>a<sp/>pain?</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(bdcr_reg,<sp/>15,<sp/>15,<sp/>1);</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(clock_source)</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41a6cb0b8d31d7921bc4d91fa425f8e1e8e" kindref="member">BEA_RTC_CLKSRC_HSE</ref>:</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(bdcr_reg,<sp/>9,<sp/>8,<sp/>0b11);</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41af026b52870b04a0719d7ce2da1787b7a" kindref="member">BEA_RTC_CLKSRC_LSE</ref>:</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Make<sp/>sure<sp/>the<sp/>LSE<sp/>is<sp/>turned<sp/>on</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(bdcr_reg,<sp/>9,<sp/>8,<sp/>0b01);</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(bdcr_reg,<sp/>0,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(<ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(bdcr_reg,<sp/>1,<sp/>1)<sp/>==<sp/>0)</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41a41ed13532a638a6557488e5fe047d16f" kindref="member">BEA_RTC_CLKSRC_LSI</ref>:</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(bdcr_reg,<sp/>9,<sp/>8,<sp/>0b10);</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Disarm<sp/>the<sp/>write<sp/>protection<sp/>on<sp/>the<sp/>RTC<sp/>registers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/>uint32_t<sp/>*wpr_reg<sp/>=<sp/><ref refid="rtc_8h_1aa4e35b2201d956f267436f5ba2fd8c89" kindref="member">BEA_RTC_BASE_ADDR</ref><sp/>+<sp/><ref refid="rtc_8h_1a1a93dd6cc9f212cb62b68e8ec6febee6" kindref="member">BEA_RTC_WPR_OFFSET</ref>;</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(wpr_reg,<sp/>31,<sp/>0,<sp/>0xCA);</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(wpr_reg,<sp/>31,<sp/>0,<sp/>0x53);</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Set<sp/>the<sp/>INIT<sp/>flag<sp/>to<sp/>enter<sp/>initialization<sp/>mode</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/>uint32_t<sp/>*isr_reg<sp/>=<sp/><ref refid="rtc_8h_1aa4e35b2201d956f267436f5ba2fd8c89" kindref="member">BEA_RTC_BASE_ADDR</ref><sp/>+<sp/><ref refid="rtc_8h_1af3aa5fc5cbd7155f6dced938fe9e676e" kindref="member">BEA_RTC_ISR_OFFSET</ref>;</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(isr_reg,<sp/>7,<sp/>7,<sp/>1);</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(isr_reg,<sp/>5,<sp/>5,<sp/>0);</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Poll<sp/>the<sp/>INITF<sp/>flag<sp/>to<sp/>wait<sp/>for<sp/>initialization<sp/>mode<sp/>to<sp/>begin</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(<ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(isr_reg,<sp/>6,<sp/>6)<sp/>==<sp/>0)</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Set<sp/>the<sp/>prescaler<sp/>so<sp/>we<sp/>can<sp/>actually<sp/>measure<sp/>things</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><ref refid="rtc_8c_1aa2ac37e9f13589d6c1963b089319efd2" kindref="member">bea_rtc_init_prescaler</ref><sp/>(clock_source,<sp/>subsec_freq);</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Set<sp/>the<sp/>start<sp/>time</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><ref refid="rtc_8c_1a0769de8db989497497906ce05eb5f007" kindref="member">bea_rtc_set_datetime</ref><sp/>(start_time);</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Exit<sp/>initialization<sp/>mode</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(isr_reg,<sp/>7,<sp/>7,<sp/>0);</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Wait<sp/>for<sp/>everything<sp/>to<sp/>go<sp/>through</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(<ref refid="register__utils_8h_1a44dad41f9a6b361221dfd97e36343764" kindref="member">bea_get_reg_bits</ref><sp/>(isr_reg,<sp/>5,<sp/>5)<sp/>==<sp/>0)</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Re-arm<sp/>the<sp/>write<sp/>protection<sp/>on<sp/>the<sp/>RTC<sp/>registers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><ref refid="register__utils_8h_1a3c04f34a58adc5c29dd8f4160adb9a7f" kindref="member">bea_set_reg_bits</ref><sp/>(wpr_reg,<sp/>31,<sp/>0,<sp/>0xFF);</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="286"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="kernel/src/rtc.c"/>
+  </compounddef>
+</doxygen>

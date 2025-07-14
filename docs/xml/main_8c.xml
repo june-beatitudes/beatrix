@@ -1,0 +1,233 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="main_8c" kind="file" language="C++">
+    <compoundname>main.c</compoundname>
+    <includes refid="ftoa_8h" local="no">ftoa.h</includes>
+    <includes refid="isr_8h" local="no">isr.h</includes>
+    <includes refid="logging_8h" local="no">logging.h</includes>
+    <includes refid="processor_8h" local="no">processor.h</includes>
+    <includes refid="rcc_8h" local="no">rcc.h</includes>
+    <includes refid="rtc_8h" local="no">rtc.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>ftoa.h</label>
+        <link refid="ftoa_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>isr.h</label>
+        <link refid="isr_8h"/>
+      </node>
+      <node id="6">
+        <label>logging.h</label>
+        <link refid="logging_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>processor.h</label>
+        <link refid="processor_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>rcc.h</label>
+        <link refid="rcc_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>rtc.h</label>
+        <link refid="rtc_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>kernel/src/main.c</label>
+        <link refid="main_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>stdbool.h</label>
+      </node>
+      <node id="4">
+        <label>stddef.h</label>
+      </node>
+      <node id="8">
+        <label>stdint.h</label>
+      </node>
+      <node id="11">
+        <label>stdlib.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="main_8c_1a7c586ff49f2d6a6d4d4034ea15285529" prot="public" static="no">
+        <name>STACK_TOP</name>
+        <initializer>(void *)(0x20030000)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/src/main.c" line="45" column="9" bodyfile="kernel/src/main.c" bodystart="45" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="main_8c_1a0185f4e6b9f2af8e364ef78819c06709" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void bea_string_copy</definition>
+        <argsstring>(const char *from, char *to, size_t n)</argsstring>
+        <name>bea_string_copy</name>
+        <param>
+          <type>const char *</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/src/main.c" line="11" column="1" bodyfile="kernel/src/main.c" bodystart="11" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="main_8c_1a52ede75573138af61378a573170dc4b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void bea_main</definition>
+        <argsstring>()</argsstring>
+        <name>bea_main</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/src/main.c" line="20" column="1" bodyfile="kernel/src/main.c" bodystart="20" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="main_8c_1a5803c332a8ee4e6160e072ed265d2c22" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void handle_hardfault</definition>
+        <argsstring>()</argsstring>
+        <name>handle_hardfault</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/src/main.c" line="40" column="1" bodyfile="kernel/src/main.c" bodystart="40" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="main_8c_1a60da75578fa068df5096603087e3cc79" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>__attribute__</definition>
+        <argsstring>((section(&quot;.isr_table&quot;), unused)) const</argsstring>
+        <name>__attribute__</name>
+        <param>
+          <type>(section(&quot;.isr_table&quot;), unused)</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/src/main.c" line="47" column="1" bodyfile="kernel/src/main.c" bodystart="47" bodyend="48"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;<ref refid="ftoa_8h" kindref="compound">ftoa.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="isr_8h" kindref="compound">isr.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="logging_8h" kindref="compound">logging.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="processor_8h" kindref="compound">processor.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="rcc_8h" kindref="compound">rcc.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="rtc_8h" kindref="compound">rtc.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="main_8c_1a0185f4e6b9f2af8e364ef78819c06709" refkind="member"><highlight class="normal"><ref refid="main_8c_1a0185f4e6b9f2af8e364ef78819c06709" kindref="member">bea_string_copy</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*from,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*to,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>n)</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>n;<sp/>++i)</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>to[i]<sp/>=<sp/>from[i];</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="main_8c_1a52ede75573138af61378a573170dc4b4" refkind="member"><highlight class="normal"><ref refid="main_8c_1a52ede75573138af61378a573170dc4b4" kindref="member">bea_main</ref><sp/>()</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><ref refid="processor_8c_1ad22117d3d8acec58bdee6b6fcea4f542" kindref="member">bea_fpu_enable</ref><sp/>();</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref><sp/>foo<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>.year<sp/>=<sp/>25,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>.month<sp/>=<sp/><ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1ac861c879a9c295b2d94e577e003adf23" kindref="member">BEA_MONTH_JULY</ref>,</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>.day<sp/>=<sp/>12,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>.dotw<sp/>=<sp/><ref refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674ad032cc927089d86673324a5933964cf2" kindref="member">BEA_DOTW_SATURDAY</ref>,</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>.hour<sp/>=<sp/>21,</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>.minute<sp/>=<sp/>30,</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>.second<sp/>=<sp/>0.0f,</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><ref refid="rtc_8c_1a92fd61b7036c4a430ae9573180da4856" kindref="member">bea_rtc_initialize</ref><sp/>(<ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41af026b52870b04a0719d7ce2da1787b7a" kindref="member">BEA_RTC_CLKSRC_LSE</ref>,<sp/>foo,<sp/>256);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(;;)</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="logging_8c_1a5be02fad7b07b13d28f38f92c0599d97" kindref="member">bea_log</ref><sp/>(<ref refid="logging_8h_1a089df54136fab63216002eaca9f641b8aa99158bcb2bd8fd35ab424b3953f66da" kindref="member">BEA_LOG_INFO</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Hello,<sp/>world!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="main_8c_1a5803c332a8ee4e6160e072ed265d2c22" refkind="member"><highlight class="normal"><ref refid="main_8c_1a5803c332a8ee4e6160e072ed265d2c22" kindref="member">handle_hardfault</ref><sp/>()</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><ref refid="main_8c_1a52ede75573138af61378a573170dc4b4" kindref="member">bea_main</ref><sp/>();</highlight></codeline>
+<codeline lineno="43"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="main_8c_1a7c586ff49f2d6a6d4d4034ea15285529" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>STACK_TOP<sp/>(void<sp/>*)(0x20030000)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="main_8c_1a60da75578fa068df5096603087e3cc79" refkind="member"><highlight class="normal"><ref refid="main_8c_1a60da75578fa068df5096603087e3cc79" kindref="member">__attribute__</ref><sp/>((section<sp/>(</highlight><highlight class="stringliteral">&quot;.isr_table&quot;</highlight><highlight class="normal">),<sp/>unused))<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="isr_8h_1a6d626fdf464bc6f2160d0bc92243b027" kindref="member">isr_t</ref><sp/>ISR_TABLE[]</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>=<sp/>{<sp/>(<ref refid="isr_8h_1a6d626fdf464bc6f2160d0bc92243b027" kindref="member">isr_t</ref>)<ref refid="main_8c_1a7c586ff49f2d6a6d4d4034ea15285529" kindref="member">STACK_TOP</ref>,<sp/><ref refid="main_8c_1a52ede75573138af61378a573170dc4b4" kindref="member">bea_main</ref>,<sp/>NULL,<sp/><ref refid="main_8c_1a5803c332a8ee4e6160e072ed265d2c22" kindref="member">handle_hardfault</ref><sp/>};</highlight></codeline>
+    </programlisting>
+    <location file="kernel/src/main.c"/>
+  </compounddef>
+</doxygen>

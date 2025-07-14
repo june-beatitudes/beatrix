@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_3dd30a497388ee684638f120a124721c" kind="dir">
+    <compoundname>kernel/src</compoundname>
+    <innerfile refid="ftoa_8c">ftoa.c</innerfile>
+    <innerfile refid="logging_8c">logging.c</innerfile>
+    <innerfile refid="main_8c">main.c</innerfile>
+    <innerfile refid="processor_8c">processor.c</innerfile>
+    <innerfile refid="rcc_8c">rcc.c</innerfile>
+    <innerfile refid="register__utils_8c">register_utils.c</innerfile>
+    <innerfile refid="rtc_8c">rtc.c</innerfile>
+    <innerfile refid="string_8c">string.c</innerfile>
+    <innerfile refid="version_8c">version.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="kernel/src/"/>
+  </compounddef>
+</doxygen>

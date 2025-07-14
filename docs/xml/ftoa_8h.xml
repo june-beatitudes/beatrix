@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="ftoa_8h" kind="file" language="C++">
+    <compoundname>ftoa.h</compoundname>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stddef.h</includes>
+    <includedby refid="logging_8h" local="no">kernel/include/logging.h</includedby>
+    <includedby refid="ftoa_8c" local="no">kernel/src/ftoa.c</includedby>
+    <includedby refid="logging_8c" local="no">kernel/src/logging.c</includedby>
+    <includedby refid="main_8c" local="no">kernel/src/main.c</includedby>
+    <includedby refid="rtc_8c" local="no">kernel/src/rtc.c</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>kernel/include/ftoa.h</label>
+        <link refid="ftoa_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stdbool.h</label>
+      </node>
+      <node id="3">
+        <label>stddef.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>kernel/include/ftoa.h</label>
+        <link refid="ftoa_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>kernel/include/logging.h</label>
+        <link refid="logging_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>kernel/src/ftoa.c</label>
+        <link refid="ftoa_8c"/>
+      </node>
+      <node id="3">
+        <label>kernel/src/logging.c</label>
+        <link refid="logging_8c"/>
+      </node>
+      <node id="4">
+        <label>kernel/src/main.c</label>
+        <link refid="main_8c"/>
+      </node>
+      <node id="6">
+        <label>kernel/src/rtc.c</label>
+        <link refid="rtc_8c"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="ftoa_8h_1a940104fbbeedcd27d7baa58fa5e634a1" prot="public" static="no" strong="no">
+        <type></type>
+        <name>bea_ftoa_result</name>
+        <enumvalue id="ftoa_8h_1a940104fbbeedcd27d7baa58fa5e634a1a2510c23d85b67716ff5e1a6973b116d1" prot="public">
+          <name>BEA_FTOA_SUCCESS</name>
+          <briefdescription>
+<para>A successful run with no warnings. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="ftoa_8h_1a940104fbbeedcd27d7baa58fa5e634a1af13e46a6dfcaf57b9b93124cee6a8faa" prot="public">
+          <name>BEA_FTOA_ENOSPACE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>An unsuccessful run, not enough space in the buffer to represent the number as specified </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="ftoa_8h_1a940104fbbeedcd27d7baa58fa5e634a1afe94b55c395a10aa618eac547c3ebffe" prot="public">
+          <name>BEA_FTOA_WPRECISIONLOSS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>A successful run, but more significant figures were emitted than the number meaningfully has </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The result indicator of the <computeroutput>bea_ftoa</computeroutput> function. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/ftoa.h" line="17" column="1" bodyfile="kernel/include/ftoa.h" bodystart="18" bodyend="27"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="ftoa_8h_1af88c692bed6c2451087855d999da59f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>enum <ref refid="ftoa_8h_1a940104fbbeedcd27d7baa58fa5e634a1" kindref="member">bea_ftoa_result</ref></type>
+        <definition>enum bea_ftoa_result bea_ftoa</definition>
+        <argsstring>(float x, char *buf, size_t n_available, bool include_positive_sign)</argsstring>
+        <name>bea_ftoa</name>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>n_available</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>include_positive_sign</declname>
+        </param>
+        <briefdescription>
+<para>Fills a buffer with a string representation of a single-precision IEEE-754 floating point number. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number to stringify </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n_available</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of characters available in the output buffer; all characters will be used </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>include_positive_sign</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Boolean indicating whether or not a sign character should be emitted if <computeroutput>x</computeroutput> is positive</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>BEA_FTOA_SUCCESS Represents a fully successful run with no loss-of-precision warning </para>
+</simplesect>
+<simplesect kind="return"><para>BEA_FTOA_ENOSPACE Indicates that there is insufficient space in the buffer to represent the integral portion of the number </para>
+</simplesect>
+<simplesect kind="return"><para>BEA_FTOA_WPRECISIONLOSS Indicates that there are more significant digits emitted than a single-precision floating point number actually has</para>
+</simplesect>
+<xrefsect id="todo_1_todo000001"><xreftitle>Todo</xreftitle><xrefdescription><para>Add support for emitting INF, NaN </para>
+<para>Add support for scientific notation </para>
+</xrefdescription></xrefsect></para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/ftoa.h" line="50" column="21" bodyfile="kernel/src/ftoa.c" bodystart="7" bodyend="58" declfile="kernel/include/ftoa.h" declline="50" declcolumn="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Functionality for converting floats to strings inside the kernel, used primarily for logging. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="author"><para>Juniper Beatitudes </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>BEA_FTOA_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEA_FTOA_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="ftoa_8h_1a940104fbbeedcd27d7baa58fa5e634a1" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="ftoa_8h_1a940104fbbeedcd27d7baa58fa5e634a1" kindref="member">bea_ftoa_result</ref></highlight></codeline>
+<codeline lineno="18"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="20" refid="ftoa_8h_1a940104fbbeedcd27d7baa58fa5e634a1a2510c23d85b67716ff5e1a6973b116d1" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="ftoa_8h_1a940104fbbeedcd27d7baa58fa5e634a1a2510c23d85b67716ff5e1a6973b116d1" kindref="member">BEA_FTOA_SUCCESS</ref>,</highlight></codeline>
+<codeline lineno="23" refid="ftoa_8h_1a940104fbbeedcd27d7baa58fa5e634a1af13e46a6dfcaf57b9b93124cee6a8faa" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="ftoa_8h_1a940104fbbeedcd27d7baa58fa5e634a1af13e46a6dfcaf57b9b93124cee6a8faa" kindref="member">BEA_FTOA_ENOSPACE</ref>,</highlight></codeline>
+<codeline lineno="26" refid="ftoa_8h_1a940104fbbeedcd27d7baa58fa5e634a1afe94b55c395a10aa618eac547c3ebffe" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="ftoa_8h_1a940104fbbeedcd27d7baa58fa5e634a1afe94b55c395a10aa618eac547c3ebffe" kindref="member">BEA_FTOA_WPRECISIONLOSS</ref>,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="ftoa_8h_1a940104fbbeedcd27d7baa58fa5e634a1" kindref="member">bea_ftoa_result</ref><sp/><ref refid="ftoa_8h_1af88c692bed6c2451087855d999da59f6" kindref="member">bea_ftoa</ref><sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buf,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>n_available,</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>include_positive_sign);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="kernel/include/ftoa.h"/>
+  </compounddef>
+</doxygen>

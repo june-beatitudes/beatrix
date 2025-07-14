@@ -28,6 +28,8 @@
 	      doxygen
 	      doxygen_gui
 	      uv
+	      git-lfs
+	      gdb
             ]
           );
       };

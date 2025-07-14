@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="rcc_8c" kind="file" language="C++">
+    <compoundname>rcc.c</compoundname>
+    <includes refid="processor_8h" local="no">processor.h</includes>
+    <includes refid="rcc_8h" local="no">rcc.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stdint.h</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>processor.h</label>
+        <link refid="processor_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rcc.h</label>
+        <link refid="rcc_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>kernel/src/rcc.c</label>
+        <link refid="rcc_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>stdbool.h</label>
+      </node>
+      <node id="3">
+        <label>stdint.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="rcc_8c_1a6f702c69c1dce35582726441c9a453ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool bea_rcc_enable_peripheral</definition>
+        <argsstring>(enum bea_io_bank_t io_bank, uint8_t offset)</argsstring>
+        <name>bea_rcc_enable_peripheral</name>
+        <param>
+          <type>enum <ref refid="processor_8h_1a7f4f0a57c76fba097804c0372aa7a0c2" kindref="member">bea_io_bank_t</ref></type>
+          <declname>io_bank</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+<para>Enable a specific peripheral in the RCC subsystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>io_bank</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The I/O bank the peripheral is in (e.g., AHB1, AHB2, etc.) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The offset of the peripheral in the bank&apos;s register. APB1 has two registers; to access the second register, pass in the offset in that register plus 32 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true Peripheral enable successful (within reason to check) </para>
+</simplesect>
+<simplesect kind="return"><para>false Peripheral enable unsuccessful </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/src/rcc.c" line="7" column="1" bodyfile="kernel/src/rcc.c" bodystart="7" bodyend="50"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;<ref refid="processor_8h" kindref="compound">processor.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="rcc_8h" kindref="compound">rcc.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7" refid="rcc_8c_1a6f702c69c1dce35582726441c9a453ee" refkind="member"><highlight class="normal"><ref refid="rcc_8c_1a6f702c69c1dce35582726441c9a453ee" kindref="member">bea_rcc_enable_peripheral</ref><sp/>(</highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="processor_8h_1a7f4f0a57c76fba097804c0372aa7a0c2" kindref="member">bea_io_bank_t</ref><sp/>io_bank,<sp/>uint8_t<sp/>offset)</highlight></codeline>
+<codeline lineno="8"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((io_bank<sp/>==<sp/><ref refid="processor_8h_1a7f4f0a57c76fba097804c0372aa7a0c2acce50ece1d917c853f670e75a0b8d1c9" kindref="member">BEA_APB1</ref><sp/>&amp;&amp;<sp/>offset<sp/>&gt;<sp/>63)<sp/>||<sp/>offset<sp/>&gt;<sp/>31)</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Get<sp/>better<sp/>arguments</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/>uint32_t<sp/>reg_offset<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(io_bank)</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="processor_8h_1a7f4f0a57c76fba097804c0372aa7a0c2acce50ece1d917c853f670e75a0b8d1c9" kindref="member">BEA_APB1</ref>:</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(offset<sp/>&gt;<sp/>31)</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>There<sp/>are<sp/>actually<sp/>two<sp/>registers,<sp/>which<sp/>I<sp/>dislike<sp/>b/c<sp/>they<sp/>don&apos;t</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>need<sp/>to<sp/>be<sp/>that<sp/>way</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>reg_offset<sp/>=<sp/>0x05C;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>offset<sp/>-=<sp/>32;<sp/></highlight><highlight class="comment">//<sp/>Makes<sp/>the<sp/>rest<sp/>of<sp/>this<sp/>code<sp/>simpler</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>reg_offset<sp/>=<sp/>0x058;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="processor_8h_1a7f4f0a57c76fba097804c0372aa7a0c2ae4b8c45192ddf6f8fd1a1238a4c992fa" kindref="member">BEA_APB2</ref>:</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>reg_offset<sp/>=<sp/>0x060;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="processor_8h_1a7f4f0a57c76fba097804c0372aa7a0c2a69833a38b8a699ae6169ad540f7a4f31" kindref="member">BEA_APB3</ref>:</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Only<sp/>for<sp/>CPU2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>reg_offset<sp/>=<sp/>0x164;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="processor_8h_1a7f4f0a57c76fba097804c0372aa7a0c2ac412275f9d02febf15409b37096e5697" kindref="member">BEA_AHB1</ref>:</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>reg_offset<sp/>=<sp/>0x048;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="processor_8h_1a7f4f0a57c76fba097804c0372aa7a0c2adaf88a9adb8988c0e295c164d282beb3" kindref="member">BEA_AHB2</ref>:</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>reg_offset<sp/>=<sp/>0x04C;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="processor_8h_1a7f4f0a57c76fba097804c0372aa7a0c2ae8a7bd869c16140acadc9249919dc1c9" kindref="member">BEA_AHB3</ref>:</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>reg_offset<sp/>=<sp/>0x050;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/>reg_offset<sp/>/=<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal"><sp/>(uint32_t);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>*(<ref refid="rcc_8h_1afd632f112bc5ac1d4313c20cdab75010" kindref="member">BEA_RCC_BASE_ADDR</ref><sp/>+<sp/>reg_offset)<sp/>|=<sp/>(1<sp/>&lt;&lt;<sp/>offset);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="kernel/src/rcc.c"/>
+  </compounddef>
+</doxygen>

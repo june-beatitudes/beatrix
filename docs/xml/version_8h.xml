@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="version_8h" kind="file" language="C++">
+    <compoundname>version.h</compoundname>
+    <includedby refid="version_8c" local="no">kernel/src/version.c</includedby>
+    <invincdepgraph>
+      <node id="1">
+        <label>kernel/include/version.h</label>
+        <link refid="version_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>kernel/src/version.c</label>
+        <link refid="version_8c"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structbea__version" prot="public">bea_version</innerclass>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="version_8h_1ac3cf97780e63b7c75fc05243b9165923" prot="public" static="no">
+        <name>BEA_VERSION_NAME_MAXLEN</name>
+        <initializer>31</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/version.h" line="4" column="9" bodyfile="kernel/include/version.h" bodystart="4" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="version_8h_1a00abde852c05096fa1f4890027f85910" prot="public" static="no">
+        <name>BEA_GIT_HASH_LEN</name>
+        <initializer>40</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/version.h" line="5" column="9" bodyfile="kernel/include/version.h" bodystart="5" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>BEATRIX_VERSION_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEATRIX_VERSION_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4" refid="version_8h_1ac3cf97780e63b7c75fc05243b9165923" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEA_VERSION_NAME_MAXLEN<sp/>31</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5" refid="version_8h_1a00abde852c05096fa1f4890027f85910" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEA_GIT_HASH_LEN<sp/>40</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="structbea__version" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structbea__version" kindref="compound">bea_version</ref></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="14" refid="structbea__version_1a51d783fcfc343796d2d13d8c25788a14" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="structbea__version_1a51d783fcfc343796d2d13d8c25788a14" kindref="member">name</ref>[<ref refid="version_8h_1ac3cf97780e63b7c75fc05243b9165923" kindref="member">BEA_VERSION_NAME_MAXLEN</ref>];</highlight></codeline>
+<codeline lineno="15" refid="structbea__version_1a5b451235b3ce2ac08a4ca181df09a348" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="structbea__version_1a5b451235b3ce2ac08a4ca181df09a348" kindref="member">git_hash</ref>[<ref refid="version_8h_1a00abde852c05096fa1f4890027f85910" kindref="member">BEA_GIT_HASH_LEN</ref>];</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="kernel/include/version.h"/>
+  </compounddef>
+</doxygen>

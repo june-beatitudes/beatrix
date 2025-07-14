@@ -1,0 +1,720 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="rtc_8h" kind="file" language="C++">
+    <compoundname>rtc.h</compoundname>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stdint.h</includes>
+    <includedby refid="logging_8h" local="no">kernel/include/logging.h</includedby>
+    <includedby refid="logging_8c" local="no">kernel/src/logging.c</includedby>
+    <includedby refid="main_8c" local="no">kernel/src/main.c</includedby>
+    <includedby refid="rtc_8c" local="no">kernel/src/rtc.c</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>kernel/include/rtc.h</label>
+        <link refid="rtc_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stdbool.h</label>
+      </node>
+      <node id="3">
+        <label>stdint.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>kernel/include/logging.h</label>
+        <link refid="logging_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>kernel/include/rtc.h</label>
+        <link refid="rtc_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>kernel/src/logging.c</label>
+        <link refid="logging_8c"/>
+      </node>
+      <node id="4">
+        <label>kernel/src/main.c</label>
+        <link refid="main_8c"/>
+      </node>
+      <node id="5">
+        <label>kernel/src/rtc.c</label>
+        <link refid="rtc_8c"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structbea__datetime" prot="public">bea_datetime</innerclass>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="rtc_8h_1aa4e35b2201d956f267436f5ba2fd8c89" prot="public" static="no">
+        <name>BEA_RTC_BASE_ADDR</name>
+        <initializer>(uint32_t *)(0x40002800)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="7" column="9" bodyfile="kernel/include/rtc.h" bodystart="7" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="rtc_8h_1aa0c34cb47ad373d5f159b66b3f8f7e57" prot="public" static="no">
+        <name>BEA_DATETIME_KSTRZ_LEN</name>
+        <initializer>31</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="77" column="9" bodyfile="kernel/include/rtc.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="rtc_8h_1af3aa5fc5cbd7155f6dced938fe9e676e" prot="public" static="no">
+        <name>BEA_RTC_ISR_OFFSET</name>
+        <initializer>0x03</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="120" column="9" bodyfile="kernel/include/rtc.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="rtc_8h_1a6ef853b1002e0b01a7bb2e4d8a58b066" prot="public" static="no">
+        <name>BEA_RCC_BDCR_OFFSET</name>
+        <initializer>0x024</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="121" column="9" bodyfile="kernel/include/rtc.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="rtc_8h_1a05dee0783324f86ac3b05aa117e66d57" prot="public" static="no">
+        <name>BEA_RTC_PRER_OFFSET</name>
+        <initializer>0x04</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="122" column="9" bodyfile="kernel/include/rtc.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="rtc_8h_1a1a93dd6cc9f212cb62b68e8ec6febee6" prot="public" static="no">
+        <name>BEA_RTC_WPR_OFFSET</name>
+        <initializer>0x09</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="123" column="9" bodyfile="kernel/include/rtc.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="rtc_8h_1a656bfb6152f934923527efc53af7044b" prot="public" static="no">
+        <name>BEA_RTC_TR_OFFSET</name>
+        <initializer>0x00</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="156" column="9" bodyfile="kernel/include/rtc.h" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="rtc_8h_1aee2ff170abde8bdd9e805df5a2c473f7" prot="public" static="no">
+        <name>BEA_RTC_DR_OFFSET</name>
+        <initializer>0x01</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="157" column="9" bodyfile="kernel/include/rtc.h" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="rtc_8h_1a16b73eae23a64baa1342135d9e986dde" prot="public" static="no">
+        <name>BEA_RTC_SSR_OFFSET</name>
+        <initializer>0x0A</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="158" column="9" bodyfile="kernel/include/rtc.h" bodystart="158" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="rtc_8h_1a5a141291cb1b18719561b278c54d9674" prot="public" static="no" strong="no">
+        <type></type>
+        <name>bea_dotw</name>
+        <enumvalue id="rtc_8h_1a5a141291cb1b18719561b278c54d9674a8b6a8854d8a73e3adcc0a815028917a2" prot="public">
+          <name>BEA_DOTW_MONDAY</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a5a141291cb1b18719561b278c54d9674a2575319050ff561903bb6cf27bb6e020" prot="public">
+          <name>BEA_DOTW_TUESDAY</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a5a141291cb1b18719561b278c54d9674a311763564c1d421480030e5902580c8f" prot="public">
+          <name>BEA_DOTW_WEDNESDAY</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a5a141291cb1b18719561b278c54d9674a8dfc0d43c3aa7ec41a914860fcc89d89" prot="public">
+          <name>BEA_DOTW_THURSDAY</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a5a141291cb1b18719561b278c54d9674a1d40c3a8d21d29996a42709c3e1a1587" prot="public">
+          <name>BEA_DOTW_FRIDAY</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a5a141291cb1b18719561b278c54d9674ad032cc927089d86673324a5933964cf2" prot="public">
+          <name>BEA_DOTW_SATURDAY</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a5a141291cb1b18719561b278c54d9674a2a50df1df50ca49545e0a6255ce484c1" prot="public">
+          <name>BEA_DOTW_SUNDAY</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Represents a day of the week in the Gregorian calendar. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="12" column="1" bodyfile="kernel/include/rtc.h" bodystart="13" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="enum" id="rtc_8h_1a183d395107037b6e6e676272bf472bb1" prot="public" static="no" strong="no">
+        <type></type>
+        <name>bea_month</name>
+        <enumvalue id="rtc_8h_1a183d395107037b6e6e676272bf472bb1aba1ef0c427b885529221329fe43d291d" prot="public">
+          <name>BEA_MONTH_JANUARY</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a183d395107037b6e6e676272bf472bb1a76271e112688594621a6470284008c55" prot="public">
+          <name>BEA_MONTH_FEBRUARY</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a183d395107037b6e6e676272bf472bb1ad62b5873939fb30b280b780fe32c26d2" prot="public">
+          <name>BEA_MONTH_MARCH</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a183d395107037b6e6e676272bf472bb1a665abc879dd589bbbace2cf6a6e3c88c" prot="public">
+          <name>BEA_MONTH_APRIL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a183d395107037b6e6e676272bf472bb1a271953761e0fe53d335d7bf4f670c459" prot="public">
+          <name>BEA_MONTH_MAY</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a183d395107037b6e6e676272bf472bb1a49e4bb3b1a3d304378aeb121c4158e25" prot="public">
+          <name>BEA_MONTH_JUNE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a183d395107037b6e6e676272bf472bb1ac861c879a9c295b2d94e577e003adf23" prot="public">
+          <name>BEA_MONTH_JULY</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a183d395107037b6e6e676272bf472bb1af20938ad9249b2468c15edd927acd703" prot="public">
+          <name>BEA_MONTH_AUGUST</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a183d395107037b6e6e676272bf472bb1af9d0259319e2eb3aab30834180391392" prot="public">
+          <name>BEA_MONTH_SEPTEMBER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a183d395107037b6e6e676272bf472bb1afa545be5c6732b2bda3d2fecb6c9e868" prot="public">
+          <name>BEA_MONTH_OCTOBER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a183d395107037b6e6e676272bf472bb1a5f782158facd30fcdc39ea307f43d48f" prot="public">
+          <name>BEA_MONTH_NOVEMBER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1a183d395107037b6e6e676272bf472bb1a7399e743e3e9a373084538457c35b58f" prot="public">
+          <name>BEA_MONTH_DECEMBER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Represents a month in the Gregorian calendar. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="26" column="1" bodyfile="kernel/include/rtc.h" bodystart="27" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="enum" id="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41" prot="public" static="no" strong="no">
+        <type></type>
+        <name>bea_rtc_clksrc</name>
+        <enumvalue id="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41af026b52870b04a0719d7ce2da1787b7a" prot="public">
+          <name>BEA_RTC_CLKSRC_LSE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41a41ed13532a638a6557488e5fe047d16f" prot="public">
+          <name>BEA_RTC_CLKSRC_LSI</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41a6cb0b8d31d7921bc4d91fa425f8e1e8e" prot="public">
+          <name>BEA_RTC_CLKSRC_HSE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Represents a clock source for the RTC subsystem to use (see RM0434 pp. 263) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="129" column="1" bodyfile="kernel/include/rtc.h" bodystart="130" bodyend="134"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="rtc_8h_1a9a407050f95cd5f2379a6b1ff40eb3c2" prot="public" static="yes" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t BEA_MONTH_LENGTHS_NONLEAP[12]</definition>
+        <argsstring>[12]</argsstring>
+        <name>BEA_MONTH_LENGTHS_NONLEAP</name>
+        <initializer>= { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="42" column="22" bodyfile="kernel/include/rtc.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="variable" id="rtc_8h_1a75ba894d90e036747dbd68b273d23906" prot="public" static="yes" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t BEA_MONTH_LENGTHS_LEAP[12]</definition>
+        <argsstring>[12]</argsstring>
+        <name>BEA_MONTH_LENGTHS_LEAP</name>
+        <initializer>= { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="45" column="22" bodyfile="kernel/include/rtc.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="rtc_8h_1ab6ff20318ac77751c215ab5a091726dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool bea_datetime_is_valid</definition>
+        <argsstring>(struct bea_datetime datetime)</argsstring>
+        <name>bea_datetime_is_valid</name>
+        <param>
+          <type>struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></type>
+          <declname>datetime</declname>
+        </param>
+        <briefdescription>
+<para>Checks whether a <computeroutput>struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></computeroutput> represents a valid point in time in the Gregorian calendar. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>datetime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The datetime to check </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true The represented datetime is valid </para>
+</simplesect>
+<simplesect kind="return"><para>false The represented datetime is invalid </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="75" column="6" bodyfile="kernel/src/rtc.c" bodystart="53" bodyend="68" declfile="kernel/include/rtc.h" declline="75" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="rtc_8h_1a72426f7ac9905f8b80c87355e3cdc124" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void bea_datetime_to_kstrz</definition>
+        <argsstring>(const struct bea_datetime datetime, char *buf)</argsstring>
+        <name>bea_datetime_to_kstrz</name>
+        <param>
+          <type>const struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></type>
+          <declname>datetime</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+<para>Fills a buffer of at least 31 chars (please just use <computeroutput>BEA_DATETIME_KSTRZ_LEN</computeroutput>) with a null terminated string in BEATRIX kernel format. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The BEATRIX kernel format is loosely based on ISO and is &quot;WDY MON DY YEAR
+HR:MN:SECOND UTC&quot;, with seconds being given with 5 significant figures of precision and a decimal point.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>datetime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The datetime to use </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The buffer to fill </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="91" column="6" bodyfile="kernel/src/rtc.c" bodystart="82" bodyend="120" declfile="kernel/include/rtc.h" declline="91" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="rtc_8h_1a637f47f6df6e71aa34b4c8a0786b943f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool bea_unix_to_datetime</definition>
+        <argsstring>(uint64_t timestamp, struct bea_datetime *datetime_out)</argsstring>
+        <name>bea_unix_to_datetime</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>timestamp</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref> *</type>
+          <declname>datetime_out</declname>
+        </param>
+        <briefdescription>
+<para>Converts a standard Unix timestamp (seconds since the beginning of the year 1970) to a <computeroutput><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></computeroutput> </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timestamp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The timestamp in Unix format </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>datetime_out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to an uninitialized <computeroutput><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></computeroutput> object, which will be filled out by the function </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true The conversion was successful </para>
+</simplesect>
+<simplesect kind="return"><para>false The conversion was unsuccessful due to a mismatch in representable ranges </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="104" column="6" declfile="kernel/include/rtc.h" declline="104" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="rtc_8h_1a0e459b8d865049ef6c8f729ffa925dad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool bea_datetime_to_unix</definition>
+        <argsstring>(struct bea_datetime datetime, uint64_t timestamp_out)</argsstring>
+        <name>bea_datetime_to_unix</name>
+        <param>
+          <type>struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></type>
+          <declname>datetime</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>timestamp_out</declname>
+        </param>
+        <briefdescription>
+<para>converts a <computeroutput><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></computeroutput> to a Unix timestamp (seconds since the beginning of the year 1970) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>datetime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The datetime in <computeroutput><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></computeroutput> format </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timestamp_out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to an uninitialized <computeroutput>uint64_t</computeroutput>, whose value will be filled in by the function </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true The conversion was successful </para>
+</simplesect>
+<simplesect kind="return"><para>false The conversion was unsuccessful because <computeroutput>datetime</computeroutput> is invalid </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="117" column="6" declfile="kernel/include/rtc.h" declline="117" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="rtc_8h_1aa741288d7a53547a4928bf0b6788df80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool bea_rtc_initialize</definition>
+        <argsstring>(enum bea_rtc_clksrc clock_source, struct bea_datetime start_time, uint32_t subsec_frequency)</argsstring>
+        <name>bea_rtc_initialize</name>
+        <param>
+          <type>enum <ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41" kindref="member">bea_rtc_clksrc</ref></type>
+          <declname>clock_source</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></type>
+          <declname>start_time</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>subsec_frequency</declname>
+        </param>
+        <briefdescription>
+<para>Initialize the RTC subsystem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>clock_source</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Clock source for the RTC subsystem to use (see STMicroelectronics RM0434 pp. 263) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start_time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at initialization </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>subsec_frequency</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum frequency (in Hertz) the RTC can resolve. Validity depends on the clock source; reference page mentioned above </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true No error encountered </para>
+</simplesect>
+<simplesect kind="return"><para>false Error encountered</para>
+</simplesect>
+<xrefsect id="todo_1_todo000002"><xreftitle>Todo</xreftitle><xrefdescription><para>Add timeout for INITF flag </para>
+<para>Add timeout for initialization completion </para>
+<para>Add less opaque error return </para>
+</xrefdescription></xrefsect></para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="152" column="6" bodyfile="kernel/src/rtc.c" bodystart="234" bodyend="286" declfile="kernel/include/rtc.h" declline="152" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="rtc_8h_1a58d53e77d4fd1a5835050704ab10f3b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></type>
+        <definition>struct bea_datetime bea_rtc_get_datetime</definition>
+        <argsstring>()</argsstring>
+        <name>bea_rtc_get_datetime</name>
+        <briefdescription>
+<para>Reads the current date and time according to the RTC. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref> The returned date and time values </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/include/rtc.h" line="164" column="19" bodyfile="kernel/src/rtc.c" bodystart="123" bodyend="158" declfile="kernel/include/rtc.h" declline="164" declcolumn="19"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>BEATRIX_RTC_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEATRIX_RTC_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7" refid="rtc_8h_1aa4e35b2201d956f267436f5ba2fd8c89" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEA_RTC_BASE_ADDR<sp/>(uint32_t<sp/>*)(0x40002800)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674" kindref="member">bea_dotw</ref></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="14" refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674a8b6a8854d8a73e3adcc0a815028917a2" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674a8b6a8854d8a73e3adcc0a815028917a2" kindref="member">BEA_DOTW_MONDAY</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="15" refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674a2575319050ff561903bb6cf27bb6e020" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674a2575319050ff561903bb6cf27bb6e020" kindref="member">BEA_DOTW_TUESDAY</ref>,</highlight></codeline>
+<codeline lineno="16" refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674a311763564c1d421480030e5902580c8f" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674a311763564c1d421480030e5902580c8f" kindref="member">BEA_DOTW_WEDNESDAY</ref>,</highlight></codeline>
+<codeline lineno="17" refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674a8dfc0d43c3aa7ec41a914860fcc89d89" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674a8dfc0d43c3aa7ec41a914860fcc89d89" kindref="member">BEA_DOTW_THURSDAY</ref>,</highlight></codeline>
+<codeline lineno="18" refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674a1d40c3a8d21d29996a42709c3e1a1587" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674a1d40c3a8d21d29996a42709c3e1a1587" kindref="member">BEA_DOTW_FRIDAY</ref>,</highlight></codeline>
+<codeline lineno="19" refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674ad032cc927089d86673324a5933964cf2" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674ad032cc927089d86673324a5933964cf2" kindref="member">BEA_DOTW_SATURDAY</ref>,</highlight></codeline>
+<codeline lineno="20" refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674a2a50df1df50ca49545e0a6255ce484c1" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674a2a50df1df50ca49545e0a6255ce484c1" kindref="member">BEA_DOTW_SUNDAY</ref>,</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1" kindref="member">bea_month</ref></highlight></codeline>
+<codeline lineno="27"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="28" refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1aba1ef0c427b885529221329fe43d291d" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1aba1ef0c427b885529221329fe43d291d" kindref="member">BEA_MONTH_JANUARY</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="29" refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1a76271e112688594621a6470284008c55" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1a76271e112688594621a6470284008c55" kindref="member">BEA_MONTH_FEBRUARY</ref>,</highlight></codeline>
+<codeline lineno="30" refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1ad62b5873939fb30b280b780fe32c26d2" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1ad62b5873939fb30b280b780fe32c26d2" kindref="member">BEA_MONTH_MARCH</ref>,</highlight></codeline>
+<codeline lineno="31" refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1a665abc879dd589bbbace2cf6a6e3c88c" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1a665abc879dd589bbbace2cf6a6e3c88c" kindref="member">BEA_MONTH_APRIL</ref>,</highlight></codeline>
+<codeline lineno="32" refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1a271953761e0fe53d335d7bf4f670c459" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1a271953761e0fe53d335d7bf4f670c459" kindref="member">BEA_MONTH_MAY</ref>,</highlight></codeline>
+<codeline lineno="33" refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1a49e4bb3b1a3d304378aeb121c4158e25" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1a49e4bb3b1a3d304378aeb121c4158e25" kindref="member">BEA_MONTH_JUNE</ref>,</highlight></codeline>
+<codeline lineno="34" refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1ac861c879a9c295b2d94e577e003adf23" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1ac861c879a9c295b2d94e577e003adf23" kindref="member">BEA_MONTH_JULY</ref>,</highlight></codeline>
+<codeline lineno="35" refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1af20938ad9249b2468c15edd927acd703" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1af20938ad9249b2468c15edd927acd703" kindref="member">BEA_MONTH_AUGUST</ref>,</highlight></codeline>
+<codeline lineno="36" refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1af9d0259319e2eb3aab30834180391392" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1af9d0259319e2eb3aab30834180391392" kindref="member">BEA_MONTH_SEPTEMBER</ref>,</highlight></codeline>
+<codeline lineno="37" refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1afa545be5c6732b2bda3d2fecb6c9e868" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1afa545be5c6732b2bda3d2fecb6c9e868" kindref="member">BEA_MONTH_OCTOBER</ref>,</highlight></codeline>
+<codeline lineno="38" refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1a5f782158facd30fcdc39ea307f43d48f" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1a5f782158facd30fcdc39ea307f43d48f" kindref="member">BEA_MONTH_NOVEMBER</ref>,</highlight></codeline>
+<codeline lineno="39" refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1a7399e743e3e9a373084538457c35b58f" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1a7399e743e3e9a373084538457c35b58f" kindref="member">BEA_MONTH_DECEMBER</ref>,</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="rtc_8h_1a9a407050f95cd5f2379a6b1ff40eb3c2" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>uint8_t<sp/><ref refid="rtc_8h_1a9a407050f95cd5f2379a6b1ff40eb3c2" kindref="member">BEA_MONTH_LENGTHS_NONLEAP</ref>[12]</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>=<sp/>{<sp/>31,<sp/>28,<sp/>31,<sp/>30,<sp/>31,<sp/>30,<sp/>31,<sp/>31,<sp/>30,<sp/>31,<sp/>30,<sp/>31<sp/>};</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="rtc_8h_1a75ba894d90e036747dbd68b273d23906" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>uint8_t<sp/><ref refid="rtc_8h_1a75ba894d90e036747dbd68b273d23906" kindref="member">BEA_MONTH_LENGTHS_LEAP</ref>[12]</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>=<sp/>{<sp/>31,<sp/>29,<sp/>31,<sp/>30,<sp/>31,<sp/>30,<sp/>31,<sp/>31,<sp/>30,<sp/>31,<sp/>30,<sp/>31<sp/>};</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="structbea__datetime" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref></highlight></codeline>
+<codeline lineno="56"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="58" refid="structbea__datetime_1a492668fc6368f762a22333ada6647c5a" refkind="member"><highlight class="normal"><sp/><sp/>uint8_t<sp/><ref refid="structbea__datetime_1a492668fc6368f762a22333ada6647c5a" kindref="member">year</ref>;</highlight></codeline>
+<codeline lineno="59" refid="structbea__datetime_1a39060ca586b6954fcba1ce5bb3f92cfb" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1a183d395107037b6e6e676272bf472bb1" kindref="member">bea_month</ref><sp/><ref refid="structbea__datetime_1a39060ca586b6954fcba1ce5bb3f92cfb" kindref="member">month</ref>;</highlight></codeline>
+<codeline lineno="60" refid="structbea__datetime_1a8770c15ef1dad83a7942eb22de549b99" refkind="member"><highlight class="normal"><sp/><sp/>uint8_t<sp/><ref refid="structbea__datetime_1a8770c15ef1dad83a7942eb22de549b99" kindref="member">day</ref>;</highlight></codeline>
+<codeline lineno="61" refid="structbea__datetime_1a9f2e1b0c7d147a6ba40edb3f9c6607e4" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1a5a141291cb1b18719561b278c54d9674" kindref="member">bea_dotw</ref><sp/><ref refid="structbea__datetime_1a9f2e1b0c7d147a6ba40edb3f9c6607e4" kindref="member">dotw</ref>;</highlight></codeline>
+<codeline lineno="62" refid="structbea__datetime_1a0631f507f068a1d2d07519e9bdc1dc10" refkind="member"><highlight class="normal"><sp/><sp/>uint8_t<sp/><ref refid="structbea__datetime_1a0631f507f068a1d2d07519e9bdc1dc10" kindref="member">hour</ref>;</highlight></codeline>
+<codeline lineno="63" refid="structbea__datetime_1a6c89c9c3c828dc79b8fe429b7ca8bf3c" refkind="member"><highlight class="normal"><sp/><sp/>uint8_t<sp/><ref refid="structbea__datetime_1a6c89c9c3c828dc79b8fe429b7ca8bf3c" kindref="member">minute</ref>;</highlight></codeline>
+<codeline lineno="64" refid="structbea__datetime_1ac58a64dddca3b47be2ee6f8473f05c3c" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="structbea__datetime_1ac58a64dddca3b47be2ee6f8473f05c3c" kindref="member">second</ref>;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1ab6ff20318ac77751c215ab5a091726dc" kindref="member">bea_datetime_is_valid</ref><sp/>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref><sp/>datetime);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77" refid="rtc_8h_1aa0c34cb47ad373d5f159b66b3f8f7e57" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEA_DATETIME_KSTRZ_LEN<sp/>31</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1a72426f7ac9905f8b80c87355e3cdc124" kindref="member">bea_datetime_to_kstrz</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref><sp/>datetime,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buf);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104" refid="rtc_8h_1a637f47f6df6e71aa34b4c8a0786b943f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1a637f47f6df6e71aa34b4c8a0786b943f" kindref="member">bea_unix_to_datetime</ref><sp/>(uint64_t<sp/>timestamp,</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref><sp/>*datetime_out);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117" refid="rtc_8h_1a0e459b8d865049ef6c8f729ffa925dad" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1a0e459b8d865049ef6c8f729ffa925dad" kindref="member">bea_datetime_to_unix</ref><sp/>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref><sp/>datetime,</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>timestamp_out);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120" refid="rtc_8h_1af3aa5fc5cbd7155f6dced938fe9e676e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEA_RTC_ISR_OFFSET<sp/>0x03</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121" refid="rtc_8h_1a6ef853b1002e0b01a7bb2e4d8a58b066" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEA_RCC_BDCR_OFFSET<sp/>0x024</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122" refid="rtc_8h_1a05dee0783324f86ac3b05aa117e66d57" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEA_RTC_PRER_OFFSET<sp/>0x04</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123" refid="rtc_8h_1a1a93dd6cc9f212cb62b68e8ec6febee6" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEA_RTC_WPR_OFFSET<sp/>0x09</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="129" refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41" kindref="member">bea_rtc_clksrc</ref></highlight></codeline>
+<codeline lineno="130"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="131" refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41af026b52870b04a0719d7ce2da1787b7a" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41af026b52870b04a0719d7ce2da1787b7a" kindref="member">BEA_RTC_CLKSRC_LSE</ref>,</highlight></codeline>
+<codeline lineno="132" refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41a41ed13532a638a6557488e5fe047d16f" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41a41ed13532a638a6557488e5fe047d16f" kindref="member">BEA_RTC_CLKSRC_LSI</ref>,</highlight></codeline>
+<codeline lineno="133" refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41a6cb0b8d31d7921bc4d91fa425f8e1e8e" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41a6cb0b8d31d7921bc4d91fa425f8e1e8e" kindref="member">BEA_RTC_CLKSRC_HSE</ref>,</highlight></codeline>
+<codeline lineno="134"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1aa741288d7a53547a4928bf0b6788df80" kindref="member">bea_rtc_initialize</ref><sp/>(</highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41" kindref="member">bea_rtc_clksrc</ref><sp/>clock_source,</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref><sp/>start_time,</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>subsec_frequency);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156" refid="rtc_8h_1a656bfb6152f934923527efc53af7044b" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEA_RTC_TR_OFFSET<sp/>0x00</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="157" refid="rtc_8h_1aee2ff170abde8bdd9e805df5a2c473f7" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEA_RTC_DR_OFFSET<sp/>0x01</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="158" refid="rtc_8h_1a16b73eae23a64baa1342135d9e986dde" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BEA_RTC_SSR_OFFSET<sp/>0x0A</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structbea__datetime" kindref="compound">bea_datetime</ref><sp/><ref refid="rtc_8c_1a58d53e77d4fd1a5835050704ab10f3b2" kindref="member">bea_rtc_get_datetime</ref><sp/>();</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="kernel/include/rtc.h"/>
+  </compounddef>
+</doxygen>

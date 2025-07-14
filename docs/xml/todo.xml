@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="todo" kind="page">
+    <compoundname>todo</compoundname>
+    <title>Todo List</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><variablelist>
+<varlistentry><term>Global <ref refid="ftoa_8c_1af88c692bed6c2451087855d999da59f6" kindref="member">bea_ftoa</ref>  (float x, char *buf, size_t n_available, bool include_positive_sign)</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000001"/>Add support for emitting INF, NaN </para>
+<para></para>
+<para>Add support for scientific notation  </para>
+</listitem>
+<varlistentry><term>Global <ref refid="rtc_8c_1a92fd61b7036c4a430ae9573180da4856" kindref="member">bea_rtc_initialize</ref>  (enum <ref refid="rtc_8h_1ac1bac0ca6a122e954d7ec3918e5cce41" kindref="member">bea_rtc_clksrc</ref> clock_source, struct <ref refid="structbea__datetime" kindref="compound">bea_datetime</ref> start_time, uint32_t subsec_freq)</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000002"/>Add timeout for INITF flag </para>
+<para></para>
+<para>Add timeout for initialization completion </para>
+<para></para>
+<para>Add less opaque error return </para>
+</listitem>
+</variablelist>
+</para>
+    </detaileddescription>
+    <location file="todo"/>
+  </compounddef>
+</doxygen>

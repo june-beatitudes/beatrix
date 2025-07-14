@@ -16,7 +16,7 @@ MEMORY {
 
 SECTIONS {
     /* The startup code goes first into FLASH */
-    .isr_table : {
+    .isr_table 0x08000000 : {
         . = ALIGN(4);
         KEEP(*(.isr_table)) /* Startup code */
         . = ALIGN(4);

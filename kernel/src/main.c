@@ -44,5 +44,5 @@ handle_hardfault ()
 
 #define STACK_TOP (void *)(0x20030000)
 
-__attribute__ ((section (".isr_table"), unused)) const static isr_t ISR_TABLE[]
+__attribute__ ((section (".isr_table"), unused)) const isr_t ISR_TABLE[]
     = { (isr_t)STACK_TOP, bea_main, NULL, handle_hardfault };
