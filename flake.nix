@@ -30,6 +30,8 @@
 	      uv
 	      git-lfs
 	      gdb
+	      gnumake
+	      unzip
             ]
           );
       };
