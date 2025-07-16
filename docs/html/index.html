@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>API Reference</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+</span>
+<span class="navlink">
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="0-api-reference-1.html" accesskey="n" rel="next">API Reference</a>
+</span>
+<span class="navlink">
+</span>
+</div>
+</nav>
+<header id="title-block-header">
+<h1 class="title">API Reference</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="0-api-reference-1.html#header-files"
+id="toc-header-files"><span class="toc-section-number">0.1</span> Header
+files</a></li>
+<li><a href="1-file-kernelincludeftoa.h.html#file-kernelincludeftoa.h"
+id="toc-file-kernelincludeftoa.h"><span
+class="toc-section-number">1</span> File kernel/include/ftoa.h</a>
+<ul>
+<li><a href="1-file-kernelincludeftoa.h.html#structures-and-types"
+id="toc-structures-and-types"><span
+class="toc-section-number">1.1</span> Structures and Types</a></li>
+<li><a href="1-file-kernelincludeftoa.h.html#functions"
+id="toc-functions"><span class="toc-section-number">1.2</span>
+Functions</a></li>
+<li><a
+href="1-file-kernelincludeftoa.h.html#structures-and-types-documentation"
+id="toc-structures-and-types-documentation"><span
+class="toc-section-number">1.3</span> Structures and Types
+Documentation</a>
+<ul>
+<li><a href="1-file-kernelincludeftoa.h.html#enum-bea_ftoa_result"
+id="toc-enum-bea_ftoa_result"><span
+class="toc-section-number">1.3.1</span> enum
+<code>bea_ftoa_result</code></a></li>
+</ul></li>
+<li><a href="1-file-kernelincludeftoa.h.html#functions-documentation"
+id="toc-functions-documentation"><span
+class="toc-section-number">1.4</span> Functions Documentation</a>
+<ul>
+<li><a href="1-file-kernelincludeftoa.h.html#function-bea_ftoa"
+id="toc-function-bea_ftoa"><span class="toc-section-number">1.4.1</span>
+function <code>bea_ftoa</code></a></li>
+</ul></li>
+</ul></li>
+<li><a href="2-file-kernelincludeisr.h.html#file-kernelincludeisr.h"
+id="toc-file-kernelincludeisr.h"><span
+class="toc-section-number">2</span> File kernel/include/isr.h</a>
+<ul>
+<li><a href="2-file-kernelincludeisr.h.html#structures-and-types-1"
+id="toc-structures-and-types-1"><span
+class="toc-section-number">2.1</span> Structures and Types</a></li>
+<li><a
+href="2-file-kernelincludeisr.h.html#structures-and-types-documentation-1"
+id="toc-structures-and-types-documentation-1"><span
+class="toc-section-number">2.2</span> Structures and Types
+Documentation</a>
+<ul>
+<li><a href="2-file-kernelincludeisr.h.html#typedef-isr_t"
+id="toc-typedef-isr_t"><span class="toc-section-number">2.2.1</span>
+typedef <code>isr_t</code></a></li>
+</ul></li>
+</ul></li>
+<li><a
+href="3-file-kernelincludelogging.h.html#file-kernelincludelogging.h"
+id="toc-file-kernelincludelogging.h"><span
+class="toc-section-number">3</span> File kernel/include/logging.h</a>
+<ul>
+<li><a href="3-file-kernelincludelogging.h.html#structures-and-types-2"
+id="toc-structures-and-types-2"><span
+class="toc-section-number">3.1</span> Structures and Types</a></li>
+<li><a href="3-file-kernelincludelogging.h.html#functions-1"
+id="toc-functions-1"><span class="toc-section-number">3.2</span>
+Functions</a></li>
+<li><a
+href="3-file-kernelincludelogging.h.html#structures-and-types-documentation-2"
+id="toc-structures-and-types-documentation-2"><span
+class="toc-section-number">3.3</span> Structures and Types
+Documentation</a>
+<ul>
+<li><a href="3-file-kernelincludelogging.h.html#enum-bea_log_level_t"
+id="toc-enum-bea_log_level_t"><span
+class="toc-section-number">3.3.1</span> enum
+<code>bea_log_level_t</code></a></li>
+</ul></li>
+<li><a
+href="3-file-kernelincludelogging.h.html#functions-documentation-1"
+id="toc-functions-documentation-1"><span
+class="toc-section-number">3.4</span> Functions Documentation</a>
+<ul>
+<li><a href="3-file-kernelincludelogging.h.html#function-bea_log"
+id="toc-function-bea_log"><span class="toc-section-number">3.4.1</span>
+function <code>bea_log</code></a></li>
+</ul></li>
+</ul></li>
+<li><a
+href="4-file-kernelincludeprocessor.h.html#file-kernelincludeprocessor.h"
+id="toc-file-kernelincludeprocessor.h"><span
+class="toc-section-number">4</span> File kernel/include/processor.h</a>
+<ul>
+<li><a
+href="4-file-kernelincludeprocessor.h.html#structures-and-types-3"
+id="toc-structures-and-types-3"><span
+class="toc-section-number">4.1</span> Structures and Types</a></li>
+<li><a href="4-file-kernelincludeprocessor.h.html#functions-2"
+id="toc-functions-2"><span class="toc-section-number">4.2</span>
+Functions</a></li>
+<li><a
+href="4-file-kernelincludeprocessor.h.html#structures-and-types-documentation-3"
+id="toc-structures-and-types-documentation-3"><span
+class="toc-section-number">4.3</span> Structures and Types
+Documentation</a>
+<ul>
+<li><a href="4-file-kernelincludeprocessor.h.html#enum-bea_io_bank_t"
+id="toc-enum-bea_io_bank_t"><span
+class="toc-section-number">4.3.1</span> enum
+<code>bea_io_bank_t</code></a></li>
+<li><a
+href="4-file-kernelincludeprocessor.h.html#enum-bea_semihost_reason_t"
+id="toc-enum-bea_semihost_reason_t"><span
+class="toc-section-number">4.3.2</span> enum
+<code>bea_semihost_reason_t</code></a></li>
+</ul></li>
+<li><a
+href="4-file-kernelincludeprocessor.h.html#functions-documentation-2"
+id="toc-functions-documentation-2"><span
+class="toc-section-number">4.4</span> Functions Documentation</a>
+<ul>
+<li><a
+href="4-file-kernelincludeprocessor.h.html#function-bea_fpu_enable"
+id="toc-function-bea_fpu_enable"><span
+class="toc-section-number">4.4.1</span> function
+<code>bea_fpu_enable</code></a></li>
+<li><a
+href="4-file-kernelincludeprocessor.h.html#function-bea_semihost_rq"
+id="toc-function-bea_semihost_rq"><span
+class="toc-section-number">4.4.2</span> function
+<code>bea_semihost_rq</code></a></li>
+</ul></li>
+</ul></li>
+<li><a href="5-file-kernelincludepwr.h.html#file-kernelincludepwr.h"
+id="toc-file-kernelincludepwr.h"><span
+class="toc-section-number">5</span> File kernel/include/pwr.h</a>
+<ul>
+<li><a href="5-file-kernelincludepwr.h.html#macros"
+id="toc-macros"><span class="toc-section-number">5.1</span>
+Macros</a></li>
+<li><a href="5-file-kernelincludepwr.h.html#macros-documentation"
+id="toc-macros-documentation"><span
+class="toc-section-number">5.2</span> Macros Documentation</a>
+<ul>
+<li><a href="5-file-kernelincludepwr.h.html#define-bea_pwr_base_addr"
+id="toc-define-bea_pwr_base_addr"><span
+class="toc-section-number">5.2.1</span> define
+<code>BEA_PWR_BASE_ADDR</code></a></li>
+<li><a href="5-file-kernelincludepwr.h.html#define-bea_pwr_cr1_offset"
+id="toc-define-bea_pwr_cr1_offset"><span
+class="toc-section-number">5.2.2</span> define
+<code>BEA_PWR_CR1_OFFSET</code></a></li>
+</ul></li>
+</ul></li>
+<li><a href="6-file-kernelincludercc.h.html#file-kernelincludercc.h"
+id="toc-file-kernelincludercc.h"><span
+class="toc-section-number">6</span> File kernel/include/rcc.h</a>
+<ul>
+<li><a href="6-file-kernelincludercc.h.html#functions-3"
+id="toc-functions-3"><span class="toc-section-number">6.1</span>
+Functions</a></li>
+<li><a href="6-file-kernelincludercc.h.html#macros-1"
+id="toc-macros-1"><span class="toc-section-number">6.2</span>
+Macros</a></li>
+<li><a href="6-file-kernelincludercc.h.html#functions-documentation-3"
+id="toc-functions-documentation-3"><span
+class="toc-section-number">6.3</span> Functions Documentation</a>
+<ul>
+<li><a
+href="6-file-kernelincludercc.h.html#function-bea_rcc_enable_peripheral"
+id="toc-function-bea_rcc_enable_peripheral"><span
+class="toc-section-number">6.3.1</span> function
+<code>bea_rcc_enable_peripheral</code></a></li>
+</ul></li>
+<li><a href="6-file-kernelincludercc.h.html#macros-documentation-1"
+id="toc-macros-documentation-1"><span
+class="toc-section-number">6.4</span> Macros Documentation</a>
+<ul>
+<li><a href="6-file-kernelincludercc.h.html#define-bea_rcc_base_addr"
+id="toc-define-bea_rcc_base_addr"><span
+class="toc-section-number">6.4.1</span> define
+<code>BEA_RCC_BASE_ADDR</code></a></li>
+</ul></li>
+</ul></li>
+<li><a
+href="7-file-kernelincluderegister_utils.h.html#file-kernelincluderegister_utils.h"
+id="toc-file-kernelincluderegister_utils.h"><span
+class="toc-section-number">7</span> File
+kernel/include/register_utils.h</a>
+<ul>
+<li><a href="7-file-kernelincluderegister_utils.h.html#functions-4"
+id="toc-functions-4"><span class="toc-section-number">7.1</span>
+Functions</a></li>
+<li><a
+href="7-file-kernelincluderegister_utils.h.html#functions-documentation-4"
+id="toc-functions-documentation-4"><span
+class="toc-section-number">7.2</span> Functions Documentation</a>
+<ul>
+<li><a
+href="7-file-kernelincluderegister_utils.h.html#function-bea_get_reg_bits"
+id="toc-function-bea_get_reg_bits"><span
+class="toc-section-number">7.2.1</span> function
+<code>bea_get_reg_bits</code></a></li>
+</ul></li>
+</ul></li>
+<li><a href="8-file-kernelincludertc.h.html#file-kernelincludertc.h"
+id="toc-file-kernelincludertc.h"><span
+class="toc-section-number">8</span> File kernel/include/rtc.h</a>
+<ul>
+<li><a href="8-file-kernelincludertc.h.html#structures-and-types-4"
+id="toc-structures-and-types-4"><span
+class="toc-section-number">8.1</span> Structures and Types</a></li>
+<li><a href="8-file-kernelincludertc.h.html#functions-5"
+id="toc-functions-5"><span class="toc-section-number">8.2</span>
+Functions</a></li>
+<li><a href="8-file-kernelincludertc.h.html#macros-2"
+id="toc-macros-2"><span class="toc-section-number">8.3</span>
+Macros</a></li>
+<li><a
+href="8-file-kernelincludertc.h.html#structures-and-types-documentation-4"
+id="toc-structures-and-types-documentation-4"><span
+class="toc-section-number">8.4</span> Structures and Types
+Documentation</a>
+<ul>
+<li><a href="8-file-kernelincludertc.h.html#struct-bea_datetime"
+id="toc-struct-bea_datetime"><span
+class="toc-section-number">8.4.1</span> struct
+<code>bea_datetime</code></a></li>
+<li><a href="8-file-kernelincludertc.h.html#enum-bea_dotw"
+id="toc-enum-bea_dotw"><span class="toc-section-number">8.4.2</span>
+enum <code>bea_dotw</code></a></li>
+<li><a href="8-file-kernelincludertc.h.html#enum-bea_month"
+id="toc-enum-bea_month"><span class="toc-section-number">8.4.3</span>
+enum <code>bea_month</code></a></li>
+<li><a href="8-file-kernelincludertc.h.html#enum-bea_rtc_clksrc"
+id="toc-enum-bea_rtc_clksrc"><span
+class="toc-section-number">8.4.4</span> enum
+<code>bea_rtc_clksrc</code></a></li>
+</ul></li>
+<li><a href="8-file-kernelincludertc.h.html#functions-documentation-5"
+id="toc-functions-documentation-5"><span
+class="toc-section-number">8.5</span> Functions Documentation</a>
+<ul>
+<li><a
+href="8-file-kernelincludertc.h.html#function-bea_datetime_is_valid"
+id="toc-function-bea_datetime_is_valid"><span
+class="toc-section-number">8.5.1</span> function
+<code>bea_datetime_is_valid</code></a></li>
+</ul></li>
+<li><a href="8-file-kernelincludertc.h.html#macros-documentation-2"
+id="toc-macros-documentation-2"><span
+class="toc-section-number">8.6</span> Macros Documentation</a>
+<ul>
+<li><a
+href="8-file-kernelincludertc.h.html#define-bea_datetime_kstrz_len"
+id="toc-define-bea_datetime_kstrz_len"><span
+class="toc-section-number">8.6.1</span> define
+<code>BEA_DATETIME_KSTRZ_LEN</code></a></li>
+<li><a href="8-file-kernelincludertc.h.html#define-bea_rcc_bdcr_offset"
+id="toc-define-bea_rcc_bdcr_offset"><span
+class="toc-section-number">8.6.2</span> define
+<code>BEA_RCC_BDCR_OFFSET</code></a></li>
+<li><a href="8-file-kernelincludertc.h.html#define-bea_rtc_base_addr"
+id="toc-define-bea_rtc_base_addr"><span
+class="toc-section-number">8.6.3</span> define
+<code>BEA_RTC_BASE_ADDR</code></a></li>
+<li><a href="8-file-kernelincludertc.h.html#define-bea_rtc_dr_offset"
+id="toc-define-bea_rtc_dr_offset"><span
+class="toc-section-number">8.6.4</span> define
+<code>BEA_RTC_DR_OFFSET</code></a></li>
+<li><a href="8-file-kernelincludertc.h.html#define-bea_rtc_isr_offset"
+id="toc-define-bea_rtc_isr_offset"><span
+class="toc-section-number">8.6.5</span> define
+<code>BEA_RTC_ISR_OFFSET</code></a></li>
+<li><a href="8-file-kernelincludertc.h.html#define-bea_rtc_prer_offset"
+id="toc-define-bea_rtc_prer_offset"><span
+class="toc-section-number">8.6.6</span> define
+<code>BEA_RTC_PRER_OFFSET</code></a></li>
+<li><a href="8-file-kernelincludertc.h.html#define-bea_rtc_ssr_offset"
+id="toc-define-bea_rtc_ssr_offset"><span
+class="toc-section-number">8.6.7</span> define
+<code>BEA_RTC_SSR_OFFSET</code></a></li>
+<li><a href="8-file-kernelincludertc.h.html#define-bea_rtc_tr_offset"
+id="toc-define-bea_rtc_tr_offset"><span
+class="toc-section-number">8.6.8</span> define
+<code>BEA_RTC_TR_OFFSET</code></a></li>
+<li><a href="8-file-kernelincludertc.h.html#define-bea_rtc_wpr_offset"
+id="toc-define-bea_rtc_wpr_offset"><span
+class="toc-section-number">8.6.9</span> define
+<code>BEA_RTC_WPR_OFFSET</code></a></li>
+</ul></li>
+</ul></li>
+<li><a
+href="9-file-kernelincludestring.h.html#file-kernelincludestring.h"
+id="toc-file-kernelincludestring.h"><span
+class="toc-section-number">9</span> File kernel/include/string.h</a>
+<ul>
+<li><a href="9-file-kernelincludestring.h.html#functions-6"
+id="toc-functions-6"><span class="toc-section-number">9.1</span>
+Functions</a></li>
+<li><a
+href="9-file-kernelincludestring.h.html#functions-documentation-6"
+id="toc-functions-documentation-6"><span
+class="toc-section-number">9.2</span> Functions Documentation</a>
+<ul>
+<li><a href="9-file-kernelincludestring.h.html#function-bea_strncpy"
+id="toc-function-bea_strncpy"><span
+class="toc-section-number">9.2.1</span> function
+<code>bea_strncpy</code></a></li>
+</ul></li>
+</ul></li>
+<li><a
+href="10-file-kernelincludeversion.h.html#file-kernelincludeversion.h"
+id="toc-file-kernelincludeversion.h"><span
+class="toc-section-number">10</span> File kernel/include/version.h</a>
+<ul>
+<li><a href="10-file-kernelincludeversion.h.html#structures-and-types-5"
+id="toc-structures-and-types-5"><span
+class="toc-section-number">10.1</span> Structures and Types</a></li>
+<li><a href="10-file-kernelincludeversion.h.html#macros-3"
+id="toc-macros-3"><span class="toc-section-number">10.2</span>
+Macros</a></li>
+<li><a
+href="10-file-kernelincludeversion.h.html#structures-and-types-documentation-5"
+id="toc-structures-and-types-documentation-5"><span
+class="toc-section-number">10.3</span> Structures and Types
+Documentation</a>
+<ul>
+<li><a href="10-file-kernelincludeversion.h.html#struct-bea_version"
+id="toc-struct-bea_version"><span
+class="toc-section-number">10.3.1</span> struct
+<code>bea_version</code></a></li>
+</ul></li>
+<li><a href="10-file-kernelincludeversion.h.html#macros-documentation-3"
+id="toc-macros-documentation-3"><span
+class="toc-section-number">10.4</span> Macros Documentation</a>
+<ul>
+<li><a
+href="10-file-kernelincludeversion.h.html#define-bea_git_hash_len"
+id="toc-define-bea_git_hash_len"><span
+class="toc-section-number">10.4.1</span> define
+<code>BEA_GIT_HASH_LEN</code></a></li>
+<li><a
+href="10-file-kernelincludeversion.h.html#define-bea_version_name_maxlen"
+id="toc-define-bea_version_name_maxlen"><span
+class="toc-section-number">10.4.2</span> define
+<code>BEA_VERSION_NAME_MAXLEN</code></a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+
+</body>
+</html>
