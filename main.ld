@@ -1,6 +1,6 @@
 /* DERIVED WITH LOVE FROM THE OFFICIAL F0 FIRMWARE */
 
-ENTRY(bea_main)
+ENTRY(bea_do_reset)
 
 /* Highest address of the user mode stack */
 _stack_end = 0x20030000;    /* end of RAM */
