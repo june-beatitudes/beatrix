@@ -26,6 +26,6 @@ bea_semihost_rq (int32_t reason, void *arg)
                     "MOV %[val], R0 \n"
                     : [val] "=r"(value)
                     : [rsn] "r"(reason), [arg] "r"(arg)
-                    : "r0", "r1", "r2", "r3", "ip", "lr", "memory", "cc");
+                    : "r0", "r1");
   return value;
 }

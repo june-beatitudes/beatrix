@@ -10,7 +10,6 @@
 
 #include <stdbool.h>
 #include <stddef.h>
-#include <stdint.h>
 
 /// The longest the name of a driver can be (not including the null terminator)
 #define BEA_DRIVER_NAME_MAXLEN 31
@@ -31,7 +30,7 @@ struct bea_driver
 {
   const char name[BEA_DRIVER_NAME_MAXLEN + 1];
   bool (*initialize) (void);
-  bool (*request) (void *arg, void *result);
+  void (*request) (void *arg, void *result);
   bool (*deinitialize) (void);
 };
 
