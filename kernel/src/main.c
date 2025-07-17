@@ -6,6 +6,7 @@
 #include <rtc.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <uart.h>
 
 void
 bea_string_copy (const char *from, char *to, size_t n)
@@ -30,9 +31,11 @@ bea_main ()
     .second = 0.0f,
   };
   bea_rtc_initialize (BEA_RTC_CLKSRC_LSE, foo, 256);
+  bea_uart_initialize (115200);
   for (;;)
     {
-      bea_log (BEA_LOG_INFO, "Hello, world!");
+      // bea_log (BEA_LOG_INFO, "Hello, world!");
+      bea_uart_send ((const uint8_t *)"Hello, world!\n");
     }
 }
 
