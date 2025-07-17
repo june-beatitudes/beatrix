@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>File kernel/include/version.h</title>
+  <title>File kernel/include/string.h</title>
   <style>
     div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
     span.navlink { flex: 1; }
@@ -248,17 +248,18 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
+<span class="navlink-label">Next:</span> <a href="11-file-kernelincludeuart.h.html" accesskey="n" rel="next">File kernel/include/uart.h</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="9-file-kernelincludestring.h.html" accesskey="p" rel="previous">File kernel/include/string.h</a>
+<span class="navlink-label">Previous:</span> <a href="9-file-kernelincludertc.h.html" accesskey="p" rel="previous">File kernel/include/rtc.h</a>
 </span>
 </div>
 </nav>
-<h1 data-number="10" id="file-kernelincludeversion.h"><span
+<h1 data-number="10" id="file-kernelincludestring.h"><span
 class="header-section-number">10</span> File
-kernel/include/version.h</h1>
-<h2 data-number="10.1" id="structures-and-types-5"><span
-class="header-section-number">10.1</span> Structures and Types</h2>
+kernel/include/string.h</h1>
+<h2 data-number="10.1" id="functions-7"><span
+class="header-section-number">10.1</span> Functions</h2>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -272,66 +273,31 @@ class="header-section-number">10.1</span> Structures and Types</h2>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">struct</td>
+<td style="text-align: right;">void</td>
 <td style="text-align: left;"><a
-href="10-file-kernelincludeversion.h.html#struct-bea_version"><strong>bea_version</strong></a>
-<br><em>A version of BEATRIX is uniquely given by its Git commit hash
-and the major version name (conventionally the name of a Pigeon Pit
-song)</em></td>
+href="10-file-kernelincludestring.h.html#function-bea_strncpy"><strong>bea_strncpy</strong></a>
+(const char *from, char *to, size_t n) <br><em>Copies</em>
+<code>n</code>_ characters from a character buffer._</td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="10.2" id="macros-3"><span
-class="header-section-number">10.2</span> Macros</h2>
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">define</td>
-<td style="text-align: left;"><a
-href="10-file-kernelincludeversion.h.html#define-bea_git_hash_len"><strong>BEA_GIT_HASH_LEN</strong></a>
-40<br></td>
-</tr>
-<tr>
-<td style="text-align: right;">define</td>
-<td style="text-align: left;"><a
-href="10-file-kernelincludeversion.h.html#define-bea_version_name_maxlen"><strong>BEA_VERSION_NAME_MAXLEN</strong></a>
-31<br></td>
-</tr>
-</tbody>
-</table>
-<h2 data-number="10.3" id="structures-and-types-documentation-5"><span
-class="header-section-number">10.3</span> Structures and Types
-Documentation</h2>
-<h3 data-number="10.3.1" id="struct-bea_version"><span
-class="header-section-number">10.3.1</span> struct
-<code>bea_version</code></h3>
-<p><em>A version of BEATRIX is uniquely given by its Git commit hash and
-the major version name (conventionally the name of a Pigeon Pit
-song)</em></p>
-<p>Variables:</p>
+<h2 data-number="10.2" id="functions-documentation-7"><span
+class="header-section-number">10.2</span> Functions Documentation</h2>
+<h3 data-number="10.2.1" id="function-bea_strncpy"><span
+class="header-section-number">10.2.1</span> function
+<code>bea_strncpy</code></h3>
+<p><em>Copies</em> <code>n</code>_ characters from a character
+buffer._</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> bea_strncpy <span class="op">(</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>from<span class="op">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> <span class="op">*</span>to<span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> n</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> </span></code></pre></div>
+<p><strong>Parameters:</strong></p>
 <ul>
-<li><p>char git_hash</p></li>
-<li><p>char name</p></li>
+<li><code>from</code> The buffer to copy from</li>
+<li><code>to</code> The buffer to copy into</li>
+<li><code>n</code> The number of characters to copy</li>
 </ul>
-<h2 data-number="10.4" id="macros-documentation-3"><span
-class="header-section-number">10.4</span> Macros Documentation</h2>
-<h3 data-number="10.4.1" id="define-bea_git_hash_len"><span
-class="header-section-number">10.4.1</span> define
-<code>BEA_GIT_HASH_LEN</code></h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_GIT_HASH_LEN 40</span></span></code></pre></div>
-<h3 data-number="10.4.2" id="define-bea_version_name_maxlen"><span
-class="header-section-number">10.4.2</span> define
-<code>BEA_VERSION_NAME_MAXLEN</code></h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_VERSION_NAME_MAXLEN 31</span></span></code></pre></div>
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>File kernel/include/pwr.h</title>
+  <title>File kernel/include/uart.h</title>
   <style>
     div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
     span.navlink { flex: 1; }
@@ -248,17 +248,53 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="6-file-kernelincludercc.h.html" accesskey="n" rel="next">File kernel/include/rcc.h</a>
+<span class="navlink-label">Next:</span> <a href="12-file-kernelincludeversion.h.html" accesskey="n" rel="next">File kernel/include/version.h</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="4-file-kernelincludeprocessor.h.html" accesskey="p" rel="previous">File kernel/include/processor.h</a>
+<span class="navlink-label">Previous:</span> <a href="10-file-kernelincludestring.h.html" accesskey="p" rel="previous">File kernel/include/string.h</a>
 </span>
 </div>
 </nav>
-<h1 data-number="5" id="file-kernelincludepwr.h"><span
-class="header-section-number">5</span> File kernel/include/pwr.h</h1>
-<h2 data-number="5.1" id="macros"><span
-class="header-section-number">5.1</span> Macros</h2>
+<h1 data-number="11" id="file-kernelincludeuart.h"><span
+class="header-section-number">11</span> File kernel/include/uart.h</h1>
+<p><em>Implements a very basic USART transmission interface.</em></p>
+<p><strong>Author:</strong></p>
+<p>Juniper Beatitudes</p>
+<p><strong>Date:</strong></p>
+<p>2025-07-16</p>
+<h2 data-number="11.1" id="functions-8"><span
+class="header-section-number">11.1</span> Functions</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">bool</td>
+<td style="text-align: left;"><a
+href="11-file-kernelincludeuart.h.html#function-bea_uart_initialize"><strong>bea_uart_initialize</strong></a>
+(uint32_t baud) <br><em>Initializes the UART transmission registers for
+use by the kernel.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">bool</td>
+<td style="text-align: left;"><a
+href="#function-bea_uart_send"><strong>bea_uart_send</strong></a> (const
+uint8_t *msg) <br><em>Sends a null-terminated string of bytes over the
+UART interface, using the baud rate estabklished in</em>
+<code>bea_uart_initialize</code></td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="11.2" id="macros-3"><span
+class="header-section-number">11.2</span> Macros</h2>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -274,26 +310,95 @@ class="header-section-number">5.1</span> Macros</h2>
 <tr>
 <td style="text-align: right;">define</td>
 <td style="text-align: left;"><a
-href="5-file-kernelincludepwr.h.html#define-bea_pwr_base_addr"><strong>BEA_PWR_BASE_ADDR</strong></a>
-(uint32_t *)(0x58000400)<br></td>
+href="11-file-kernelincludeuart.h.html#define-bea_uart_base_addr"><strong>BEA_UART_BASE_ADDR</strong></a>
+(uint32_t *)(0x40013800)<br></td>
 </tr>
 <tr>
 <td style="text-align: right;">define</td>
 <td style="text-align: left;"><a
-href="5-file-kernelincludepwr.h.html#define-bea_pwr_cr1_offset"><strong>BEA_PWR_CR1_OFFSET</strong></a>
+href="11-file-kernelincludeuart.h.html#define-bea_uart_brr_offset"><strong>BEA_UART_BRR_OFFSET</strong></a>
+0x3<br></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a
+href="11-file-kernelincludeuart.h.html#define-bea_uart_cr1_offset"><strong>BEA_UART_CR1_OFFSET</strong></a>
 0x0<br></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a
+href="11-file-kernelincludeuart.h.html#define-bea_uart_cr2_offset"><strong>BEA_UART_CR2_OFFSET</strong></a>
+0x1<br></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a
+href="11-file-kernelincludeuart.h.html#define-bea_uart_isr_offset"><strong>BEA_UART_ISR_OFFSET</strong></a>
+0x7<br></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a
+href="11-file-kernelincludeuart.h.html#define-bea_uart_tdr_offset"><strong>BEA_UART_TDR_OFFSET</strong></a>
+0xA<br></td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="5.2" id="macros-documentation"><span
-class="header-section-number">5.2</span> Macros Documentation</h2>
-<h3 data-number="5.2.1" id="define-bea_pwr_base_addr"><span
-class="header-section-number">5.2.1</span> define
-<code>BEA_PWR_BASE_ADDR</code></h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_PWR_BASE_ADDR (uint32_t *)(0x58000400)</span></span></code></pre></div>
-<h3 data-number="5.2.2" id="define-bea_pwr_cr1_offset"><span
-class="header-section-number">5.2.2</span> define
-<code>BEA_PWR_CR1_OFFSET</code></h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_PWR_CR1_OFFSET 0x0</span></span></code></pre></div>
+<h2 data-number="11.3" id="functions-documentation-8"><span
+class="header-section-number">11.3</span> Functions Documentation</h2>
+<h3 data-number="11.3.1" id="function-bea_uart_initialize"><span
+class="header-section-number">11.3.1</span> function
+<code>bea_uart_initialize</code></h3>
+<p><em>Initializes the UART transmission registers for use by the
+kernel.</em></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> bea_uart_initialize <span class="op">(</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">uint32_t</span> baud</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> </span></code></pre></div>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>baud</code> The baud rate to be used for transmissions</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A boolean indicating whether or not initialization was successful
+#### function <code>bea_uart_send</code></p>
+<p><em>Sends a null-terminated string of bytes over the UART interface,
+using the baud rate estabklished in</em>
+<code>bea_uart_initialize</code></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> bea_uart_send <span class="op">(</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">const</span> <span class="dt">uint8_t</span> <span class="op">*</span>msg</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> </span></code></pre></div>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>msg</code> A null-terminated string of bytes to send</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A boolean indicating whether or not transmission was successful</p>
+<h2 data-number="11.4" id="macros-documentation-3"><span
+class="header-section-number">11.4</span> Macros Documentation</h2>
+<h3 data-number="11.4.1" id="define-bea_uart_base_addr"><span
+class="header-section-number">11.4.1</span> define
+<code>BEA_UART_BASE_ADDR</code></h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_UART_BASE_ADDR (uint32_t *)(0x40013800)</span></span></code></pre></div>
+<h3 data-number="11.4.2" id="define-bea_uart_brr_offset"><span
+class="header-section-number">11.4.2</span> define
+<code>BEA_UART_BRR_OFFSET</code></h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_UART_BRR_OFFSET 0x3</span></span></code></pre></div>
+<h3 data-number="11.4.3" id="define-bea_uart_cr1_offset"><span
+class="header-section-number">11.4.3</span> define
+<code>BEA_UART_CR1_OFFSET</code></h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_UART_CR1_OFFSET 0x0</span></span></code></pre></div>
+<h3 data-number="11.4.4" id="define-bea_uart_cr2_offset"><span
+class="header-section-number">11.4.4</span> define
+<code>BEA_UART_CR2_OFFSET</code></h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_UART_CR2_OFFSET 0x1</span></span></code></pre></div>
+<h3 data-number="11.4.5" id="define-bea_uart_isr_offset"><span
+class="header-section-number">11.4.5</span> define
+<code>BEA_UART_ISR_OFFSET</code></h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_UART_ISR_OFFSET 0x7</span></span></code></pre></div>
+<h3 data-number="11.4.6" id="define-bea_uart_tdr_offset"><span
+class="header-section-number">11.4.6</span> define
+<code>BEA_UART_TDR_OFFSET</code></h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_UART_TDR_OFFSET 0xA</span></span></code></pre></div>
 </body>
 </html>

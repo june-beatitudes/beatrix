@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>File kernel/include/processor.h</title>
+  <title>File kernel/include/rcc.h</title>
   <style>
     div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
     span.navlink { flex: 1; }
@@ -248,18 +248,17 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="5-file-kernelincludepwr.h.html" accesskey="n" rel="next">File kernel/include/pwr.h</a>
+<span class="navlink-label">Next:</span> <a href="8-file-kernelincluderegister_utils.h.html" accesskey="n" rel="next">File kernel/include/register_utils.h</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="3-file-kernelincludelogging.h.html" accesskey="p" rel="previous">File kernel/include/logging.h</a>
+<span class="navlink-label">Previous:</span> <a href="6-file-kernelincludepwr.h.html" accesskey="p" rel="previous">File kernel/include/pwr.h</a>
 </span>
 </div>
 </nav>
-<h1 data-number="4" id="file-kernelincludeprocessor.h"><span
-class="header-section-number">4</span> File
-kernel/include/processor.h</h1>
-<h2 data-number="4.1" id="structures-and-types-3"><span
-class="header-section-number">4.1</span> Structures and Types</h2>
+<h1 data-number="7" id="file-kernelincludercc.h"><span
+class="header-section-number">7</span> File kernel/include/rcc.h</h1>
+<h2 data-number="7.1" id="functions-4"><span
+class="header-section-number">7.1</span> Functions</h2>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -273,21 +272,18 @@ class="header-section-number">4.1</span> Structures and Types</h2>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">enum</td>
+<td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a
-href="4-file-kernelincludeprocessor.h.html#enum-bea_io_bank_t"><strong>bea_io_bank_t</strong></a>
-<br><em>Represents an I/O peripheral bank.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">enum</td>
-<td style="text-align: left;"><a
-href="4-file-kernelincludeprocessor.h.html#enum-bea_semihost_reason_t"><strong>bea_semihost_reason_t</strong></a>
-<br><em>Represents a semihost request type.</em></td>
+href="7-file-kernelincludercc.h.html#function-bea_rcc_enable_peripheral"><strong>bea_rcc_enable_peripheral</strong></a>
+(enum <a
+href="5-file-kernelincludeprocessor.h.html#enum-bea_io_bank_t"><strong>bea_io_bank_t</strong></a>
+io_bank, uint8_t offset) <br><em>Enable a specific peripheral in the RCC
+subsystem.</em></td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="4.2" id="functions-2"><span
-class="header-section-number">4.2</span> Functions</h2>
+<h2 data-number="7.2" id="macros-1"><span
+class="header-section-number">7.2</span> Macros</h2>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -301,69 +297,40 @@ class="header-section-number">4.2</span> Functions</h2>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">void</td>
+<td style="text-align: right;">define</td>
 <td style="text-align: left;"><a
-href="4-file-kernelincludeprocessor.h.html#function-bea_fpu_enable"><strong>bea_fpu_enable</strong></a>
-() <br><em>Enables the STM32WB55RGV hardware FPU. Must be called
-before</em> _any__ floating point instructions are executed. Reference
-STMicroelectronics PM0214 Rev. 10, pp. 257._</td>
-</tr>
-<tr>
-<td style="text-align: right;">int32_t</td>
-<td style="text-align: left;"><a
-href="4-file-kernelincludeprocessor.h.html#function-bea_semihost_rq"><strong>bea_semihost_rq</strong></a>
-(int32_t reason, void *arg) <br><em>Sends a semihost request to whatever
-device is connected (if semihosting is enabled)</em></td>
+href="7-file-kernelincludercc.h.html#define-bea_rcc_base_addr"><strong>BEA_RCC_BASE_ADDR</strong></a>
+(uint32_t *)(0x58000000)<br></td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="4.3" id="structures-and-types-documentation-3"><span
-class="header-section-number">4.3</span> Structures and Types
-Documentation</h2>
-<h3 data-number="4.3.1" id="enum-bea_io_bank_t"><span
-class="header-section-number">4.3.1</span> enum
-<code>bea_io_bank_t</code></h3>
-<p><em>Represents an I/O peripheral bank.</em></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> bea_io_bank_t <span class="op">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    BEA_APB1<span class="op">,</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    BEA_APB2<span class="op">,</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    BEA_APB3<span class="op">,</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    BEA_AHB1<span class="op">,</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    BEA_AHB2<span class="op">,</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    BEA_AHB3</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<h3 data-number="4.3.2" id="enum-bea_semihost_reason_t"><span
-class="header-section-number">4.3.2</span> enum
-<code>bea_semihost_reason_t</code></h3>
-<p><em>Represents a semihost request type.</em></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> bea_semihost_reason_t <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    BEA_SEMIHOST_SYSWRITEZ <span class="op">=</span> <span class="bn">0x04</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<h2 data-number="4.4" id="functions-documentation-2"><span
-class="header-section-number">4.4</span> Functions Documentation</h2>
-<h3 data-number="4.4.1" id="function-bea_fpu_enable"><span
-class="header-section-number">4.4.1</span> function
-<code>bea_fpu_enable</code></h3>
-<p><em>Enables the STM32WB55RGV hardware FPU. Must be called before</em>
-_any__ floating point instructions are executed. Reference
-STMicroelectronics PM0214 Rev. 10, pp. 257._</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> bea_fpu_enable <span class="op">()</span> </span></code></pre></div>
-<h3 data-number="4.4.2" id="function-bea_semihost_rq"><span
-class="header-section-number">4.4.2</span> function
-<code>bea_semihost_rq</code></h3>
-<p><em>Sends a semihost request to whatever device is connected (if
-semihosting is enabled)</em></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int32_t</span> bea_semihost_rq <span class="op">(</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> reason<span class="op">,</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="op">*</span>arg</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> </span></code></pre></div>
+<h2 data-number="7.3" id="functions-documentation-4"><span
+class="header-section-number">7.3</span> Functions Documentation</h2>
+<h3 data-number="7.3.1" id="function-bea_rcc_enable_peripheral"><span
+class="header-section-number">7.3.1</span> function
+<code>bea_rcc_enable_peripheral</code></h3>
+<p><em>Enable a specific peripheral in the RCC subsystem.</em></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> bea_rcc_enable_peripheral <span class="op">(</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">enum</span> bea_io_bank_t io_bank<span class="op">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">uint8_t</span> offset</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> </span></code></pre></div>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>reason</code> The semihost request “reason”, i.e. the request
-type</li>
-<li><code>arg</code> The semihost request argument</li>
+<li><code>io_bank</code> The I/O bank the peripheral is in (e.g., AHB1,
+AHB2, etc.)</li>
+<li><code>offset</code> The offset of the peripheral in the bank’s
+register. APB1 has two registers; to access the second register, pass in
+the offset in that register plus 32</li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>The semihost request result from the processor/device</p>
+<p>true Peripheral enable successful (within reason to check)</p>
+<p><strong>Returns:</strong></p>
+<p>false Peripheral enable unsuccessful</p>
+<h2 data-number="7.4" id="macros-documentation-1"><span
+class="header-section-number">7.4</span> Macros Documentation</h2>
+<h3 data-number="7.4.1" id="define-bea_rcc_base_addr"><span
+class="header-section-number">7.4.1</span> define
+<code>BEA_RCC_BASE_ADDR</code></h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_RCC_BASE_ADDR (uint32_t *)(0x58000000)</span></span></code></pre></div>
 </body>
 </html>
