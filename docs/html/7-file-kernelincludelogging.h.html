@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>File kernel/include/pwr.h</title>
+  <title>File kernel/include/logging.h</title>
   <style>
     div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
     span.navlink { flex: 1; }
@@ -248,17 +248,18 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="7-file-kernelincludercc.h.html" accesskey="n" rel="next">File kernel/include/rcc.h</a>
+<span class="navlink-label">Next:</span> <a href="8-file-kernelincludemem_utils.h.html" accesskey="n" rel="next">File kernel/include/mem_utils.h</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="5-file-kernelincludeprocessor.h.html" accesskey="p" rel="previous">File kernel/include/processor.h</a>
+<span class="navlink-label">Previous:</span> <a href="6-file-kernelincludeisr.h.html" accesskey="p" rel="previous">File kernel/include/isr.h</a>
 </span>
 </div>
 </nav>
-<h1 data-number="6" id="file-kernelincludepwr.h"><span
-class="header-section-number">6</span> File kernel/include/pwr.h</h1>
-<h2 data-number="6.1" id="macros"><span
-class="header-section-number">6.1</span> Macros</h2>
+<h1 data-number="7" id="file-kernelincludelogging.h"><span
+class="header-section-number">7</span> File
+kernel/include/logging.h</h1>
+<h2 data-number="7.1" id="structures-and-types-3"><span
+class="header-section-number">7.1</span> Structures and Types</h2>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -272,28 +273,72 @@ class="header-section-number">6.1</span> Macros</h2>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">define</td>
+<td style="text-align: right;">enum</td>
 <td style="text-align: left;"><a
-href="6-file-kernelincludepwr.h.html#define-bea_pwr_base_addr"><strong>BEA_PWR_BASE_ADDR</strong></a>
-(uint32_t *)(0x58000400)<br></td>
-</tr>
-<tr>
-<td style="text-align: right;">define</td>
-<td style="text-align: left;"><a
-href="6-file-kernelincludepwr.h.html#define-bea_pwr_cr1_offset"><strong>BEA_PWR_CR1_OFFSET</strong></a>
-0x0<br></td>
+href="7-file-kernelincludelogging.h.html#enum-bea_log_level_t"><strong>bea_log_level_t</strong></a>
+<br><em>Kernel logging levels.</em></td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="6.2" id="macros-documentation"><span
-class="header-section-number">6.2</span> Macros Documentation</h2>
-<h3 data-number="6.2.1" id="define-bea_pwr_base_addr"><span
-class="header-section-number">6.2.1</span> define
-<code>BEA_PWR_BASE_ADDR</code></h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_PWR_BASE_ADDR (uint32_t *)(0x58000400)</span></span></code></pre></div>
-<h3 data-number="6.2.2" id="define-bea_pwr_cr1_offset"><span
-class="header-section-number">6.2.2</span> define
-<code>BEA_PWR_CR1_OFFSET</code></h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_PWR_CR1_OFFSET 0x0</span></span></code></pre></div>
+<h2 data-number="7.2" id="functions-3"><span
+class="header-section-number">7.2</span> Functions</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">bool</td>
+<td style="text-align: left;"><a
+href="7-file-kernelincludelogging.h.html#function-bea_log"><strong>bea_log</strong></a>
+(enum <a
+href="7-file-kernelincludelogging.h.html#enum-bea_log_level_t"><strong>bea_log_level_t</strong></a>
+level, const char *msg) <br><em>Log message to whatever log output
+device has been specified at build time.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="7.3" id="structures-and-types-documentation-3"><span
+class="header-section-number">7.3</span> Structures and Types
+Documentation</h2>
+<h3 data-number="7.3.1" id="enum-bea_log_level_t"><span
+class="header-section-number">7.3.1</span> enum
+<code>bea_log_level_t</code></h3>
+<p><em>Kernel logging levels.</em></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> bea_log_level_t <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    BEA_LOG_DEBUG <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    BEA_LOG_INFO<span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    BEA_LOG_WARNING<span class="op">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    BEA_LOG_ERROR<span class="op">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    BEA_LOG_FATAL</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<h2 data-number="7.4" id="functions-documentation-3"><span
+class="header-section-number">7.4</span> Functions Documentation</h2>
+<h3 data-number="7.4.1" id="function-bea_log"><span
+class="header-section-number">7.4.1</span> function
+<code>bea_log</code></h3>
+<p><em>Log message to whatever log output device has been specified at
+build time.</em></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> bea_log <span class="op">(</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">enum</span> bea_log_level_t level<span class="op">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>msg</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> </span></code></pre></div>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>level</code> The log level</li>
+<li><code>msg</code> The log message</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>true Logging was actually performed (device is connected and log
+level is set appropriately)</p>
+<p><strong>Returns:</strong></p>
+<p>false Logging was not performed</p>
 </body>
 </html>

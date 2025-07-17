@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>File kernel/include/isr.h</title>
+  <title>File kernel/include/bootloader.h</title>
   <style>
     div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
     span.navlink { flex: 1; }
@@ -248,22 +248,25 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="3-file-kernelincludelogging.h.html" accesskey="n" rel="next">File kernel/include/logging.h</a>
+<span class="navlink-label">Next:</span> <a href="4-file-kernelincludefaults.h.html" accesskey="n" rel="next">File kernel/include/faults.h</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="1-file-kernelincludeftoa.h.html" accesskey="p" rel="previous">File kernel/include/ftoa.h</a>
+<span class="navlink-label">Previous:</span> <a href="2-file-driversdriver_table.h.html" accesskey="p" rel="previous">File drivers/driver_table.h</a>
 </span>
 </div>
 </nav>
-<h1 data-number="2" id="file-kernelincludeisr.h"><span
-class="header-section-number">2</span> File kernel/include/isr.h</h1>
-<h2 data-number="2.1" id="structures-and-types-1"><span
-class="header-section-number">2.1</span> Structures and Types</h2>
+<h1 data-number="3" id="file-kernelincludebootloader.h"><span
+class="header-section-number">3</span> File
+kernel/include/bootloader.h</h1>
+<p><em>BEATRIX bootloader. Sets up the RTC, loads the drivers, sets up
+memory, and branches to the shell.</em></p>
+<p><strong>Author:</strong></p>
+<p>Juniper Beatitudes</p>
+<p><strong>Date:</strong></p>
+<p>2025-07-16</p>
+<h2 data-number="3.1" id="functions"><span
+class="header-section-number">3.1</span> Functions</h2>
 <table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <thead>
 <tr>
 <th style="text-align: right;">Type</th>
@@ -272,20 +275,20 @@ class="header-section-number">2.1</span> Structures and Types</h2>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef void(*</td>
+<td style="text-align: right;">void</td>
 <td style="text-align: left;"><a
-href="2-file-kernelincludeisr.h.html#typedef-isr_t"><strong>isr_t</strong></a>
-<br><em>Represents an ISR.</em></td>
+href="3-file-kernelincludebootloader.h.html#function-bea_do_boot"><strong>bea_do_boot</strong></a>
+(void) <br></td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="2.2" id="structures-and-types-documentation-1"><span
-class="header-section-number">2.2</span> Structures and Types
-Documentation</h2>
-<h3 data-number="2.2.1" id="typedef-isr_t"><span
-class="header-section-number">2.2.1</span> typedef
-<code>isr_t</code></h3>
-<p><em>Represents an ISR.</em></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">void</span><span class="op">(*</span> isr_t<span class="op">)</span> <span class="op">(</span><span class="dt">void</span><span class="op">);</span></span></code></pre></div>
+<h2 data-number="3.2" id="functions-documentation"><span
+class="header-section-number">3.2</span> Functions Documentation</h2>
+<h3 data-number="3.2.1" id="function-bea_do_boot"><span
+class="header-section-number">3.2.1</span> function
+<code>bea_do_boot</code></h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> bea_do_boot <span class="op">(</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> </span></code></pre></div>
 </body>
 </html>

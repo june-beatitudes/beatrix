@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>File kernel/include/processor.h</title>
+  <title>File kernel/include/ftoa.h</title>
   <style>
     div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
     span.navlink { flex: 1; }
@@ -248,17 +248,20 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="6-file-kernelincludepwr.h.html" accesskey="n" rel="next">File kernel/include/pwr.h</a>
+<span class="navlink-label">Next:</span> <a href="6-file-kernelincludeisr.h.html" accesskey="n" rel="next">File kernel/include/isr.h</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="4-file-kernelincludemem_utils.h.html" accesskey="p" rel="previous">File kernel/include/mem_utils.h</a>
+<span class="navlink-label">Previous:</span> <a href="4-file-kernelincludefaults.h.html" accesskey="p" rel="previous">File kernel/include/faults.h</a>
 </span>
 </div>
 </nav>
-<h1 data-number="5" id="file-kernelincludeprocessor.h"><span
-class="header-section-number">5</span> File
-kernel/include/processor.h</h1>
-<h2 data-number="5.1" id="structures-and-types-3"><span
+<h1 data-number="5" id="file-kernelincludeftoa.h"><span
+class="header-section-number">5</span> File kernel/include/ftoa.h</h1>
+<p><em>Functionality for converting floats to strings inside the kernel,
+used primarily for logging.</em></p>
+<p><strong>Author:</strong></p>
+<p>Juniper Beatitudes</p>
+<h2 data-number="5.1" id="structures-and-types-1"><span
 class="header-section-number">5.1</span> Structures and Types</h2>
 <table>
 <colgroup>
@@ -275,18 +278,13 @@ class="header-section-number">5.1</span> Structures and Types</h2>
 <tr>
 <td style="text-align: right;">enum</td>
 <td style="text-align: left;"><a
-href="5-file-kernelincludeprocessor.h.html#enum-bea_io_bank_t"><strong>bea_io_bank_t</strong></a>
-<br><em>Represents an I/O peripheral bank.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">enum</td>
-<td style="text-align: left;"><a
-href="5-file-kernelincludeprocessor.h.html#enum-bea_semihost_reason_t"><strong>bea_semihost_reason_t</strong></a>
-<br><em>Represents a semihost request type.</em></td>
+href="5-file-kernelincludeftoa.h.html#enum-bea_ftoa_result"><strong>bea_ftoa_result</strong></a>
+<br><em>The result indicator of the</em> <code>bea_ftoa</code>_
+function._</td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="5.2" id="functions-3"><span
+<h2 data-number="5.2" id="functions-2"><span
 class="header-section-number">5.2</span> Functions</h2>
 <table>
 <colgroup>
@@ -301,69 +299,63 @@ class="header-section-number">5.2</span> Functions</h2>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">void</td>
+<td style="text-align: right;">enum <a
+href="5-file-kernelincludeftoa.h.html#enum-bea_ftoa_result"><strong>bea_ftoa_result</strong></a></td>
 <td style="text-align: left;"><a
-href="5-file-kernelincludeprocessor.h.html#function-bea_fpu_enable"><strong>bea_fpu_enable</strong></a>
-() <br><em>Enables the STM32WB55RGV hardware FPU. Must be called
-before</em> _any__ floating point instructions are executed. Reference
-STMicroelectronics PM0214 Rev. 10, pp. 257._</td>
-</tr>
-<tr>
-<td style="text-align: right;">int32_t</td>
-<td style="text-align: left;"><a
-href="5-file-kernelincludeprocessor.h.html#function-bea_semihost_rq"><strong>bea_semihost_rq</strong></a>
-(int32_t reason, void *arg) <br><em>Sends a semihost request to whatever
-device is connected (if semihosting is enabled)</em></td>
+href="5-file-kernelincludeftoa.h.html#function-bea_ftoa"><strong>bea_ftoa</strong></a>
+(float x, char *buf, size_t n_available, bool include_positive_sign)
+<br><em>Fills a buffer with a string representation of a
+single-precision IEEE-754 floating point number.</em></td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="5.3" id="structures-and-types-documentation-3"><span
+<h2 data-number="5.3" id="structures-and-types-documentation-1"><span
 class="header-section-number">5.3</span> Structures and Types
 Documentation</h2>
-<h3 data-number="5.3.1" id="enum-bea_io_bank_t"><span
+<h3 data-number="5.3.1" id="enum-bea_ftoa_result"><span
 class="header-section-number">5.3.1</span> enum
-<code>bea_io_bank_t</code></h3>
-<p><em>Represents an I/O peripheral bank.</em></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> bea_io_bank_t <span class="op">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    BEA_APB1<span class="op">,</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    BEA_APB2<span class="op">,</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    BEA_APB3<span class="op">,</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    BEA_AHB1<span class="op">,</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    BEA_AHB2<span class="op">,</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    BEA_AHB3</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<h3 data-number="5.3.2" id="enum-bea_semihost_reason_t"><span
-class="header-section-number">5.3.2</span> enum
-<code>bea_semihost_reason_t</code></h3>
-<p><em>Represents a semihost request type.</em></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> bea_semihost_reason_t <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    BEA_SEMIHOST_SYSWRITEZ <span class="op">=</span> <span class="bn">0x04</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<h2 data-number="5.4" id="functions-documentation-3"><span
+<code>bea_ftoa_result</code></h3>
+<p><em>The result indicator of the</em> <code>bea_ftoa</code>_
+function._</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> bea_ftoa_result <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    BEA_FTOA_SUCCESS<span class="op">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    BEA_FTOA_ENOSPACE<span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    BEA_FTOA_WPRECISIONLOSS</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<h2 data-number="5.4" id="functions-documentation-2"><span
 class="header-section-number">5.4</span> Functions Documentation</h2>
-<h3 data-number="5.4.1" id="function-bea_fpu_enable"><span
+<h3 data-number="5.4.1" id="function-bea_ftoa"><span
 class="header-section-number">5.4.1</span> function
-<code>bea_fpu_enable</code></h3>
-<p><em>Enables the STM32WB55RGV hardware FPU. Must be called before</em>
-_any__ floating point instructions are executed. Reference
-STMicroelectronics PM0214 Rev. 10, pp. 257._</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> bea_fpu_enable <span class="op">()</span> </span></code></pre></div>
-<h3 data-number="5.4.2" id="function-bea_semihost_rq"><span
-class="header-section-number">5.4.2</span> function
-<code>bea_semihost_rq</code></h3>
-<p><em>Sends a semihost request to whatever device is connected (if
-semihosting is enabled)</em></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int32_t</span> bea_semihost_rq <span class="op">(</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> reason<span class="op">,</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="op">*</span>arg</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> </span></code></pre></div>
+<code>bea_ftoa</code></h3>
+<p><em>Fills a buffer with a string representation of a single-precision
+IEEE-754 floating point number.</em></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> bea_ftoa_result bea_ftoa <span class="op">(</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> x<span class="op">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> <span class="op">*</span>buf<span class="op">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> n_available<span class="op">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> include_positive_sign</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> </span></code></pre></div>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>reason</code> The semihost request “reason”, i.e. the request
-type</li>
-<li><code>arg</code> The semihost request argument</li>
+<li><code>x</code> The number to stringify</li>
+<li><code>buf</code> The output buffer</li>
+<li><code>n_available</code> The number of characters available in the
+output buffer; all characters will be used</li>
+<li><code>include_positive_sign</code> Boolean indicating whether or not
+a sign character should be emitted if <code>x</code> is positive</li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>The semihost request result from the processor/device</p>
+<p>BEA_FTOA_SUCCESS Represents a fully successful run with no
+loss-of-precision warning</p>
+<p><strong>Returns:</strong></p>
+<p>BEA_FTOA_ENOSPACE Indicates that there is insufficient space in the
+buffer to represent the integral portion of the number</p>
+<p><strong>Returns:</strong></p>
+<p>BEA_FTOA_WPRECISIONLOSS Indicates that there are more significant
+digits emitted than a single-precision floating point number actually
+has</p>
+<p><strong>Todo</strong></p>
+<p>Add support for emitting INF, NaN</p>
+<p>Add support for scientific notation</p>
 </body>
 </html>

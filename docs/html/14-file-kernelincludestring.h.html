@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>File kernel/include/logging.h</title>
+  <title>File kernel/include/string.h</title>
   <style>
     div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
     span.navlink { flex: 1; }
@@ -248,18 +248,18 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="4-file-kernelincludemem_utils.h.html" accesskey="n" rel="next">File kernel/include/mem_utils.h</a>
+<span class="navlink-label">Next:</span> <a href="15-file-kernelincludesyscall.h.html" accesskey="n" rel="next">File kernel/include/syscall.h</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="2-file-kernelincludeisr.h.html" accesskey="p" rel="previous">File kernel/include/isr.h</a>
+<span class="navlink-label">Previous:</span> <a href="13-file-kernelincludertc.h.html" accesskey="p" rel="previous">File kernel/include/rtc.h</a>
 </span>
 </div>
 </nav>
-<h1 data-number="3" id="file-kernelincludelogging.h"><span
-class="header-section-number">3</span> File
-kernel/include/logging.h</h1>
-<h2 data-number="3.1" id="structures-and-types-2"><span
-class="header-section-number">3.1</span> Structures and Types</h2>
+<h1 data-number="14" id="file-kernelincludestring.h"><span
+class="header-section-number">14</span> File
+kernel/include/string.h</h1>
+<h2 data-number="14.1" id="functions-9"><span
+class="header-section-number">14.1</span> Functions</h2>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -273,72 +273,31 @@ class="header-section-number">3.1</span> Structures and Types</h2>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">enum</td>
+<td style="text-align: right;">void</td>
 <td style="text-align: left;"><a
-href="3-file-kernelincludelogging.h.html#enum-bea_log_level_t"><strong>bea_log_level_t</strong></a>
-<br><em>Kernel logging levels.</em></td>
+href="14-file-kernelincludestring.h.html#function-bea_strncpy"><strong>bea_strncpy</strong></a>
+(const char *from, char *to, size_t n) <br><em>Copies</em>
+<code>n</code>_ characters from a character buffer._</td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="3.2" id="functions-1"><span
-class="header-section-number">3.2</span> Functions</h2>
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">bool</td>
-<td style="text-align: left;"><a
-href="3-file-kernelincludelogging.h.html#function-bea_log"><strong>bea_log</strong></a>
-(enum <a
-href="3-file-kernelincludelogging.h.html#enum-bea_log_level_t"><strong>bea_log_level_t</strong></a>
-level, const char *msg) <br><em>Log message to whatever log output
-device has been specified at build time.</em></td>
-</tr>
-</tbody>
-</table>
-<h2 data-number="3.3" id="structures-and-types-documentation-2"><span
-class="header-section-number">3.3</span> Structures and Types
-Documentation</h2>
-<h3 data-number="3.3.1" id="enum-bea_log_level_t"><span
-class="header-section-number">3.3.1</span> enum
-<code>bea_log_level_t</code></h3>
-<p><em>Kernel logging levels.</em></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> bea_log_level_t <span class="op">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    BEA_LOG_DEBUG <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    BEA_LOG_INFO<span class="op">,</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    BEA_LOG_WARNING<span class="op">,</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    BEA_LOG_ERROR<span class="op">,</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    BEA_LOG_FATAL</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<h2 data-number="3.4" id="functions-documentation-1"><span
-class="header-section-number">3.4</span> Functions Documentation</h2>
-<h3 data-number="3.4.1" id="function-bea_log"><span
-class="header-section-number">3.4.1</span> function
-<code>bea_log</code></h3>
-<p><em>Log message to whatever log output device has been specified at
-build time.</em></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> bea_log <span class="op">(</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">enum</span> bea_log_level_t level<span class="op">,</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>msg</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> </span></code></pre></div>
+<h2 data-number="14.2" id="functions-documentation-9"><span
+class="header-section-number">14.2</span> Functions Documentation</h2>
+<h3 data-number="14.2.1" id="function-bea_strncpy"><span
+class="header-section-number">14.2.1</span> function
+<code>bea_strncpy</code></h3>
+<p><em>Copies</em> <code>n</code>_ characters from a character
+buffer._</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> bea_strncpy <span class="op">(</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>from<span class="op">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> <span class="op">*</span>to<span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> n</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> </span></code></pre></div>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>level</code> The log level</li>
-<li><code>msg</code> The log message</li>
+<li><code>from</code> The buffer to copy from</li>
+<li><code>to</code> The buffer to copy into</li>
+<li><code>n</code> The number of characters to copy</li>
 </ul>
-<p><strong>Returns:</strong></p>
-<p>true Logging was actually performed (device is connected and log
-level is set appropriately)</p>
-<p><strong>Returns:</strong></p>
-<p>false Logging was not performed</p>
 </body>
 </html>
