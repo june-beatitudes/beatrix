@@ -1,7 +1,8 @@
 kernel/build
-kernel/wip
-kernel/compile_commands.json
-kernel/.cache
+drivers/build
+compile_commands.json
 tools
+.cache
+bin
 .vscode
 *.o
