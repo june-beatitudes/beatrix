@@ -38,13 +38,19 @@ void bea_gpio_request (void *arg, void *result);
 /// Entry in the kernel driver table
 extern const struct bea_driver BEA_GPIO_DRIVER;
 
+/// Type of userspace request
 enum bea_gpio_rq_type
 {
+  /// Set the mode for a particular pin
   BEA_GPIO_SET_MODE,
+  /// Set the value on an output pin
   BEA_GPIO_SET_VALUE,
+  /// Read the value of an input pin
   BEA_GPIO_READ_VALUE,
 };
 
+/// GPIO banks on the Flipper, each numbered based on its registers' locations
+/// in memory
 enum bea_gpio_bank
 {
   BEA_GPIO_BANK_A = 0x48000000,
@@ -55,6 +61,8 @@ enum bea_gpio_bank
   BEA_GPIO_BANK_H = 0x48001C00,
 };
 
+/// Types of GPIO pin modes, with the numbers associated encoding the register
+/// contents that they are associated with
 enum bea_gpio_pin_mode
 {
   BEA_GPIO_OUT = 0b0001,
@@ -65,6 +73,15 @@ enum bea_gpio_pin_mode
   BEA_GPIO_FLOATING = 0b0011,
 };
 
+/**
+ * @brief Request sent to the GPIO driver
+ *
+ * @member type The type of request
+ * @member bank The bank being changed/read/updated
+ * @member pin The specific pin being changed/read/updated
+ * @member value The new value for a pin (for a `SET_VALUE` request)
+ * @member mode The new mode for a pin (for a `SET_MODE` request)
+ */
 struct bea_gpio_request_arg
 {
   enum bea_gpio_rq_type type;
@@ -77,6 +94,12 @@ struct bea_gpio_request_arg
   };
 };
 
+/**
+ * @brief Response from the GPIO driver
+ *
+ * @member succeeded Boolean that indicates if the request succeeded or not
+ * @member value The value of the pin being read (if that was the request type)
+ */
 struct bea_gpio_request_response
 {
   bool succeeded;
