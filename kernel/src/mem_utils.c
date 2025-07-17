@@ -46,3 +46,14 @@ memmove (void *p1, void *p2, size_t n)
     }
   return p1;
 }
+
+void *
+memset (void *dest, int ch, size_t count)
+{
+  uint8_t byte = (uint8_t)ch;
+  for (size_t i = 0; i < count; ++i)
+    {
+      ((uint8_t *)dest)[i] = byte;
+    }
+  return dest;
+}
