@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>File kernel/include/ftoa.h</title>
+  <title>File kernel/include/version.h</title>
   <style>
     div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
     span.navlink { flex: 1; }
@@ -248,21 +248,17 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="2-file-kernelincludeisr.h.html" accesskey="n" rel="next">File kernel/include/isr.h</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="0-api-reference-1.html" accesskey="p" rel="previous">API Reference</a>
+<span class="navlink-label">Previous:</span> <a href="15-file-kernelincludesyscall.h.html" accesskey="p" rel="previous">File kernel/include/syscall.h</a>
 </span>
 </div>
 </nav>
-<h1 data-number="1" id="file-kernelincludeftoa.h"><span
-class="header-section-number">1</span> File kernel/include/ftoa.h</h1>
-<p><em>Functionality for converting floats to strings inside the kernel,
-used primarily for logging.</em></p>
-<p><strong>Author:</strong></p>
-<p>Juniper Beatitudes</p>
-<h2 data-number="1.1" id="structures-and-types"><span
-class="header-section-number">1.1</span> Structures and Types</h2>
+<h1 data-number="16" id="file-kernelincludeversion.h"><span
+class="header-section-number">16</span> File
+kernel/include/version.h</h1>
+<h2 data-number="16.1" id="structures-and-types-7"><span
+class="header-section-number">16.1</span> Structures and Types</h2>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -276,16 +272,17 @@ class="header-section-number">1.1</span> Structures and Types</h2>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">enum</td>
+<td style="text-align: right;">struct</td>
 <td style="text-align: left;"><a
-href="1-file-kernelincludeftoa.h.html#enum-bea_ftoa_result"><strong>bea_ftoa_result</strong></a>
-<br><em>The result indicator of the</em> <code>bea_ftoa</code>_
-function._</td>
+href="16-file-kernelincludeversion.h.html#struct-bea_version"><strong>bea_version</strong></a>
+<br><em>A version of BEATRIX is uniquely given by its Git commit hash
+and the major version name (conventionally the name of a Pigeon Pit
+song)</em></td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="1.2" id="functions"><span
-class="header-section-number">1.2</span> Functions</h2>
+<h2 data-number="16.2" id="macros-5"><span
+class="header-section-number">16.2</span> Macros</h2>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -299,63 +296,42 @@ class="header-section-number">1.2</span> Functions</h2>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">enum <a
-href="1-file-kernelincludeftoa.h.html#enum-bea_ftoa_result"><strong>bea_ftoa_result</strong></a></td>
+<td style="text-align: right;">define</td>
 <td style="text-align: left;"><a
-href="1-file-kernelincludeftoa.h.html#function-bea_ftoa"><strong>bea_ftoa</strong></a>
-(float x, char *buf, size_t n_available, bool include_positive_sign)
-<br><em>Fills a buffer with a string representation of a
-single-precision IEEE-754 floating point number.</em></td>
+href="16-file-kernelincludeversion.h.html#define-bea_git_hash_len"><strong>BEA_GIT_HASH_LEN</strong></a>
+40<br></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a
+href="16-file-kernelincludeversion.h.html#define-bea_version_name_maxlen"><strong>BEA_VERSION_NAME_MAXLEN</strong></a>
+31<br></td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="1.3" id="structures-and-types-documentation"><span
-class="header-section-number">1.3</span> Structures and Types
+<h2 data-number="16.3" id="structures-and-types-documentation-7"><span
+class="header-section-number">16.3</span> Structures and Types
 Documentation</h2>
-<h3 data-number="1.3.1" id="enum-bea_ftoa_result"><span
-class="header-section-number">1.3.1</span> enum
-<code>bea_ftoa_result</code></h3>
-<p><em>The result indicator of the</em> <code>bea_ftoa</code>_
-function._</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> bea_ftoa_result <span class="op">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    BEA_FTOA_SUCCESS<span class="op">,</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    BEA_FTOA_ENOSPACE<span class="op">,</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    BEA_FTOA_WPRECISIONLOSS</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<h2 data-number="1.4" id="functions-documentation"><span
-class="header-section-number">1.4</span> Functions Documentation</h2>
-<h3 data-number="1.4.1" id="function-bea_ftoa"><span
-class="header-section-number">1.4.1</span> function
-<code>bea_ftoa</code></h3>
-<p><em>Fills a buffer with a string representation of a single-precision
-IEEE-754 floating point number.</em></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> bea_ftoa_result bea_ftoa <span class="op">(</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> x<span class="op">,</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> <span class="op">*</span>buf<span class="op">,</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> n_available<span class="op">,</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> include_positive_sign</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> </span></code></pre></div>
-<p><strong>Parameters:</strong></p>
+<h3 data-number="16.3.1" id="struct-bea_version"><span
+class="header-section-number">16.3.1</span> struct
+<code>bea_version</code></h3>
+<p><em>A version of BEATRIX is uniquely given by its Git commit hash and
+the major version name (conventionally the name of a Pigeon Pit
+song)</em></p>
+<p>Variables:</p>
 <ul>
-<li><code>x</code> The number to stringify</li>
-<li><code>buf</code> The output buffer</li>
-<li><code>n_available</code> The number of characters available in the
-output buffer; all characters will be used</li>
-<li><code>include_positive_sign</code> Boolean indicating whether or not
-a sign character should be emitted if <code>x</code> is positive</li>
+<li><p>char git_hash</p></li>
+<li><p>char name</p></li>
 </ul>
-<p><strong>Returns:</strong></p>
-<p>BEA_FTOA_SUCCESS Represents a fully successful run with no
-loss-of-precision warning</p>
-<p><strong>Returns:</strong></p>
-<p>BEA_FTOA_ENOSPACE Indicates that there is insufficient space in the
-buffer to represent the integral portion of the number</p>
-<p><strong>Returns:</strong></p>
-<p>BEA_FTOA_WPRECISIONLOSS Indicates that there are more significant
-digits emitted than a single-precision floating point number actually
-has</p>
-<p><strong>Todo</strong></p>
-<p>Add support for emitting INF, NaN</p>
-<p>Add support for scientific notation</p>
+<h2 data-number="16.4" id="macros-documentation-5"><span
+class="header-section-number">16.4</span> Macros Documentation</h2>
+<h3 data-number="16.4.1" id="define-bea_git_hash_len"><span
+class="header-section-number">16.4.1</span> define
+<code>BEA_GIT_HASH_LEN</code></h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_GIT_HASH_LEN 40</span></span></code></pre></div>
+<h3 data-number="16.4.2" id="define-bea_version_name_maxlen"><span
+class="header-section-number">16.4.2</span> define
+<code>BEA_VERSION_NAME_MAXLEN</code></h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_VERSION_NAME_MAXLEN 31</span></span></code></pre></div>
 </body>
 </html>

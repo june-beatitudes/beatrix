@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>File kernel/include/register_utils.h</title>
+  <title>File kernel/include/syscall.h</title>
   <style>
     div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
     span.navlink { flex: 1; }
@@ -248,18 +248,24 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="8-file-kernelincludertc.h.html" accesskey="n" rel="next">File kernel/include/rtc.h</a>
+<span class="navlink-label">Next:</span> <a href="16-file-kernelincludeversion.h.html" accesskey="n" rel="next">File kernel/include/version.h</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="6-file-kernelincludercc.h.html" accesskey="p" rel="previous">File kernel/include/rcc.h</a>
+<span class="navlink-label">Previous:</span> <a href="14-file-kernelincludestring.h.html" accesskey="p" rel="previous">File kernel/include/string.h</a>
 </span>
 </div>
 </nav>
-<h1 data-number="7" id="file-kernelincluderegister_utils.h"><span
-class="header-section-number">7</span> File
-kernel/include/register_utils.h</h1>
-<h2 data-number="7.1" id="functions-4"><span
-class="header-section-number">7.1</span> Functions</h2>
+<h1 data-number="15" id="file-kernelincludesyscall.h"><span
+class="header-section-number">15</span> File
+kernel/include/syscall.h</h1>
+<p><em>Defines the functions that handle various system calls, along
+with their numbers.</em></p>
+<p><strong>Author:</strong></p>
+<p>Juniper Beatitudes</p>
+<p><strong>Date:</strong></p>
+<p>2025-07-16</p>
+<h2 data-number="15.1" id="structures-and-types-6"><span
+class="header-section-number">15.1</span> Structures and Types</h2>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -273,65 +279,65 @@ class="header-section-number">7.1</span> Functions</h2>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">uint32_t</td>
+<td style="text-align: right;">enum</td>
 <td style="text-align: left;"><a
-href="7-file-kernelincluderegister_utils.h.html#function-bea_get_reg_bits"><strong>bea_get_reg_bits</strong></a>
-(volatile uint32_t *base_addr, uint8_t msb, uint8_t lsb) <br><em>Get
-bits in a hardware memory-mapped register (assumed to be 32 bits wide).
-Reading from an incorrect memory address is undefined behavior and may
-trigger a hard fault or other interrupt.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a
-href="#function-bea_set_reg_bits"><strong>bea_set_reg_bits</strong></a>
-(volatile uint32_t *base_addr, uint8_t msb, uint8_t lsb, uint32_t value)
-<br><em>Set bits in a hardware memory-mapped register (assumed to be 32
-bits wide). Writing to an incorrect memory address is undefined behavior
-and may trigger a hard fault or other interrupt.</em></td>
+href="15-file-kernelincludesyscall.h.html#enum-bea_syscall_t"><strong>bea_syscall_t</strong></a>
+<br><em>System call enumeration.</em></td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="7.2" id="functions-documentation-4"><span
-class="header-section-number">7.2</span> Functions Documentation</h2>
-<h3 data-number="7.2.1" id="function-bea_get_reg_bits"><span
-class="header-section-number">7.2.1</span> function
-<code>bea_get_reg_bits</code></h3>
-<p><em>Get bits in a hardware memory-mapped register (assumed to be 32
-bits wide). Reading from an incorrect memory address is undefined
-behavior and may trigger a hard fault or other interrupt.</em></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">uint32_t</span> bea_get_reg_bits <span class="op">(</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">volatile</span> <span class="dt">uint32_t</span> <span class="op">*</span>base_addr<span class="op">,</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">uint8_t</span> msb<span class="op">,</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">uint8_t</span> lsb</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> </span></code></pre></div>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>base_addr</code> The base memory address of the register</li>
-<li><code>msb</code> The “highest” bit (inclusive) to read,
-zero-indexed, big-endian</li>
-<li><code>lsb</code> The “lowest” bit (inclusive) to read, zero-indexed,
-big-endian #### function <code>bea_set_reg_bits</code></li>
-</ul>
-<p><em>Set bits in a hardware memory-mapped register (assumed to be 32
-bits wide). Writing to an incorrect memory address is undefined behavior
-and may trigger a hard fault or other interrupt.</em></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> bea_set_reg_bits <span class="op">(</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">volatile</span> <span class="dt">uint32_t</span> <span class="op">*</span>base_addr<span class="op">,</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">uint8_t</span> msb<span class="op">,</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">uint8_t</span> lsb<span class="op">,</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">uint32_t</span> value</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> </span></code></pre></div>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>base_addr</code> The base memory address of the register</li>
-<li><code>msb</code> The “highest” bit (inclusive) to set, zero-indexed,
-big-endian</li>
-<li><code>lsb</code> The “lowest” bit (inclusive) to set, zero-indexed,
-big-endian</li>
-<li><code>value</code> The value to write into that range of the
-register. Only the lowest <code>(1 + msb - lsb)</code> bits will be
-written, all others will be discarded</li>
-</ul>
+<h2 data-number="15.2" id="functions-10"><span
+class="header-section-number">15.2</span> Functions</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a
+href="15-file-kernelincludesyscall.h.html#function-bea_do_syscall"><strong>bea_do_syscall</strong></a>
+(void) <br><em>System call interrupt handler, fetches reason and
+argument from R0 and R1 respectively, return value is in R0.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="15.3" id="structures-and-types-documentation-6"><span
+class="header-section-number">15.3</span> Structures and Types
+Documentation</h2>
+<h3 data-number="15.3.1" id="enum-bea_syscall_t"><span
+class="header-section-number">15.3.1</span> enum
+<code>bea_syscall_t</code></h3>
+<p><em>System call enumeration.</em></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> bea_syscall_t <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    BEA_SYSCALL_LOG <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    BEA_SYSCALL_DRIVER_RQ<span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    BEA_SYSCALL_SILENCE_RQ<span class="op">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    BEA_SYSCALL_YIELD<span class="op">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    BEA_SYSCALL_MALLOC<span class="op">,</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    BEA_SYSCALL_FREE<span class="op">,</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    BEA_SYSCALL_CALLOC<span class="op">,</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    BEA_SYSCALL_REALLOC<span class="op">,</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    BEA_SYSCALL_SPAWN<span class="op">,</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    BEA_SYSCALL_KILL<span class="op">,</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    BEA_NUM_SYSCALLS</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<h2 data-number="15.4" id="functions-documentation-10"><span
+class="header-section-number">15.4</span> Functions Documentation</h2>
+<h3 data-number="15.4.1" id="function-bea_do_syscall"><span
+class="header-section-number">15.4.1</span> function
+<code>bea_do_syscall</code></h3>
+<p><em>System call interrupt handler, fetches reason and argument from
+R0 and R1 respectively, return value is in R0.</em></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> bea_do_syscall <span class="op">(</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> </span></code></pre></div>
 </body>
 </html>

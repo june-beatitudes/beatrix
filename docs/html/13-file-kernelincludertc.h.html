@@ -248,17 +248,17 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="9-file-kernelincludestring.h.html" accesskey="n" rel="next">File kernel/include/string.h</a>
+<span class="navlink-label">Next:</span> <a href="14-file-kernelincludestring.h.html" accesskey="n" rel="next">File kernel/include/string.h</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="7-file-kernelincluderegister_utils.h.html" accesskey="p" rel="previous">File kernel/include/register_utils.h</a>
+<span class="navlink-label">Previous:</span> <a href="12-file-kernelincluderegister_utils.h.html" accesskey="p" rel="previous">File kernel/include/register_utils.h</a>
 </span>
 </div>
 </nav>
-<h1 data-number="8" id="file-kernelincludertc.h"><span
-class="header-section-number">8</span> File kernel/include/rtc.h</h1>
-<h2 data-number="8.1" id="structures-and-types-4"><span
-class="header-section-number">8.1</span> Structures and Types</h2>
+<h1 data-number="13" id="file-kernelincludertc.h"><span
+class="header-section-number">13</span> File kernel/include/rtc.h</h1>
+<h2 data-number="13.1" id="structures-and-types-5"><span
+class="header-section-number">13.1</span> Structures and Types</h2>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -274,7 +274,7 @@ class="header-section-number">8.1</span> Structures and Types</h2>
 <tr>
 <td style="text-align: right;">struct</td>
 <td style="text-align: left;"><a
-href="8-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a>
+href="13-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a>
 <br><em>Represents a single point in time in the Gregorian calendar.
 Years begin at 2000 (since the RTC hardware can’t represent anything
 earlier than that), and hours are in 24-hour time. Always in UTC because
@@ -284,27 +284,27 @@ we have to work with.</em></td>
 <tr>
 <td style="text-align: right;">enum</td>
 <td style="text-align: left;"><a
-href="8-file-kernelincludertc.h.html#enum-bea_dotw"><strong>bea_dotw</strong></a>
+href="13-file-kernelincludertc.h.html#enum-bea_dotw"><strong>bea_dotw</strong></a>
 <br><em>Represents a day of the week in the Gregorian
 calendar.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">enum</td>
 <td style="text-align: left;"><a
-href="8-file-kernelincludertc.h.html#enum-bea_month"><strong>bea_month</strong></a>
+href="13-file-kernelincludertc.h.html#enum-bea_month"><strong>bea_month</strong></a>
 <br><em>Represents a month in the Gregorian calendar.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">enum</td>
 <td style="text-align: left;"><a
-href="8-file-kernelincludertc.h.html#enum-bea_rtc_clksrc"><strong>bea_rtc_clksrc</strong></a>
+href="13-file-kernelincludertc.h.html#enum-bea_rtc_clksrc"><strong>bea_rtc_clksrc</strong></a>
 <br><em>Represents a clock source for the RTC subsystem to use (see
 RM0434 pp. 263)</em></td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="8.2" id="functions-5"><span
-class="header-section-number">8.2</span> Functions</h2>
+<h2 data-number="13.2" id="functions-8"><span
+class="header-section-number">13.2</span> Functions</h2>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -320,9 +320,9 @@ class="header-section-number">8.2</span> Functions</h2>
 <tr>
 <td style="text-align: right;">bool</td>
 <td style="text-align: left;"><a
-href="8-file-kernelincludertc.h.html#function-bea_datetime_is_valid"><strong>bea_datetime_is_valid</strong></a>
+href="13-file-kernelincludertc.h.html#function-bea_datetime_is_valid"><strong>bea_datetime_is_valid</strong></a>
 (struct <a
-href="8-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a>
+href="13-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a>
 datetime) <br><em>Checks whether a</em>
 <code>struct  bea_datetime</code>_ represents a valid point in time in
 the Gregorian calendar._</td>
@@ -332,7 +332,7 @@ the Gregorian calendar._</td>
 <td style="text-align: left;"><a
 href="#function-bea_datetime_to_kstrz"><strong>bea_datetime_to_kstrz</strong></a>
 (const struct <a
-href="8-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a>
+href="13-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a>
 datetime, char *buf) <br><em>Fills a buffer of at least 31 chars (please
 just use</em> <code>BEA_DATETIME_KSTRZ_LEN</code><em>) with a null
 terminated string in BEATRIX kernel format.</em></td>
@@ -342,14 +342,14 @@ terminated string in BEATRIX kernel format.</em></td>
 <td style="text-align: left;"><a
 href="#function-bea_datetime_to_unix"><strong>bea_datetime_to_unix</strong></a>
 (struct <a
-href="8-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a>
+href="13-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a>
 datetime, uint64_t timestamp_out) <br><em>converts a</em>
 <code>bea_datetime</code>_ to a Unix timestamp (seconds since the
 beginning of the year 1970)_</td>
 </tr>
 <tr>
 <td style="text-align: right;">struct <a
-href="8-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a></td>
+href="13-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a></td>
 <td style="text-align: left;"><a
 href="#function-bea_rtc_get_datetime"><strong>bea_rtc_get_datetime</strong></a>
 () <br><em>Reads the current date and time according to the
@@ -360,9 +360,9 @@ RTC.</em></td>
 <td style="text-align: left;"><a
 href="#function-bea_rtc_initialize"><strong>bea_rtc_initialize</strong></a>
 (enum <a
-href="8-file-kernelincludertc.h.html#enum-bea_rtc_clksrc"><strong>bea_rtc_clksrc</strong></a>
+href="13-file-kernelincludertc.h.html#enum-bea_rtc_clksrc"><strong>bea_rtc_clksrc</strong></a>
 clock_source, struct <a
-href="8-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a>
+href="13-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a>
 start_time, uint32_t subsec_frequency) <br><em>Initialize the RTC
 subsystem.</em></td>
 </tr>
@@ -371,14 +371,14 @@ subsystem.</em></td>
 <td style="text-align: left;"><a
 href="#function-bea_unix_to_datetime"><strong>bea_unix_to_datetime</strong></a>
 (uint64_t timestamp, struct <a
-href="8-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a>
+href="13-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a>
 *datetime_out) <br><em>Converts a standard Unix timestamp (seconds since
 the beginning of the year 1970) to a</em> <code>bea_datetime</code></td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="8.3" id="macros-2"><span
-class="header-section-number">8.3</span> Macros</h2>
+<h2 data-number="13.3" id="macros-4"><span
+class="header-section-number">13.3</span> Macros</h2>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -394,64 +394,64 @@ class="header-section-number">8.3</span> Macros</h2>
 <tr>
 <td style="text-align: right;">define</td>
 <td style="text-align: left;"><a
-href="8-file-kernelincludertc.h.html#define-bea_datetime_kstrz_len"><strong>BEA_DATETIME_KSTRZ_LEN</strong></a>
+href="13-file-kernelincludertc.h.html#define-bea_datetime_kstrz_len"><strong>BEA_DATETIME_KSTRZ_LEN</strong></a>
 31<br></td>
 </tr>
 <tr>
 <td style="text-align: right;">define</td>
 <td style="text-align: left;"><a
-href="8-file-kernelincludertc.h.html#define-bea_rcc_bdcr_offset"><strong>BEA_RCC_BDCR_OFFSET</strong></a>
+href="13-file-kernelincludertc.h.html#define-bea_rcc_bdcr_offset"><strong>BEA_RCC_BDCR_OFFSET</strong></a>
 0x024<br></td>
 </tr>
 <tr>
 <td style="text-align: right;">define</td>
 <td style="text-align: left;"><a
-href="8-file-kernelincludertc.h.html#define-bea_rtc_base_addr"><strong>BEA_RTC_BASE_ADDR</strong></a>
+href="13-file-kernelincludertc.h.html#define-bea_rtc_base_addr"><strong>BEA_RTC_BASE_ADDR</strong></a>
 (uint32_t *)(0x40002800)<br></td>
 </tr>
 <tr>
 <td style="text-align: right;">define</td>
 <td style="text-align: left;"><a
-href="8-file-kernelincludertc.h.html#define-bea_rtc_dr_offset"><strong>BEA_RTC_DR_OFFSET</strong></a>
+href="13-file-kernelincludertc.h.html#define-bea_rtc_dr_offset"><strong>BEA_RTC_DR_OFFSET</strong></a>
 0x01<br></td>
 </tr>
 <tr>
 <td style="text-align: right;">define</td>
 <td style="text-align: left;"><a
-href="8-file-kernelincludertc.h.html#define-bea_rtc_isr_offset"><strong>BEA_RTC_ISR_OFFSET</strong></a>
+href="13-file-kernelincludertc.h.html#define-bea_rtc_isr_offset"><strong>BEA_RTC_ISR_OFFSET</strong></a>
 0x03<br></td>
 </tr>
 <tr>
 <td style="text-align: right;">define</td>
 <td style="text-align: left;"><a
-href="8-file-kernelincludertc.h.html#define-bea_rtc_prer_offset"><strong>BEA_RTC_PRER_OFFSET</strong></a>
+href="13-file-kernelincludertc.h.html#define-bea_rtc_prer_offset"><strong>BEA_RTC_PRER_OFFSET</strong></a>
 0x04<br></td>
 </tr>
 <tr>
 <td style="text-align: right;">define</td>
 <td style="text-align: left;"><a
-href="8-file-kernelincludertc.h.html#define-bea_rtc_ssr_offset"><strong>BEA_RTC_SSR_OFFSET</strong></a>
+href="13-file-kernelincludertc.h.html#define-bea_rtc_ssr_offset"><strong>BEA_RTC_SSR_OFFSET</strong></a>
 0x0A<br></td>
 </tr>
 <tr>
 <td style="text-align: right;">define</td>
 <td style="text-align: left;"><a
-href="8-file-kernelincludertc.h.html#define-bea_rtc_tr_offset"><strong>BEA_RTC_TR_OFFSET</strong></a>
+href="13-file-kernelincludertc.h.html#define-bea_rtc_tr_offset"><strong>BEA_RTC_TR_OFFSET</strong></a>
 0x00<br></td>
 </tr>
 <tr>
 <td style="text-align: right;">define</td>
 <td style="text-align: left;"><a
-href="8-file-kernelincludertc.h.html#define-bea_rtc_wpr_offset"><strong>BEA_RTC_WPR_OFFSET</strong></a>
+href="13-file-kernelincludertc.h.html#define-bea_rtc_wpr_offset"><strong>BEA_RTC_WPR_OFFSET</strong></a>
 0x09<br></td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="8.4" id="structures-and-types-documentation-4"><span
-class="header-section-number">8.4</span> Structures and Types
+<h2 data-number="13.4" id="structures-and-types-documentation-5"><span
+class="header-section-number">13.4</span> Structures and Types
 Documentation</h2>
-<h3 data-number="8.4.1" id="struct-bea_datetime"><span
-class="header-section-number">8.4.1</span> struct
+<h3 data-number="13.4.1" id="struct-bea_datetime"><span
+class="header-section-number">13.4.1</span> struct
 <code>bea_datetime</code></h3>
 <p><em>Represents a single point in time in the Gregorian calendar.
 Years begin at 2000 (since the RTC hardware can’t represent anything
@@ -462,18 +462,18 @@ we have to work with.</em></p>
 <ul>
 <li><p>uint8_t day</p></li>
 <li><p>enum <a
-href="8-file-kernelincludertc.h.html#enum-bea_dotw"><strong>bea_dotw</strong></a>
+href="13-file-kernelincludertc.h.html#enum-bea_dotw"><strong>bea_dotw</strong></a>
 dotw</p></li>
 <li><p>uint8_t hour</p></li>
 <li><p>uint8_t minute</p></li>
 <li><p>enum <a
-href="8-file-kernelincludertc.h.html#enum-bea_month"><strong>bea_month</strong></a>
+href="13-file-kernelincludertc.h.html#enum-bea_month"><strong>bea_month</strong></a>
 month</p></li>
 <li><p>float second</p></li>
 <li><p>uint8_t year <br><em>Years since 2000.</em></p></li>
 </ul>
-<h3 data-number="8.4.2" id="enum-bea_dotw"><span
-class="header-section-number">8.4.2</span> enum
+<h3 data-number="13.4.2" id="enum-bea_dotw"><span
+class="header-section-number">13.4.2</span> enum
 <code>bea_dotw</code></h3>
 <p><em>Represents a day of the week in the Gregorian calendar.</em></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> bea_dotw <span class="op">{</span></span>
@@ -485,8 +485,8 @@ class="header-section-number">8.4.2</span> enum
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    BEA_DOTW_SATURDAY<span class="op">,</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    BEA_DOTW_SUNDAY</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<h3 data-number="8.4.3" id="enum-bea_month"><span
-class="header-section-number">8.4.3</span> enum
+<h3 data-number="13.4.3" id="enum-bea_month"><span
+class="header-section-number">13.4.3</span> enum
 <code>bea_month</code></h3>
 <p><em>Represents a month in the Gregorian calendar.</em></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> bea_month <span class="op">{</span></span>
@@ -503,8 +503,8 @@ class="header-section-number">8.4.3</span> enum
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    BEA_MONTH_NOVEMBER<span class="op">,</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    BEA_MONTH_DECEMBER</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<h3 data-number="8.4.4" id="enum-bea_rtc_clksrc"><span
-class="header-section-number">8.4.4</span> enum
+<h3 data-number="13.4.4" id="enum-bea_rtc_clksrc"><span
+class="header-section-number">13.4.4</span> enum
 <code>bea_rtc_clksrc</code></h3>
 <p><em>Represents a clock source for the RTC subsystem to use (see
 RM0434 pp. 263)</em></p>
@@ -513,10 +513,10 @@ RM0434 pp. 263)</em></p>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    BEA_RTC_CLKSRC_LSI<span class="op">,</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    BEA_RTC_CLKSRC_HSE</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<h2 data-number="8.5" id="functions-documentation-5"><span
-class="header-section-number">8.5</span> Functions Documentation</h2>
-<h3 data-number="8.5.1" id="function-bea_datetime_is_valid"><span
-class="header-section-number">8.5.1</span> function
+<h2 data-number="13.5" id="functions-documentation-8"><span
+class="header-section-number">13.5</span> Functions Documentation</h2>
+<h3 data-number="13.5.1" id="function-bea_datetime_is_valid"><span
+class="header-section-number">13.5.1</span> function
 <code>bea_datetime_is_valid</code></h3>
 <p><em>Checks whether a</em> <code>struct  bea_datetime</code>_
 represents a valid point in time in the Gregorian calendar._</p>
@@ -571,7 +571,7 @@ is invalid #### function <code>bea_rtc_get_datetime</code></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> bea_datetime bea_rtc_get_datetime <span class="op">()</span> </span></code></pre></div>
 <p><strong>Returns:</strong></p>
 <p>struct <a
-href="8-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a>
+href="13-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a>
 The returned date and time values #### function
 <code>bea_rtc_initialize</code></p>
 <p><em>Initialize the RTC subsystem.</em></p>
@@ -616,42 +616,42 @@ function</li>
 <p><strong>Returns:</strong></p>
 <p>false The conversion was unsuccessful due to a mismatch in
 representable ranges</p>
-<h2 data-number="8.6" id="macros-documentation-2"><span
-class="header-section-number">8.6</span> Macros Documentation</h2>
-<h3 data-number="8.6.1" id="define-bea_datetime_kstrz_len"><span
-class="header-section-number">8.6.1</span> define
+<h2 data-number="13.6" id="macros-documentation-4"><span
+class="header-section-number">13.6</span> Macros Documentation</h2>
+<h3 data-number="13.6.1" id="define-bea_datetime_kstrz_len"><span
+class="header-section-number">13.6.1</span> define
 <code>BEA_DATETIME_KSTRZ_LEN</code></h3>
 <div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_DATETIME_KSTRZ_LEN 31</span></span></code></pre></div>
-<h3 data-number="8.6.2" id="define-bea_rcc_bdcr_offset"><span
-class="header-section-number">8.6.2</span> define
+<h3 data-number="13.6.2" id="define-bea_rcc_bdcr_offset"><span
+class="header-section-number">13.6.2</span> define
 <code>BEA_RCC_BDCR_OFFSET</code></h3>
 <div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_RCC_BDCR_OFFSET 0x024</span></span></code></pre></div>
-<h3 data-number="8.6.3" id="define-bea_rtc_base_addr"><span
-class="header-section-number">8.6.3</span> define
+<h3 data-number="13.6.3" id="define-bea_rtc_base_addr"><span
+class="header-section-number">13.6.3</span> define
 <code>BEA_RTC_BASE_ADDR</code></h3>
 <div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_RTC_BASE_ADDR (uint32_t *)(0x40002800)</span></span></code></pre></div>
-<h3 data-number="8.6.4" id="define-bea_rtc_dr_offset"><span
-class="header-section-number">8.6.4</span> define
+<h3 data-number="13.6.4" id="define-bea_rtc_dr_offset"><span
+class="header-section-number">13.6.4</span> define
 <code>BEA_RTC_DR_OFFSET</code></h3>
 <div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_RTC_DR_OFFSET 0x01</span></span></code></pre></div>
-<h3 data-number="8.6.5" id="define-bea_rtc_isr_offset"><span
-class="header-section-number">8.6.5</span> define
+<h3 data-number="13.6.5" id="define-bea_rtc_isr_offset"><span
+class="header-section-number">13.6.5</span> define
 <code>BEA_RTC_ISR_OFFSET</code></h3>
 <div class="sourceCode" id="cb14"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_RTC_ISR_OFFSET 0x03</span></span></code></pre></div>
-<h3 data-number="8.6.6" id="define-bea_rtc_prer_offset"><span
-class="header-section-number">8.6.6</span> define
+<h3 data-number="13.6.6" id="define-bea_rtc_prer_offset"><span
+class="header-section-number">13.6.6</span> define
 <code>BEA_RTC_PRER_OFFSET</code></h3>
 <div class="sourceCode" id="cb15"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_RTC_PRER_OFFSET 0x04</span></span></code></pre></div>
-<h3 data-number="8.6.7" id="define-bea_rtc_ssr_offset"><span
-class="header-section-number">8.6.7</span> define
+<h3 data-number="13.6.7" id="define-bea_rtc_ssr_offset"><span
+class="header-section-number">13.6.7</span> define
 <code>BEA_RTC_SSR_OFFSET</code></h3>
 <div class="sourceCode" id="cb16"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_RTC_SSR_OFFSET 0x0A</span></span></code></pre></div>
-<h3 data-number="8.6.8" id="define-bea_rtc_tr_offset"><span
-class="header-section-number">8.6.8</span> define
+<h3 data-number="13.6.8" id="define-bea_rtc_tr_offset"><span
+class="header-section-number">13.6.8</span> define
 <code>BEA_RTC_TR_OFFSET</code></h3>
 <div class="sourceCode" id="cb17"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_RTC_TR_OFFSET 0x00</span></span></code></pre></div>
-<h3 data-number="8.6.9" id="define-bea_rtc_wpr_offset"><span
-class="header-section-number">8.6.9</span> define
+<h3 data-number="13.6.9" id="define-bea_rtc_wpr_offset"><span
+class="header-section-number">13.6.9</span> define
 <code>BEA_RTC_WPR_OFFSET</code></h3>
 <div class="sourceCode" id="cb18"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_RTC_WPR_OFFSET 0x09</span></span></code></pre></div>
 </body>

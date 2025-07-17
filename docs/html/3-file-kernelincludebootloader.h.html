@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>File kernel/include/pwr.h</title>
+  <title>File kernel/include/bootloader.h</title>
   <style>
     div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
     span.navlink { flex: 1; }
@@ -248,22 +248,25 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="6-file-kernelincludercc.h.html" accesskey="n" rel="next">File kernel/include/rcc.h</a>
+<span class="navlink-label">Next:</span> <a href="4-file-kernelincludefaults.h.html" accesskey="n" rel="next">File kernel/include/faults.h</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="4-file-kernelincludeprocessor.h.html" accesskey="p" rel="previous">File kernel/include/processor.h</a>
+<span class="navlink-label">Previous:</span> <a href="2-file-driversdriver_table.h.html" accesskey="p" rel="previous">File drivers/driver_table.h</a>
 </span>
 </div>
 </nav>
-<h1 data-number="5" id="file-kernelincludepwr.h"><span
-class="header-section-number">5</span> File kernel/include/pwr.h</h1>
-<h2 data-number="5.1" id="macros"><span
-class="header-section-number">5.1</span> Macros</h2>
+<h1 data-number="3" id="file-kernelincludebootloader.h"><span
+class="header-section-number">3</span> File
+kernel/include/bootloader.h</h1>
+<p><em>BEATRIX bootloader. Sets up the RTC, loads the drivers, sets up
+memory, and branches to the shell.</em></p>
+<p><strong>Author:</strong></p>
+<p>Juniper Beatitudes</p>
+<p><strong>Date:</strong></p>
+<p>2025-07-16</p>
+<h2 data-number="3.1" id="functions"><span
+class="header-section-number">3.1</span> Functions</h2>
 <table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <thead>
 <tr>
 <th style="text-align: right;">Type</th>
@@ -272,28 +275,20 @@ class="header-section-number">5.1</span> Macros</h2>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">define</td>
+<td style="text-align: right;">void</td>
 <td style="text-align: left;"><a
-href="5-file-kernelincludepwr.h.html#define-bea_pwr_base_addr"><strong>BEA_PWR_BASE_ADDR</strong></a>
-(uint32_t *)(0x58000400)<br></td>
-</tr>
-<tr>
-<td style="text-align: right;">define</td>
-<td style="text-align: left;"><a
-href="5-file-kernelincludepwr.h.html#define-bea_pwr_cr1_offset"><strong>BEA_PWR_CR1_OFFSET</strong></a>
-0x0<br></td>
+href="3-file-kernelincludebootloader.h.html#function-bea_do_boot"><strong>bea_do_boot</strong></a>
+(void) <br></td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="5.2" id="macros-documentation"><span
-class="header-section-number">5.2</span> Macros Documentation</h2>
-<h3 data-number="5.2.1" id="define-bea_pwr_base_addr"><span
-class="header-section-number">5.2.1</span> define
-<code>BEA_PWR_BASE_ADDR</code></h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_PWR_BASE_ADDR (uint32_t *)(0x58000400)</span></span></code></pre></div>
-<h3 data-number="5.2.2" id="define-bea_pwr_cr1_offset"><span
-class="header-section-number">5.2.2</span> define
-<code>BEA_PWR_CR1_OFFSET</code></h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_PWR_CR1_OFFSET 0x0</span></span></code></pre></div>
+<h2 data-number="3.2" id="functions-documentation"><span
+class="header-section-number">3.2</span> Functions Documentation</h2>
+<h3 data-number="3.2.1" id="function-bea_do_boot"><span
+class="header-section-number">3.2.1</span> function
+<code>bea_do_boot</code></h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> bea_do_boot <span class="op">(</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> </span></code></pre></div>
 </body>
 </html>
