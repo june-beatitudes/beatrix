@@ -74,10 +74,10 @@ struct bea_datetime
  */
 bool bea_datetime_is_valid (struct bea_datetime datetime);
 
-#define BEA_DATETIME_KSTRZ_LEN 31
+#define BEA_DATETIME_KSTRZ_LEN 32
 
 /**
- * @brief Fills a buffer of at least 31 chars (please just use
+ * @brief Fills a buffer of at least 32 chars (please just use
  * `BEA_DATETIME_KSTRZ_LEN`) with a null terminated string in BEATRIX kernel
  * format
  *
