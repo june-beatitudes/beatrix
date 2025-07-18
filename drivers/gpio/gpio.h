@@ -43,6 +43,8 @@ enum bea_gpio_rq_type
 {
   /// Set the mode for a particular pin
   BEA_GPIO_SET_MODE,
+  /// Set the chosen alternate function for an alternate function mode pin
+  BEA_GPIO_SET_ALT_FUNC,
   /// Set the value on an output pin
   BEA_GPIO_SET_VALUE,
   /// Read the value of an input pin
@@ -59,6 +61,12 @@ enum bea_gpio_bank
   BEA_GPIO_BANK_D = 0x48000C00,
   BEA_GPIO_BANK_E = 0x48001000,
   BEA_GPIO_BANK_H = 0x48001C00,
+};
+
+struct bea_gpio_line
+{
+  enum bea_gpio_bank bank;
+  uint8_t pin;
 };
 
 /// Types of GPIO pin modes, with the numbers associated encoding the register
@@ -85,12 +93,12 @@ enum bea_gpio_pin_mode
 struct bea_gpio_request_arg
 {
   enum bea_gpio_rq_type type;
-  enum bea_gpio_bank bank;
-  uint8_t pin;
+  struct bea_gpio_line line;
   union
   {
     bool value;
     enum bea_gpio_pin_mode mode;
+    uint8_t alt_func;
   };
 };
 

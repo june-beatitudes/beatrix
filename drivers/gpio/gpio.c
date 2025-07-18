@@ -27,28 +27,43 @@ void
 bea_gpio_request (void *request, void *retval)
 {
   struct bea_gpio_request_arg arg = *((struct bea_gpio_request_arg *)request);
+  enum bea_gpio_bank bank = arg.line.bank;
+  uint8_t pin = arg.line.pin;
   struct bea_gpio_request_response resp;
 
   switch (arg.type)
     {
     case BEA_GPIO_SET_MODE:
-      bea_set_reg_bits ((uint32_t *)arg.bank, arg.pin * 2 + 1, arg.pin * 2,
+      bea_set_reg_bits ((uint32_t *)bank, pin * 2 + 1, pin * 2,
                         (uint32_t)arg.mode);
       if ((arg.mode & 0b11) == 0b00)
         {
-          bea_set_reg_bits ((uint32_t *)(arg.bank + 0x0C), arg.pin * 2 + 1,
-                            arg.pin * 2, ((uint32_t)arg.mode >> 2));
+          bea_set_reg_bits ((uint32_t *)(bank + 0x0C), pin * 2 + 1, pin * 2,
+                            ((uint32_t)arg.mode >> 2));
+        }
+      resp.succeeded = true;
+      break;
+    case BEA_GPIO_SET_ALT_FUNC:
+      if (pin < 8)
+        {
+          bea_set_reg_bits ((uint32_t *)(bank + 0x20), pin * 4 + 3, pin * 4,
+                            arg.alt_func);
+        }
+      else
+        {
+          bea_set_reg_bits ((uint32_t *)(bank + 0x24), (pin - 8) * 4 + 3,
+                            (pin - 8) * 4, arg.alt_func);
         }
       resp.succeeded = true;
       break;
     case BEA_GPIO_SET_VALUE:
-      bea_set_reg_bits ((uint32_t *)(arg.bank + 0x14), arg.pin, arg.pin,
+      bea_set_reg_bits ((uint32_t *)(bank + 0x14), pin, pin,
                         (uint32_t)arg.value);
       resp.succeeded = true;
       break;
     case BEA_GPIO_READ_VALUE:
-      resp.value = (bool)bea_get_reg_bits ((uint32_t *)(arg.bank + 0x10),
-                                           arg.pin, arg.pin);
+      resp.value
+          = (bool)bea_get_reg_bits ((uint32_t *)(bank + 0x10), pin, pin);
       resp.succeeded = true;
       break;
     }
