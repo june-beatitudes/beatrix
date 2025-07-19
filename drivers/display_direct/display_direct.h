@@ -16,4 +16,6 @@ bool bea_display_direct_deinitialize (void);
 
 void bea_display_direct_request (void *request, void *result);
 
+extern const struct bea_driver BEA_DISPLAY_DIRECT_DRIVER;
+
 #endif

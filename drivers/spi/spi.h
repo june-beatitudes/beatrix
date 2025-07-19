@@ -26,7 +26,7 @@ enum bea_spi_request_type
   BEA_SPI_DEINIT_CHANNEL,
 };
 
-enum bea_spi_channel
+enum bea_spi_channel : uint32_t
 {
   BEA_SPI_CHAN1 = 0x40013000,
   BEA_SPI_CHAN2 = 0x40003800,
@@ -50,6 +50,7 @@ struct bea_spi_request_arg
 {
   enum bea_spi_request_type type;
   struct bea_spi_channel_config channel_cfg;
+  bool should_flush;
   uint8_t packet;
 };
 
