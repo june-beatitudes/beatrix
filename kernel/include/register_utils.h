@@ -15,8 +15,7 @@
  * @param value The value to write into that range of the register. Only the
  * lowest `(1 + msb - lsb)` bits will be written, all others will be discarded
  */
-void bea_set_reg_bits (volatile uint32_t *base_addr, uint8_t msb, uint8_t lsb,
-                       uint32_t value);
+void bea_set_reg_bits (volatile uint32_t *base_addr, uint8_t msb, uint8_t lsb, uint32_t value);
 
 /**
  * @brief Get bits in a hardware memory-mapped register (assumed to be 32 bits
@@ -27,7 +26,6 @@ void bea_set_reg_bits (volatile uint32_t *base_addr, uint8_t msb, uint8_t lsb,
  * @param msb The "highest" bit (inclusive) to read, zero-indexed, big-endian
  * @param lsb The "lowest" bit (inclusive) to read, zero-indexed, big-endian
  */
-uint32_t bea_get_reg_bits (volatile uint32_t *base_addr, uint8_t msb,
-                           uint8_t lsb);
+uint32_t bea_get_reg_bits (volatile uint32_t *base_addr, uint8_t msb, uint8_t lsb);
 
 #endif

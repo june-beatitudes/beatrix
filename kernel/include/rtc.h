@@ -101,8 +101,7 @@ void bea_datetime_to_kstrz (const struct bea_datetime datetime, char *buf);
  * @return false The conversion was unsuccessful due to a mismatch in
  * representable ranges
  */
-bool bea_unix_to_datetime (uint64_t timestamp,
-                           struct bea_datetime *datetime_out);
+bool bea_unix_to_datetime (uint64_t timestamp, struct bea_datetime *datetime_out);
 
 /**
  * @brief converts a `bea_datetime` to a Unix timestamp (seconds since the
@@ -114,8 +113,7 @@ bool bea_unix_to_datetime (uint64_t timestamp,
  * @return true The conversion was successful
  * @return false The conversion was unsuccessful because `datetime` is invalid
  */
-bool bea_datetime_to_unix (struct bea_datetime datetime,
-                           uint64_t timestamp_out);
+bool bea_datetime_to_unix (struct bea_datetime datetime, uint64_t timestamp_out);
 
 #define BEA_RTC_ISR_OFFSET 0x03
 #define BEA_RCC_BDCR_OFFSET 0x024
@@ -149,8 +147,7 @@ enum bea_rtc_clksrc
  * @todo Add timeout for initialization completion
  * @todo Add less opaque error return
  */
-bool bea_rtc_initialize (enum bea_rtc_clksrc clock_source,
-                         struct bea_datetime start_time,
+bool bea_rtc_initialize (enum bea_rtc_clksrc clock_source, struct bea_datetime start_time,
                          uint32_t subsec_frequency);
 
 #define BEA_RTC_TR_OFFSET 0x00

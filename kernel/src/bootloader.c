@@ -18,13 +18,25 @@ bea_do_boot (void)
           bea_log (BEA_LOG_INFO, "Driver initialization successful");
         }
     }
+  for (;;)
+    {
+      BEA_DRIVER_TABLE[3]->request (NULL, NULL);
+      bea_log (BEA_LOG_DEBUG, "Is it on???");
+    }
   struct bea_sd_request_arg rq = {
     .type = BEA_SD_IS_PRESENT,
   };
   struct bea_sd_request_response resp;
+  BEA_DRIVER_TABLE[2]->request (&rq, &resp);
+  if (resp.succeeded && resp.is_present)
+    {
+      bea_log (BEA_LOG_INFO, "SD card is present");
+      rq.type = BEA_SD_ACTIVATE;
+      BEA_DRIVER_TABLE[2]->request (&rq, &resp);
+      bea_log (BEA_LOG_INFO, "SD card enabled");
+    }
   for (;;)
     {
-      BEA_DRIVER_TABLE[2]->request ((void *)&rq, (void *)&resp);
       if (resp.is_present && resp.succeeded)
         {
           bea_log (BEA_LOG_INFO, "SD card is present");
