@@ -7,3 +7,6 @@
 [submodule "extern/umm_malloc"]
 	path = extern/umm_malloc
 	url = https://github.com/rhempel/umm_malloc.git
+[submodule "extern/fatfs"]
+	path = extern/fatfs
+	url = https://github.com/abbrev/fatfs.git

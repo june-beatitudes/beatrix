@@ -47,7 +47,6 @@ enum bea_ftoa_result
  * @todo Add support for emitting INF, NaN
  * @todo Add support for scientific notation
  */
-enum bea_ftoa_result bea_ftoa (float x, char *buf, size_t n_available,
-                               bool include_positive_sign);
+enum bea_ftoa_result bea_ftoa (float x, char *buf, size_t n_available, bool include_positive_sign);
 
 #endif

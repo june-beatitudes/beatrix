@@ -6,6 +6,7 @@
 __attribute__ ((noreturn)) void
 bea_do_reset (void)
 {
+  // If we don't enable the FPU then logging will fail immediately
   bea_fpu_enable ();
   bea_log (BEA_LOG_WARNING, "Reset encountered! Was this expected?");
   bea_log (BEA_LOG_INFO, "Branching to bootloader...");

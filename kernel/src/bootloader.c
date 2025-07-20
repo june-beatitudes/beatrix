@@ -1,7 +1,7 @@
 #include <bootloader.h>
 #include <driver_table.h>
-#include <gpio/gpio.h>
 #include <logging.h>
+#include <sd/sd.h>
 
 void
 bea_do_boot (void)
@@ -18,29 +18,36 @@ bea_do_boot (void)
           bea_log (BEA_LOG_INFO, "Driver initialization successful");
         }
     }
-  struct bea_gpio_request_arg arg1 = {
-    .type = BEA_GPIO_SET_MODE,
-    .mode = BEA_GPIO_PULLUP,
-    .pin = 10,
-    .bank = BEA_GPIO_BANK_B,
-  };
-  struct bea_gpio_request_arg arg2 = {
-    .type = BEA_GPIO_READ_VALUE,
-    .pin = 10,
-    .bank = BEA_GPIO_BANK_B,
-  };
-  struct bea_gpio_request_response val;
-  BEA_DRIVER_TABLE[0]->request ((void *)&arg1, (void *)&val);
   for (;;)
     {
-      BEA_DRIVER_TABLE[0]->request ((void *)&arg2, (void *)&val);
-      if (val.value)
+      BEA_DRIVER_TABLE[3]->request (NULL, NULL);
+      bea_log (BEA_LOG_DEBUG, "Is it on???");
+    }
+  struct bea_sd_request_arg rq = {
+    .type = BEA_SD_IS_PRESENT,
+  };
+  struct bea_sd_request_response resp;
+  BEA_DRIVER_TABLE[2]->request (&rq, &resp);
+  if (resp.succeeded && resp.is_present)
+    {
+      bea_log (BEA_LOG_INFO, "SD card is present");
+      rq.type = BEA_SD_ACTIVATE;
+      BEA_DRIVER_TABLE[2]->request (&rq, &resp);
+      bea_log (BEA_LOG_INFO, "SD card enabled");
+    }
+  for (;;)
+    {
+      if (resp.is_present && resp.succeeded)
         {
-          bea_log (BEA_LOG_INFO, "Button not pushed");
+          bea_log (BEA_LOG_INFO, "SD card is present");
+        }
+      else if (!resp.succeeded)
+        {
+          bea_log (BEA_LOG_ERROR, "SD polling failed");
         }
       else
         {
-          bea_log (BEA_LOG_INFO, "Button pushed");
+          bea_log (BEA_LOG_INFO, "SD card is not present");
         }
     }
 }

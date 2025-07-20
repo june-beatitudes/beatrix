@@ -6,8 +6,10 @@ CFLAGS := -c -Wall -g -O0 -ffreestanding \
 COMPILER_URL := https://github.com/arm/arm-toolchain/releases/download/release-20.1.0-ATfE/ATfE-20.1.0-Linux-x86_64.tar.xz
 BUILTINSLIB := tools/ATfE-20.1.0-Linux-x86_64/lib/clang-runtimes/arm-none-eabi/armv7m_hard_fpv4_sp_d16/lib/libclang_rt.builtins.a
 
-cfiles := $(wildcard kernel/src/*.c) $(wildcard drivers/*.c) $(wildcard drivers/gpio/*.c)
-hfiles := $(wildcard kernel/include/*.h) $(wildcard drivers/*.h) $(wildcard drivers/gpio/*.h)
+cfiles := $(wildcard kernel/src/*.c) $(wildcard drivers/*.c) $(wildcard drivers/gpio/*.c) \
+	  $(wildcard drivers/spi/*.c) $(wildcard drivers/sd/*.c) $(wildcard drivers/display_direct/*c)
+hfiles := $(wildcard kernel/include/*.h) $(wildcard drivers/*.h) $(wildcard drivers/gpio/*.h) \
+	  $(wildcard drivers/spi/*.h) $(wildcard drivers/sd/*.h) $(wildcard drivers/display_direct/*.h)
 mdfiles := $(wildcard *.md) $(wildcard kernel/*.md)
 
 setup:
