@@ -19,7 +19,8 @@ bea_log (enum bea_log_level_t level, const char *msg)
   char prefixbuf[BEA_DATETIME_KSTRZ_LEN + 12];
   bea_datetime_to_kstrz (bea_rtc_get_datetime (), &prefixbuf[0]);
   prefixbuf[BEA_DATETIME_KSTRZ_LEN] = ' ';
-  bea_strncpy (BEA_LOG_LEVEL_NAMES[(size_t)level], &prefixbuf[BEA_DATETIME_KSTRZ_LEN + 1], 7);
+  bea_strncpy (BEA_LOG_LEVEL_NAMES[(size_t)level],
+               &prefixbuf[BEA_DATETIME_KSTRZ_LEN + 1], 7);
   prefixbuf[BEA_DATETIME_KSTRZ_LEN + 8] = ' ';
   prefixbuf[BEA_DATETIME_KSTRZ_LEN + 9] = '\0';
   bea_semihost_rq (BEA_SEMIHOST_SYSWRITEZ, (void *)prefixbuf);

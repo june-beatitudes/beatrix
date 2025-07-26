@@ -1,7 +1,7 @@
 /**
  * @file
  * @brief Describes the `struct bea_driver` object
- * @author Juniper Beatitudes
+ * @author Juniper Beatitudes <juniper@eyes-like-fire.org>
  * @date 2025-07-16
  */
 
@@ -17,20 +17,19 @@
 /**
  * @brief Driver table entry, representing a single driver
  *
- * @member name The registered *unique* name of the driver
- * @member initialize Initializes necessary functionality for the driver and
- * returns a boolean indicating if initialization was successful or not
- * @member request The request method, which takes in an argument, performs
- * some action, and fills out a result object. Returns a boolean indicating if
- * the operation was successful or not
- * @member deinitialize Deinitializes functionality for the driver and returns
- * a bvoolean indicating if that operation was successful or not
  */
 struct bea_driver
 {
+  /// The registered (and unique) name of the driver
   const char name[BEA_DRIVER_NAME_MAXLEN + 1];
+  /// Function to initialize the driver. Returns a Boolesn indicating whether or
+  /// not initialization was successful
   bool (*initialize) (void);
+  /// Function to make a request to the driver from userspace. Not intended for
+  /// internal kernel usage
   void (*request) (void *arg, void *result);
+  /// Function to deinitialize the driver. Returns a Boolean indicating whether
+  /// or not deinitialization was successful
   bool (*deinitialize) (void);
 };
 

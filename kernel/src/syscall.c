@@ -10,12 +10,13 @@ bea_do_syscall (void)
   uint32_t reason;
   uint32_t argument1;
   uint32_t argument2;
-  __asm__ volatile ("MOV %[rsn], R0\n"
-                    "MOV %[arg1], R1\n"
-                    "MOV %[arg2], R2\n"
-                    : [rsn] "=r"(reason), [arg1] "=r"(argument1), [arg2] "=r"(argument2)
-                    :
-                    :);
+  __asm__ volatile (
+      "MOV %[rsn], R0\n"
+      "MOV %[arg1], R1\n"
+      "MOV %[arg2], R2\n"
+      : [rsn] "=r"(reason), [arg1] "=r"(argument1), [arg2] "=r"(argument2)
+      :
+      :);
   bea_log (BEA_LOG_DEBUG, "Received a system call");
   uint32_t retval;
   if (reason >= (uint32_t)BEA_NUM_SYSCALLS)

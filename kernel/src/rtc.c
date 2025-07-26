@@ -13,8 +13,8 @@ bea_month_day_is_valid (struct bea_datetime datetime)
 {
   // Remember here that `datetime.year` is a `uint8_t` with 0 representing the
   // year 2000
-  bool is_leap_year
-      = (datetime.year % 4 == 0) && ((datetime.year % 100 != 0) || (datetime.year == 0));
+  bool is_leap_year = (datetime.year % 4 == 0)
+                      && ((datetime.year % 100 != 0) || (datetime.year == 0));
   enum bea_dotw dotw;
   if (datetime.year == 0)
     {
@@ -32,16 +32,20 @@ bea_month_day_is_valid (struct bea_datetime datetime)
     {
       // Use Zeller's congruence. I hate this formula because it's ugly as sin
       // and I had to steal it from Wikipedia, but it is very efficient.
-      uint8_t year_adj = ((uint8_t)datetime.month < 3) ? datetime.year - 1 : datetime.year;
-      uint8_t month_adj = ((uint8_t)datetime.month < 3) ? (uint8_t)datetime.month + 1
-                                                        : (uint8_t)datetime.month + 13;
-      uint8_t zeller_dotw = ((datetime.day + (13 * (month_adj + 1)) / 5 + (year_adj % 100)
-                              + (year_adj % 100) / 4 + (year_adj / 100) / 4 + (year_adj / 100) * 5)
+      uint8_t year_adj
+          = ((uint8_t)datetime.month < 3) ? datetime.year - 1 : datetime.year;
+      uint8_t month_adj = ((uint8_t)datetime.month < 3)
+                              ? (uint8_t)datetime.month + 1
+                              : (uint8_t)datetime.month + 13;
+      uint8_t zeller_dotw = ((datetime.day + (13 * (month_adj + 1)) / 5
+                              + (year_adj % 100) + (year_adj % 100) / 4
+                              + (year_adj / 100) / 4 + (year_adj / 100) * 5)
                              % 7);
       dotw = (enum bea_dotw) ((zeller_dotw + 5) % 7 + 1);
     }
-  uint8_t days_in_month = is_leap_year ? BEA_MONTH_LENGTHS_LEAP[(uint8_t)datetime.month]
-                                       : BEA_MONTH_LENGTHS_NONLEAP[(uint8_t)datetime.month];
+  uint8_t days_in_month
+      = is_leap_year ? BEA_MONTH_LENGTHS_LEAP[(uint8_t)datetime.month]
+                     : BEA_MONTH_LENGTHS_NONLEAP[(uint8_t)datetime.month];
   return (datetime.day <= days_in_month && datetime.dotw == dotw);
 }
 
@@ -70,7 +74,8 @@ const static char BEA_WEEKDAY_NAMES[7][4] = {
 
 /// Names of months in ISO order, truncated to 3 characters
 const static char BEA_MONTH_NAMES[12][4] = {
-  "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
+  "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+  "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
 };
 
 void
@@ -121,27 +126,32 @@ bea_rtc_get_datetime ()
   uint32_t *t_reg = BEA_RTC_BASE_ADDR + BEA_RTC_TR_OFFSET; // Time register
   uint32_t *d_reg = BEA_RTC_BASE_ADDR + BEA_RTC_DR_OFFSET; // Date register
 
-  uint32_t second_integral = (bea_get_reg_bits (t_reg, 3, 0) + 10 * bea_get_reg_bits (t_reg, 6, 4));
+  uint32_t second_integral
+      = (bea_get_reg_bits (t_reg, 3, 0) + 10 * bea_get_reg_bits (t_reg, 6, 4));
   uint32_t prescaler_sync_factor
       = bea_get_reg_bits (BEA_RTC_BASE_ADDR + BEA_RTC_PRER_OFFSET, 14, 0);
-  float second_fractional
-      = ((float)prescaler_sync_factor
-         - (float)bea_get_reg_bits (BEA_RTC_BASE_ADDR + BEA_RTC_SSR_OFFSET, 15, 0))
-        / ((float)prescaler_sync_factor + 1.0f);
+  float second_fractional = ((float)prescaler_sync_factor
+                             - (float)bea_get_reg_bits (
+                                 BEA_RTC_BASE_ADDR + BEA_RTC_SSR_OFFSET, 15, 0))
+                            / ((float)prescaler_sync_factor + 1.0f);
   result.second = (float)second_integral + second_fractional;
 
-  result.minute = bea_get_reg_bits (t_reg, 11, 8) + 10 * bea_get_reg_bits (t_reg, 14, 12);
-  result.hour = bea_get_reg_bits (t_reg, 19, 16) + 10 * bea_get_reg_bits (t_reg, 21, 20);
+  result.minute
+      = bea_get_reg_bits (t_reg, 11, 8) + 10 * bea_get_reg_bits (t_reg, 14, 12);
+  result.hour = bea_get_reg_bits (t_reg, 19, 16)
+                + 10 * bea_get_reg_bits (t_reg, 21, 20);
   if (bea_get_reg_bits (t_reg, 22, 22) != 0)
     {
       result.hour += 12;
     }
   // Extract the date, which is in a similarly God-forsaken format
-  result.day = bea_get_reg_bits (d_reg, 3, 0) + 10 * bea_get_reg_bits (d_reg, 5, 4);
+  result.day
+      = bea_get_reg_bits (d_reg, 3, 0) + 10 * bea_get_reg_bits (d_reg, 5, 4);
   result.month = (enum bea_month) (bea_get_reg_bits (d_reg, 11, 8)
                                    + 10 * bea_get_reg_bits (d_reg, 12, 12) - 1);
   result.dotw = (enum bea_dotw) (bea_get_reg_bits (d_reg, 15, 13) - 1);
-  result.year = bea_get_reg_bits (d_reg, 19, 16) + 10 * bea_get_reg_bits (d_reg, 23, 20);
+  result.year = bea_get_reg_bits (d_reg, 19, 16)
+                + 10 * bea_get_reg_bits (d_reg, 23, 20);
   return result;
 }
 
@@ -171,14 +181,16 @@ bea_rtc_init_prescaler (enum bea_rtc_clksrc clock_source, uint32_t subsec_freq)
     {
       return false;
     }
-  bea_set_reg_bits (BEA_RTC_BASE_ADDR + BEA_RTC_PRER_OFFSET, 14, 0, subsec_freq - 1);
+  bea_set_reg_bits (BEA_RTC_BASE_ADDR + BEA_RTC_PRER_OFFSET, 14, 0,
+                    subsec_freq - 1);
   float async_factor_f = (rtc_clock_freq / subsec_freq) - 1.0f;
   if (async_factor_f >= (float)(1 << 7))
     {
       return false;
     }
   uint32_t async_factor_u = (uint32_t)lroundf (async_factor_f);
-  bea_set_reg_bits (BEA_RTC_BASE_ADDR + BEA_RTC_PRER_OFFSET, 22, 16, async_factor_u);
+  bea_set_reg_bits (BEA_RTC_BASE_ADDR + BEA_RTC_PRER_OFFSET, 22, 16,
+                    async_factor_u);
   return true;
 }
 
@@ -217,8 +229,8 @@ bea_rtc_set_datetime (struct bea_datetime datetime)
 }
 
 bool
-bea_rtc_initialize (enum bea_rtc_clksrc clock_source, struct bea_datetime start_time,
-                    uint32_t subsec_freq)
+bea_rtc_initialize (enum bea_rtc_clksrc clock_source,
+                    struct bea_datetime start_time, uint32_t subsec_freq)
 {
   uint32_t *bdcr_reg = BEA_RCC_BASE_ADDR + BEA_RCC_BDCR_OFFSET;
   // Set PWR_CR flag so we can write to RTC registers at all
