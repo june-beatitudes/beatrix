@@ -21,8 +21,7 @@ void bea_spi_request (void *arg, void *result);
 enum bea_spi_request_type
 {
   BEA_SPI_INIT_CHANNEL,
-  BEA_SPI_READ,
-  BEA_SPI_WRITE,
+  BEA_SPI_TXRX,
   BEA_SPI_DEINIT_CHANNEL,
 };
 
@@ -50,8 +49,8 @@ struct bea_spi_request_arg
 {
   enum bea_spi_request_type type;
   struct bea_spi_channel_config channel_cfg;
-  bool should_flush;
   uint8_t packet;
+  bool ignore_resp;
 };
 
 struct bea_spi_request_response

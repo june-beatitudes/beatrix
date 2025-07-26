@@ -33,12 +33,13 @@ lcd_send_cmd (uint8_t cmd)
   gpio_rq.line = BEA_LCD_DI;
   bea_gpio_request (&gpio_rq, &gpio_resp);
   struct bea_spi_request_arg spi_rq = {
-		.type = BEA_SPI_WRITE,
+		.type = BEA_SPI_TXRX,
 		.channel_cfg = {
 			.chan = BEA_SPI_CHAN2,
 			.comm_mode = BEA_SPI_FULL_DUPLEX,
 		},
 		.packet = cmd,
+		.ignore_resp = true,
 	};
   struct bea_spi_request_response spi_resp;
   bea_spi_request (&spi_rq, &spi_resp);
@@ -61,12 +62,13 @@ lcd_send_data_packet (uint8_t packet)
   gpio_rq.line = BEA_LCD_DI;
   bea_gpio_request (&gpio_rq, &gpio_resp);
   struct bea_spi_request_arg spi_rq = {
-		.type = BEA_SPI_WRITE,
+		.type = BEA_SPI_TXRX,
 		.channel_cfg = {
 			.chan = BEA_SPI_CHAN2,
 			.comm_mode = BEA_SPI_FULL_DUPLEX,
 		},
 		.packet = packet,
+		.ignore_resp = true,
 	};
   struct bea_spi_request_response spi_resp;
   bea_spi_request (&spi_rq, &spi_resp);
@@ -75,7 +77,7 @@ lcd_send_data_packet (uint8_t packet)
 }
 
 const static uint8_t LCD_INIT_COMMAND_SEQ[]
-    = { 0xE2, 0xA2, 0xA0, 0xC0, 0x24, 0x81, 0x30, 0x2C, 0x2E, 0x2F };
+    = { 0xE2, 0xA2, 0xA0, 0xC0, 0x24, 0x81, 0x30, 0x2C, 0x2E, 0x2F, 0xA7 };
 
 bool
 bea_display_direct_initialize (void)
@@ -102,7 +104,7 @@ bea_display_direct_initialize (void)
   gpio_rq.line = BEA_LCD_RST;
   gpio_rq.value = false;
   bea_gpio_request (&gpio_rq, &gpio_resp);
-  bea_log(BEA_LOG_DEBUG, "Stand-in for a delay");
+  bea_log (BEA_LOG_DEBUG, "Stand-in for a delay");
   gpio_rq.value = true;
   bea_gpio_request (&gpio_rq, &gpio_resp);
 
@@ -133,15 +135,16 @@ bea_display_direct_deinitialize (void)
 void
 bea_display_direct_request (void *request, void *result)
 {
+  struct bea_display_direct_request_arg arg = *((struct bea_display_direct_request_arg *)request);
   lcd_send_cmd (0x40);
-  for (size_t page = 0; page < 9; ++page)
+  for (size_t page = 0; page < 8; ++page)
     {
       lcd_send_cmd (0xB0 + page);
       lcd_send_cmd (0x10);
       lcd_send_cmd (0x00);
       for (size_t col = 0; col < 128; ++col)
         {
-          lcd_send_data_packet (0xF0);
+          lcd_send_data_packet (arg.framebuffer[col * 8 + page]);
         }
     }
   lcd_send_cmd (0xAF);

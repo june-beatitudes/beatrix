@@ -97,11 +97,6 @@ bea_spi_request (void *arg, void *result)
   struct bea_spi_request_arg typed = *((struct bea_spi_request_arg *)arg);
   struct bea_spi_request_response resp;
 
-  if (typed.type == BEA_SPI_READ || typed.type == BEA_SPI_WRITE)
-    {
-      bea_set_reg_bits ((uint32_t *)(typed.channel_cfg.chan), 6, 6, 0b1);
-    }
-
   switch (typed.type)
     {
     case BEA_SPI_INIT_CHANNEL:
@@ -109,21 +104,19 @@ bea_spi_request (void *arg, void *result)
       do_spi_channel_init (typed.channel_cfg);
     case BEA_SPI_DEINIT_CHANNEL:
       break;
-    case BEA_SPI_READ:
-      while (!bea_get_reg_bits ((uint32_t *)(typed.channel_cfg.chan) + 0x02, 0, 0))
-        ;
-      resp.packet = *((uint8_t *)(typed.channel_cfg.chan) + 0x0C);
-      break;
-    case BEA_SPI_WRITE:
+    case BEA_SPI_TXRX:
+      bea_set_reg_bits ((uint32_t *)(typed.channel_cfg.chan), 6, 6, 0b1);
       while (!bea_get_reg_bits ((uint32_t *)(typed.channel_cfg.chan) + 0x02, 1, 1))
         ;
       *((uint8_t *)(typed.channel_cfg.chan) + 0x0C) = typed.packet;
-      break;
-    }
-
-  if (typed.type == BEA_SPI_READ || typed.type == BEA_SPI_WRITE)
-    {
+      if (!typed.ignore_resp)
+        {
+          while (!bea_get_reg_bits ((uint32_t *)(typed.channel_cfg.chan) + 0x02, 0, 0))
+            ;
+          resp.packet = *((uint8_t *)(typed.channel_cfg.chan) + 0x0C);
+        }
       bea_set_reg_bits ((uint32_t *)(typed.channel_cfg.chan), 6, 6, 0b0);
+      break;
     }
 
   resp.succeeded = true;

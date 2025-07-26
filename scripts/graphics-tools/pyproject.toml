@@ -1,0 +1,12 @@
+[project]
+name = "graphics-tools"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "bdfparser>=2.2.0",
+    "makeelf>=0.3.4",
+    "numpy>=2.3.1",
+    "pillow>=11.3.0",
+]
