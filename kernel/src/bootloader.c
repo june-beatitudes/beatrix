@@ -4,6 +4,7 @@
 #include <logging.h>
 #include <sd/sd.h>
 #include <stdint.h>
+#include <ff.h>
 
 extern const uint8_t bea_logo[512];
 

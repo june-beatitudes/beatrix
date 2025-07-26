@@ -1,5 +1,6 @@
 GIT_HASH := $(shell git rev-parse HEAD)
-INCLUDES := -I./include -I../extern/openlibm/include -I../extern/umm_malloc/src -I../drivers
+INCLUDES := -I./include -I../extern/openlibm/include -I../extern/umm_malloc/src -I../drivers \
+			-I../extern/fatfs/source
 
 cfiles := $(wildcard src/*.c)
 hfiles := $(wildcard src/*.h)

@@ -57,3 +57,16 @@ memset (void *dest, int ch, size_t count)
     }
   return dest;
 }
+
+char *strchr (const char *str, int ch)
+{
+  while (*str != '\0')
+  {
+    if (ch == *str)
+    {
+      return str;
+    }
+    str++;
+  }
+  return NULL;
+}

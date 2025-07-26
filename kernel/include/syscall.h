@@ -22,6 +22,9 @@ enum bea_syscall_t
 {
   /// Send a message to the kernel log
   BEA_SYSCALL_LOG = 0,
+  /// Load a file from the SD card and begin executing it (replacing the current
+  /// process image)
+  BEA_SYSCALL_EXECUTE,
   /// Make a request from a kernel driver
   BEA_SYSCALL_DRIVER_RQ,
   /// Make a request to not be interrupted by the scheduler during an important

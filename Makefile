@@ -51,8 +51,11 @@ drivers: setup
 openlibm: setup
 	cd extern && make build -f openlibm.mk CC="$(CC)" CFLAGS="$(CFLAGS)"
 
-ofiles := $(wildcard resources/build/*.o) $(wildcard kernel/build/*.o) extern/openlibm/libopenlibm.a \
-	  $(wildcard extern/umm_malloc/src/*.o) $(wildcard drivers/build/*.o)
+fatfs: setup
+	cd extern && make build -f fatfs.mk CC="$(CC)" CFLAGS="$(CFLAGS) -Wall"
 
-build: drivers kernel umm_malloc openlibm setup
+ofiles := $(wildcard resources/build/*.o) $(wildcard kernel/build/*.o) extern/openlibm/libopenlibm.a \
+	  $(wildcard extern/umm_malloc/src/*.o) $(wildcard drivers/build/*.o) $(wildcard extern/fatfs/source/*.o)
+
+build: drivers kernel umm_malloc openlibm setup fatfs
 	$(LD) -o bin/main.elf -Tmain.ld $(ofiles) $(BUILTINSLIB)
