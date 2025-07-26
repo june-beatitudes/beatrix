@@ -29,12 +29,6 @@ struct display_coord
   uint8_t offset;
 };
 
-struct bitmap_coord
-{
-  uint8_t x;
-  uint8_t y;
-};
-
 __attribute__ ((always_inline)) static inline uint8_t
 get_pixel (struct bitmap_coord coord, uint8_t width, const uint8_t *bmp)
 {
@@ -53,8 +47,9 @@ bmp2display (struct bitmap_coord coord)
   return ret;
 }
 
-static void
-render_bitmap (struct bitmap_coord loc, uint8_t width, uint8_t height, const uint8_t *data)
+void
+bea_render_bitmap (struct bitmap_coord loc, uint8_t width, uint8_t height,
+                   const uint8_t *data)
 {
   if (loc.x > 127 || loc.y > 63)
     {
@@ -75,15 +70,16 @@ render_bitmap (struct bitmap_coord loc, uint8_t width, uint8_t height, const uin
             .y = row - loc.y,
           };
           struct display_coord screencoord = bmp2display (pixcoord);
-          framebuffer[screencoord.col * 8 + screencoord.page] &= ~(1 << screencoord.offset);
-          framebuffer[screencoord.col * 8 + screencoord.page] |= get_pixel (bmpcoord, width, data)
-                                                                 << screencoord.offset;
+          framebuffer[screencoord.col * 8 + screencoord.page]
+              &= ~(1 << screencoord.offset);
+          framebuffer[screencoord.col * 8 + screencoord.page]
+              |= get_pixel (bmpcoord, width, data) << screencoord.offset;
         }
     }
 }
 
-static void
-render_text (uint8_t x, uint8_t y, const uint8_t *text, size_t n)
+void
+bea_render_text (uint8_t x, uint8_t y, const uint8_t *text, size_t n)
 {
   uint8_t current_x = x;
   for (size_t i = 0; i < n; ++i)
@@ -100,7 +96,7 @@ render_text (uint8_t x, uint8_t y, const uint8_t *text, size_t n)
             .x = current_x,
             .y = y,
           };
-          render_bitmap (loc, 8, 16, bea_unifont[ind]);
+          bea_render_bitmap (loc, 8, 16, bea_unifont[ind]);
           current_x += 8;
         }
     }
@@ -109,11 +105,8 @@ render_text (uint8_t x, uint8_t y, const uint8_t *text, size_t n)
 void
 bea_graphics_request (void *request, void *response)
 {
-  struct bea_graphics_request_arg arg = *((struct bea_graphics_request_arg *)request);
-  struct bea_display_direct_request_arg ddrq = {
-    .type = BEA_DISPLAY_DIRECT_RENDER,
-    .framebuffer = (const uint8_t *)framebuffer,
-  };
+  struct bea_graphics_request_arg arg
+      = *((struct bea_graphics_request_arg *)request);
   struct bitmap_coord loc = {
     .x = arg.x,
     .y = arg.y,
@@ -121,13 +114,13 @@ bea_graphics_request (void *request, void *response)
   switch (arg.type)
     {
     case BEA_GRAPHICS_UPDATE_DISPLAY:
-      bea_display_direct_request (&ddrq, NULL);
+      bea_display_direct_render ((const uint8_t *)framebuffer);
       break;
     case BEA_GRAPHICS_DRAW_BMP:
-      render_bitmap (loc, arg.width, arg.height, arg.buf);
+      bea_render_bitmap (loc, arg.width, arg.height, arg.buf);
       break;
     case BEA_GRAPHICS_DRAW_TEXT:
-      render_text (arg.x, arg.y, arg.buf, arg.n_chars);
+      bea_render_text (arg.x, arg.y, arg.buf, arg.n_chars);
       break;
     }
   struct bea_graphics_request_response resp = {

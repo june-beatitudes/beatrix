@@ -5,27 +5,93 @@
 #include <register_utils.h>
 #include <spi/spi.h>
 #include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
 
-const struct bea_gpio_line BEA_SPI_D_MISO = {
+const struct bea_gpio_line SPI1_MISO = {
+  .bank = BEA_GPIO_BANK_B,
+  .pin = 4,
+};
+
+const struct bea_gpio_line SPI1_MOSI = {
+  .bank = BEA_GPIO_BANK_B,
+  .pin = 5,
+};
+
+const struct bea_gpio_line SPI1_SCK = {
+  .bank = BEA_GPIO_BANK_A,
+  .pin = 5,
+};
+
+const struct bea_gpio_line SPI2_MISO = {
   .bank = BEA_GPIO_BANK_C,
   .pin = 2,
 };
 
-const struct bea_gpio_line BEA_SPI_D_MOSI = {
+const struct bea_gpio_line SPI2_MOSI = {
   .bank = BEA_GPIO_BANK_B,
   .pin = 15,
 };
 
-const struct bea_gpio_line BEA_SPI_D_SCK = {
+const struct bea_gpio_line SPI2_SCK = {
   .bank = BEA_GPIO_BANK_D,
   .pin = 1,
 };
+
+enum spi_register_offset : uint32_t
+{
+  SPI_REG_CR1 = 0x0,
+  SPI_REG_CR2 = 0x1,
+  SPI_REG_SR = 0x2,
+  SPI_REG_DR = 0x3,
+  SPI_REG_CRCPR = 0x4,
+  SPI_REG_RXCRCR = 0x5,
+  SPI_REG_TXCRCR = 0x6,
+};
+
+static void
+do_spi_channel_gpio_inits ()
+{
+  const struct bea_gpio_line LINES[]
+      = { SPI1_MISO, SPI1_MOSI, SPI1_SCK, SPI2_MISO, SPI2_MOSI, SPI2_SCK };
+  for (size_t i = 0; i < sizeof (LINES); ++i)
+    {
+      bea_gpio_set_mode (LINES[i], BEA_GPIO_ALT);
+      bea_gpio_set_alt_func (LINES[i], BEA_GPIO_AF_SPI1_2);
+    }
+}
+
+static void
+do_spi_channel_inits ()
+{
+  const enum bea_spi_channel CHANNELS[] = { BEA_SPI_CHAN1, BEA_SPI_CHAN2 };
+  for (size_t i = 0; i < sizeof (CHANNELS); ++i)
+    {
+      uint32_t cr1 = 0x0;
+      // TODO: Holy magic constants, Batman!
+      bea_set_reg_bits (&cr1, 15, 15, 0);
+      bea_set_reg_bits (&cr1, 13, 13, 0);
+      bea_set_reg_bits (&cr1, 10, 10, 0);
+      bea_set_reg_bits (&cr1, 9, 9, 1);
+      bea_set_reg_bits (&cr1, 8, 8, 0);
+      bea_set_reg_bits (&cr1, 7, 7, 0);
+      bea_set_reg_bits (&cr1, 6, 6, 0);
+      bea_set_reg_bits (&cr1, 5, 3, 0b011);
+      bea_set_reg_bits (&cr1, 2, 2, 0b1);
+      bea_set_reg_bits (&cr1, 1, 0, 0b00);
+      bea_set_reg_bits ((uint32_t *)CHANNELS[i] + SPI_REG_CR2, 12, 8, 0b10111);
+      bea_set_reg_bits ((uint32_t *)CHANNELS[i] + SPI_REG_CR2, 2, 2, 0b1);
+      bea_set_reg_bits ((uint32_t *)CHANNELS[i] + SPI_REG_CR1, 15, 0, cr1);
+    }
+}
 
 bool
 bea_spi_initialize (void)
 {
   bea_rcc_enable_peripheral (BEA_APB2, 12);
   bea_rcc_enable_peripheral (BEA_APB1, 14);
+  do_spi_channel_gpio_inits ();
+  do_spi_channel_inits ();
   return true;
 }
 
@@ -36,59 +102,65 @@ bea_spi_deinitialize (void)
   return true;
 }
 
-static void
-do_spi_channel_gpio_init (struct bea_spi_channel_config cfg)
+__attribute__ ((warn_unused_result)) enum bea_spi_error
+bea_spi_txrx_blocking (enum bea_spi_channel chan, uint8_t *tx, uint8_t *rx,
+                       size_t n)
 {
-  struct bea_gpio_request_arg mode_arg = { .type = BEA_GPIO_SET_MODE, .mode = BEA_GPIO_ALT };
-  struct bea_gpio_request_arg altfunc_arg = { .type = BEA_GPIO_SET_ALT_FUNC, .alt_func = 5 };
-  struct bea_gpio_request_response gpio_response;
-  // Main in, subordinate out
-  mode_arg.line = altfunc_arg.line = BEA_SPI_D_MISO;
-  bea_set_reg_bits ((uint32_t *)BEA_SPI_D_MISO.bank + 0x02, 5, 4, 0b11);
-  bea_gpio_request (&mode_arg, &gpio_response);
-  bea_gpio_request (&altfunc_arg, &gpio_response);
-  // Main out, subordinate in
-  mode_arg.line = altfunc_arg.line = BEA_SPI_D_MOSI;
-  bea_set_reg_bits ((uint32_t *)BEA_SPI_D_MOSI.bank + 0x02, 31, 30, 0b11);
-  bea_gpio_request (&mode_arg, &gpio_response);
-  bea_gpio_request (&altfunc_arg, &gpio_response);
-  // Clock
-  mode_arg.line = altfunc_arg.line = BEA_SPI_D_SCK;
-  bea_set_reg_bits ((uint32_t *)BEA_SPI_D_SCK.bank + 0x02, 3, 2, 0b11);
-  bea_gpio_request (&mode_arg, &gpio_response);
-  bea_gpio_request (&altfunc_arg, &gpio_response);
+  // Enable SPI
+  bea_set_reg_bits ((uint32_t *)(chan) + SPI_REG_CR1, 6, 6, 0b1);
+
+  for (size_t i = 0; i < n; ++i)
+    {
+      // Wait for TX to be free, then send (if we want to)
+      // TODO: Add timeout
+      while (!bea_get_reg_bits ((uint32_t *)(chan) + SPI_REG_SR, 1, 1))
+        ;
+      *((uint8_t *)(chan) + 4 * SPI_REG_DR) = tx[i];
+      if (rx != NULL)
+        {
+          while (!bea_get_reg_bits ((uint32_t *)(chan) + SPI_REG_SR, 0, 0))
+            ;
+          rx[i] = *((uint8_t *)(chan) + 4 * SPI_REG_DR);
+        }
+    }
+
+  // Disable SPI
+  bea_set_reg_bits ((uint32_t *)(chan) + SPI_REG_CR1, 6, 6, 0b0);
+
+  return BEA_SPI_ERROR_NONE;
 }
 
-static void
-do_spi_channel_init (struct bea_spi_channel_config cfg)
+void
+bea_spi_enable_crc (enum bea_spi_channel chan, bool is_crc8)
 {
-  uint32_t cr1 = 0x0;
-  bea_set_reg_bits (&cr1, 13, 13, 0);
-  bea_set_reg_bits (&cr1, 5, 3, 0b011);
-  bea_set_reg_bits (&cr1, 1, 0, 0b00);
-  bea_set_reg_bits (&cr1, 9, 9, 1);
-  bea_set_reg_bits (&cr1, 8, 8, 0);
-  switch (cfg.comm_mode)
+  bea_set_reg_bits ((uint32_t *)chan + SPI_REG_CR1, 13, 13, 0b1);
+  if (is_crc8)
     {
-    case BEA_SPI_FULL_DUPLEX:
-      bea_set_reg_bits (&cr1, 15, 15, 0);
-      bea_set_reg_bits (&cr1, 10, 10, 0);
-      break;
-    case BEA_SPI_HALF_DUPLEX_OUT_ENABLED:
-      bea_set_reg_bits (&cr1, 15, 14, 0b11);
-      break;
-    case BEA_SPI_HALF_DUPLEX_OUT_DISABLED:
-      bea_set_reg_bits (&cr1, 15, 14, 0b10);
-      break;
-    case BEA_SPI_SIMPLEX:
-      bea_set_reg_bits (&cr1, 10, 10, 1);
-      break;
+      bea_set_reg_bits ((uint32_t *)chan + SPI_REG_CR1, 11, 11, 0);
+      bea_set_reg_bits ((uint32_t *)chan + SPI_REG_CRCPR, 15, 0, 0x9);
     }
-  bea_set_reg_bits (&cr1, 7, 7, 0);
-  bea_set_reg_bits (&cr1, 2, 2, 0b1);
-  bea_set_reg_bits ((uint32_t *)(cfg.chan) + 0x01, 12, 8, 0b0111);
-  bea_set_reg_bits ((uint32_t *)(cfg.chan) + 0x01, 2, 2, 0b1);
-  bea_set_reg_bits ((uint32_t *)(cfg.chan), 15, 0, cr1);
+  else
+    {
+      bea_set_reg_bits ((uint32_t *)chan + SPI_REG_CR1, 11, 11, 0b1);
+    }
+}
+
+void
+bea_spi_disable_crc (enum bea_spi_channel chan)
+{
+  bea_set_reg_bits ((uint32_t *)chan + SPI_REG_CR1, 13, 13, 0b0);
+}
+
+__attribute__ ((warn_unused_result)) uint16_t
+bea_spi_get_txcrc (enum bea_spi_channel chan)
+{
+  return bea_get_reg_bits ((uint32_t *)chan + SPI_REG_TXCRCR, 15, 0);
+}
+
+__attribute__ ((warn_unused_result)) uint16_t
+bea_spi_get_rxcrc (enum bea_spi_channel chan)
+{
+  return bea_get_reg_bits ((uint32_t *)chan + SPI_REG_RXCRCR, 15, 0);
 }
 
 void
@@ -99,27 +171,26 @@ bea_spi_request (void *arg, void *result)
 
   switch (typed.type)
     {
-    case BEA_SPI_INIT_CHANNEL:
-      do_spi_channel_gpio_init (typed.channel_cfg);
-      do_spi_channel_init (typed.channel_cfg);
-    case BEA_SPI_DEINIT_CHANNEL:
-      break;
     case BEA_SPI_TXRX:
-      bea_set_reg_bits ((uint32_t *)(typed.channel_cfg.chan), 6, 6, 0b1);
-      while (!bea_get_reg_bits ((uint32_t *)(typed.channel_cfg.chan) + 0x02, 1, 1))
-        ;
-      *((uint8_t *)(typed.channel_cfg.chan) + 0x0C) = typed.packet;
-      if (!typed.ignore_resp)
-        {
-          while (!bea_get_reg_bits ((uint32_t *)(typed.channel_cfg.chan) + 0x02, 0, 0))
-            ;
-          resp.packet = *((uint8_t *)(typed.channel_cfg.chan) + 0x0C);
-        }
-      bea_set_reg_bits ((uint32_t *)(typed.channel_cfg.chan), 6, 6, 0b0);
+      resp.err = bea_spi_txrx_blocking (typed.channel, typed.tx_buf,
+                                        typed.rx_buf, typed.n_bytes);
+      break;
+    case BEA_SPI_ENABLE_CRC:
+      bea_spi_enable_crc (typed.channel, typed.is_crc8);
+      resp.err = BEA_SPI_ERROR_NONE;
+      break;
+    case BEA_SPI_DISABLE_CRC:
+      bea_spi_disable_crc (typed.channel);
+      resp.err = BEA_SPI_ERROR_NONE;
+    case BEA_SPI_GET_RXCRC:
+      resp.crc = bea_spi_get_rxcrc (typed.channel);
+      resp.err = BEA_SPI_ERROR_NONE;
+      break;
+    case BEA_SPI_GET_TXCRC:
+      resp.crc = bea_spi_get_txcrc (typed.channel);
+      resp.err = BEA_SPI_ERROR_NONE;
       break;
     }
-
-  resp.succeeded = true;
   *((struct bea_spi_request_response *)result) = resp;
 }
 

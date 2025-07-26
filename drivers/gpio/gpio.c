@@ -3,6 +3,21 @@
 #include <rcc.h>
 #include <register_utils.h>
 
+enum gpio_reg_offset
+{
+  GPIO_REG_MODER = 0x0,
+  GPIO_REG_OTYPER = 0x1,
+  GPIO_REG_OSPEEDR = 0x2,
+  GPIO_REG_PUPDR = 0x3,
+  GPIO_REG_IDR = 0x4,
+  GPIO_REG_ODR = 0x5,
+  GPIO_REG_BSRR = 0x6,
+  GPIO_REG_LCKR = 0x7,
+  GPIO_REG_AFRL = 0x8,
+  GPIO_REG_AFRH = 0x9,
+  GPIO_REG_BRR = 0xA,
+};
+
 bool
 bea_gpio_initialize ()
 {
@@ -23,44 +38,115 @@ bea_gpio_deinitialize ()
   return true;
 }
 
+__attribute__ ((always_inline)) static inline bool
+gpio_line_exists (struct bea_gpio_line line)
+{
+  if (line.pin > 15)
+    {
+      return false;
+    }
+  else if (line.bank == BEA_GPIO_BANK_E && line.pin > 4)
+    {
+      return false;
+    }
+  else if (line.bank == BEA_GPIO_BANK_H && (line.pin == 2 || line.pin > 3))
+    {
+      return false;
+    }
+  return true;
+}
+
+enum bea_gpio_error
+bea_gpio_set_mode (struct bea_gpio_line line, enum bea_gpio_pin_mode mode)
+{
+  if (!gpio_line_exists (line))
+    {
+      return BEA_GPIO_INVALID_LINE;
+    }
+  bea_set_reg_bits ((uint32_t *)line.bank + GPIO_REG_MODER, line.pin * 2 + 1,
+                    line.pin * 2, mode);
+  return BEA_GPIO_ERROR_NONE;
+}
+
+enum bea_gpio_error
+bea_gpio_set_alt_func (struct bea_gpio_line line, uint8_t alt_func)
+{
+  if (!gpio_line_exists (line))
+    {
+      return BEA_GPIO_INVALID_LINE;
+    }
+  if (line.pin < 8)
+    {
+      bea_set_reg_bits ((uint32_t *)line.bank + GPIO_REG_AFRL, line.pin * 4 + 3,
+                        line.pin * 4, alt_func);
+    }
+  else
+    {
+      bea_set_reg_bits ((uint32_t *)line.bank + GPIO_REG_AFRH,
+                        (line.pin - 8) * 4 + 3, (line.pin - 8) * 4, alt_func);
+    }
+  return BEA_GPIO_ERROR_NONE;
+}
+
+enum bea_gpio_error
+bea_gpio_set_value (struct bea_gpio_line line, bool value)
+{
+  if (!gpio_line_exists (line))
+    {
+      return BEA_GPIO_INVALID_LINE;
+    }
+  bea_set_reg_bits ((uint32_t *)line.bank + GPIO_REG_ODR, line.pin, line.pin,
+                    value);
+  return BEA_GPIO_ERROR_NONE;
+}
+
+enum bea_gpio_error
+bea_gpio_read_value (struct bea_gpio_line line, bool *out)
+{
+  if (!gpio_line_exists (line))
+    {
+      return BEA_GPIO_INVALID_LINE;
+    }
+  *out = (bool)bea_get_reg_bits ((uint32_t *)line.bank + GPIO_REG_IDR, line.pin,
+                                 line.pin);
+  return BEA_GPIO_ERROR_NONE;
+}
+
+enum bea_gpio_error
+bea_gpio_set_pulldir (struct bea_gpio_line line,
+                      enum bea_gpio_pull_direction dir)
+{
+  if (!gpio_line_exists (line))
+    {
+      return BEA_GPIO_INVALID_LINE;
+    }
+  bea_set_reg_bits ((uint32_t *)line.bank + GPIO_REG_PUPDR, line.pin * 2 + 1,
+                    line.pin * 2, dir);
+  return BEA_GPIO_ERROR_NONE;
+}
+
 void
 bea_gpio_request (void *request, void *retval)
 {
   struct bea_gpio_request_arg arg = *((struct bea_gpio_request_arg *)request);
-  enum bea_gpio_bank bank = arg.line.bank;
-  uint8_t pin = arg.line.pin;
   struct bea_gpio_request_response resp;
 
   switch (arg.type)
     {
     case BEA_GPIO_SET_MODE:
-      bea_set_reg_bits ((uint32_t *)bank, pin * 2 + 1, pin * 2, (uint32_t)arg.mode);
-      if ((arg.mode & 0b11) == 0b00)
-        {
-          bea_set_reg_bits ((uint32_t *)(bank + 0x0C), pin * 2 + 1, pin * 2,
-                            ((uint32_t)arg.mode >> 2));
-        }
-      resp.succeeded = true;
+      resp.err = bea_gpio_set_mode (arg.line, arg.mode);
       break;
     case BEA_GPIO_SET_ALT_FUNC:
-      if (pin < 8)
-        {
-          bea_set_reg_bits ((uint32_t *)(bank + 0x20), pin * 4 + 3, pin * 4, arg.alt_func);
-        }
-      else
-        {
-          bea_set_reg_bits ((uint32_t *)(bank + 0x24), (pin - 8) * 4 + 3, (pin - 8) * 4,
-                            arg.alt_func);
-        }
-      resp.succeeded = true;
+      resp.err = bea_gpio_set_alt_func (arg.line, arg.alt_func);
       break;
     case BEA_GPIO_SET_VALUE:
-      bea_set_reg_bits ((uint32_t *)(bank + 0x14), pin, pin, (uint32_t)arg.value);
-      resp.succeeded = true;
+      resp.err = bea_gpio_set_value (arg.line, arg.value);
       break;
     case BEA_GPIO_READ_VALUE:
-      resp.value = (bool)bea_get_reg_bits ((uint32_t *)(bank + 0x10), pin, pin);
-      resp.succeeded = true;
+      resp.err = bea_gpio_read_value (arg.line, &resp.value);
+      break;
+    case BEA_GPIO_SET_PULLDIR:
+      resp.err = bea_gpio_set_pulldir (arg.line, arg.pulldir);
       break;
     }
 
