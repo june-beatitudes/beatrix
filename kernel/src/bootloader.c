@@ -61,7 +61,17 @@ bea_do_boot (void)
             .buffer = buf,
           };
           BEA_DRIVER_TABLE[2]->request (&rq, &resp);
-          bea_log (BEA_LOG_INFO, "SD block 1 read");
+          bea_log (BEA_LOG_INFO, "SD block 0 read");
+          rq.type = BEA_SD_WRITE_BLOCKS;
+          BEA_DRIVER_TABLE[2]->request (&rq, &resp);
+          if (resp.err != BEA_SD_ERROR_NONE)
+            {
+              bea_log (BEA_LOG_ERROR, "Write back unsuccessful");
+            }
+          else
+            {
+              bea_log (BEA_LOG_INFO, "Write back successful");
+            }
         }
       else
         {

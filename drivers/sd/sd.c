@@ -204,14 +204,108 @@ bea_sd_count_blocks (void)
 __attribute__ ((warn_unused_result)) enum bea_sd_error
 bea_sd_write_blocks (uint32_t n_blocks, uint8_t *buffer, uint32_t start_addr)
 {
+  bea_gpio_set_value (SD_CHIP_SELECT, false);
+
+  // Need this to enable CRC later
+  // bea_spi_disable_crc (SD_SPI_CHANNEL);
+  struct sd_cmd_response cmd_resp = sd_send_cmd (
+      25, (sd_is_block_addressed) ? start_addr : start_addr * 512);
+  if (cmd_resp.r1 != 0)
+    {
+      bea_gpio_set_value (SD_CHIP_SELECT, true);
+      return BEA_SD_ERROR_WRITE;
+    }
+  if (cmd_resp.err != BEA_SD_ERROR_NONE)
+    {
+      // Just bubble the error upwards
+      bea_gpio_set_value (SD_CHIP_SELECT, true);
+      return cmd_resp.err;
+    }
+
+  // Wait a little bit before we start sending data
+  uint8_t dummy_packet = 0xFF;
+  uint8_t spi_resp;
+  for (size_t i = 0; i < 10; ++i)
+    {
+      if (bea_spi_txrx_blocking (SD_SPI_CHANNEL, &dummy_packet, &spi_resp, 1)
+          != BEA_SPI_ERROR_NONE)
+        {
+          bea_gpio_set_value (SD_CHIP_SELECT, true);
+          return BEA_SD_ERROR_WRITE;
+        }
+    }
+
+  uint8_t DATA_TOKEN = 0b11111100;
+  uint8_t STOP_TOKEN = 0b11111101;
+  enum bea_spi_error spi_err;
+  for (size_t i = 0; i < n_blocks; ++i)
+    {
+      // Send data token
+      spi_err
+          = bea_spi_txrx_blocking (SD_SPI_CHANNEL, &DATA_TOKEN, &spi_resp, 1);
+      // Start CRC calculations
+      bea_spi_enable_crc (SD_SPI_CHANNEL, false);
+      // Transmit actual data
+      spi_err = bea_spi_txrx_blocking (SD_SPI_CHANNEL, &buffer[i * 512],
+                                       NULL, 512);
+      // Transmit 16-bit CRC
+      uint16_t crc = bea_spi_get_txcrc (SD_SPI_CHANNEL);
+      bea_spi_disable_crc (SD_SPI_CHANNEL);
+      uint8_t crc_buf[2] = { crc >> 8, crc & 0xFF };
+      uint8_t crc_dummy_buf[2];
+      spi_err
+          = bea_spi_txrx_blocking (SD_SPI_CHANNEL, crc_buf, crc_dummy_buf, 2);
+      // Get the data response
+      do
+        {
+          spi_err = bea_spi_txrx_blocking (SD_SPI_CHANNEL, &dummy_packet,
+                                           &spi_resp, 1);
+        }
+      while (spi_resp == 0xFF);
+      switch (spi_resp & 0xF)
+        {
+        case 0b1011:
+          // CRC error
+          bea_gpio_set_value (SD_CHIP_SELECT, true);
+          return BEA_SD_ERROR_CRC;
+        case 0b1101:
+          // Write error
+          bea_gpio_set_value (SD_CHIP_SELECT, true);
+          return BEA_SD_ERROR_WRITE;
+        case 0b0101:
+        // Successful write
+        default:
+          break;
+        }
+      // Wait for the card to stop being busy
+      do
+        {
+          spi_err = bea_spi_txrx_blocking (SD_SPI_CHANNEL, &dummy_packet,
+                                           &spi_resp, 1);
+        }
+      while (spi_resp == 0x0);
+    }
+
+  // Transmit our stop token, wait for the card to finish up
+  spi_err = bea_spi_txrx_blocking (SD_SPI_CHANNEL, &STOP_TOKEN, &spi_resp, 1);
+  do
+    {
+      spi_err
+          = bea_spi_txrx_blocking (SD_SPI_CHANNEL, &dummy_packet, &spi_resp, 1);
+    }
+  while (spi_resp == 0x0);
+
+  bea_gpio_set_value (SD_CHIP_SELECT, true);
+  if (spi_err != BEA_SPI_ERROR_NONE)
+    {
+      return BEA_SD_ERROR_WRITE;
+    }
   return BEA_SD_ERROR_NONE;
 }
 
 __attribute__ ((warn_unused_result)) enum bea_sd_error
 bea_sd_read_blocks (uint32_t n_blocks, uint8_t *buffer, uint32_t start_addr)
 {
-  // Toggle the chip select
-  bea_gpio_set_value (SD_CHIP_SELECT, true);
   bea_gpio_set_value (SD_CHIP_SELECT, false);
 
   struct sd_cmd_response resp = sd_send_cmd (
@@ -250,6 +344,12 @@ bea_sd_read_blocks (uint32_t n_blocks, uint8_t *buffer, uint32_t start_addr)
       return BEA_SD_ERROR_READ;
     }
   resp = sd_send_cmd (12, 0x0);
+  do
+    {
+      spi_err = bea_spi_txrx_blocking (SD_SPI_CHANNEL, &dummy_packet,
+                                       &packet_response, 1);
+    }
+  while (packet_response != 0xFF);
   bea_gpio_set_value (SD_CHIP_SELECT, true);
   return BEA_SD_ERROR_NONE;
 }
@@ -350,16 +450,17 @@ bea_sd_request (void *arg, void *out)
   struct bea_gpio_request_arg gpio_rq = {
     .type = BEA_GPIO_READ_VALUE,
     .line = SD_CHIP_DETECT,
-  }; // Used only for checking if SD is present
+  };
   switch (tin.type)
     {
     case BEA_SD_IS_PRESENT:
       bea_gpio_request (&gpio_rq, &resp);
-      tout->err = (resp.succeeded) ? BEA_SD_ERROR_NONE : BEA_SD_ERROR_GPIO;
+      tout->err = (resp.err == BEA_GPIO_ERROR_NONE) ? BEA_SD_ERROR_NONE
+                                                    : BEA_SD_ERROR_GPIO;
       tout->is_present = !resp.value;
       break;
     case BEA_SD_ACTIVATE:
-      tout->err = bea_sd_enable (512);
+      tout->err = bea_sd_enable ();
       break;
     case BEA_SD_COUNT_BLOCKS:
       tout->block_count = bea_sd_count_blocks ();
@@ -367,6 +468,10 @@ bea_sd_request (void *arg, void *out)
       break;
     case BEA_SD_READ_BLOCKS:
       tout->err = bea_sd_read_blocks (tin.n_blocks, tin.buffer, tin.block_addr);
+      break;
+    case BEA_SD_WRITE_BLOCKS:
+      tout->err
+          = bea_sd_write_blocks (tin.n_blocks, tin.buffer, tin.block_addr);
       break;
     default:
       break;

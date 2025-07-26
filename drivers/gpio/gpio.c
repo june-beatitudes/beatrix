@@ -69,7 +69,7 @@ bea_gpio_set_mode (struct bea_gpio_line line, enum bea_gpio_pin_mode mode)
 }
 
 enum bea_gpio_error
-bea_gpio_set_alt_func (struct bea_gpio_line line, uint8_t alt_func)
+bea_gpio_set_alt_func (struct bea_gpio_line line, enum bea_gpio_alt_func alt_func)
 {
   if (!gpio_line_exists (line))
     {
