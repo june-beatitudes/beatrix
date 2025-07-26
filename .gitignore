@@ -6,3 +6,4 @@ tools
 bin
 .vscode
 *.o
+*.elf
