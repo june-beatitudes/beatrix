@@ -1,7 +1,7 @@
 /**
  * @file
  * @brief Contains the declaration for the driver table
- * @author Juniper Beatitudes
+ * @author Juniper Beatitudes <juniper@eyes-like-fire.org>
  * @date 2025-07-16
  */
 

@@ -2,7 +2,7 @@
  * @file
  * @brief Defines the functions that handle various system calls, along with
  * their numbers
- * @author Juniper Beatitudes
+ * @author Juniper Beatitudes <juniper@eyes-like-fire.org>
  * @date 2025-07-16
  */
 
