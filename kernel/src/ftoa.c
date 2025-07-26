@@ -31,8 +31,9 @@ bea_ftoa (float x, char *buf, size_t n_available, bool include_positive_sign)
     {
       buf[integral_length] = '.'; // Print at least a decimal point
     }
-  size_t fractional_length
-      = (n_available == integral_length) ? 0 : (n_available - integral_length - 1);
+  size_t fractional_length = (n_available == integral_length)
+                                 ? 0
+                                 : (n_available - integral_length - 1);
 
   float abs = fabsf (x);
   float integral_part;
