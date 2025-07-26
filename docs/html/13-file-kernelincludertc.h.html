@@ -333,7 +333,7 @@ the Gregorian calendar._</td>
 href="#function-bea_datetime_to_kstrz"><strong>bea_datetime_to_kstrz</strong></a>
 (const struct <a
 href="13-file-kernelincludertc.h.html#struct-bea_datetime"><strong>bea_datetime</strong></a>
-datetime, char *buf) <br><em>Fills a buffer of at least 31 chars (please
+datetime, char *buf) <br><em>Fills a buffer of at least 32 chars (please
 just use</em> <code>BEA_DATETIME_KSTRZ_LEN</code><em>) with a null
 terminated string in BEATRIX kernel format.</em></td>
 </tr>
@@ -395,7 +395,7 @@ class="header-section-number">13.3</span> Macros</h2>
 <td style="text-align: right;">define</td>
 <td style="text-align: left;"><a
 href="13-file-kernelincludertc.h.html#define-bea_datetime_kstrz_len"><strong>BEA_DATETIME_KSTRZ_LEN</strong></a>
-31<br></td>
+32<br></td>
 </tr>
 <tr>
 <td style="text-align: right;">define</td>
@@ -532,7 +532,7 @@ represents a valid point in time in the Gregorian calendar._</p>
 <p><strong>Returns:</strong></p>
 <p>false The represented datetime is invalid #### function
 <code>bea_datetime_to_kstrz</code></p>
-<p><em>Fills a buffer of at least 31 chars (please just use</em>
+<p><em>Fills a buffer of at least 32 chars (please just use</em>
 <code>BEA_DATETIME_KSTRZ_LEN</code><em>) with a null terminated string
 in BEATRIX kernel format.</em></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> bea_datetime_to_kstrz <span class="op">(</span></span>
@@ -621,7 +621,7 @@ class="header-section-number">13.6</span> Macros Documentation</h2>
 <h3 data-number="13.6.1" id="define-bea_datetime_kstrz_len"><span
 class="header-section-number">13.6.1</span> define
 <code>BEA_DATETIME_KSTRZ_LEN</code></h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_DATETIME_KSTRZ_LEN 31</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#</span><span class="er">#define BEA_DATETIME_KSTRZ_LEN 32</span></span></code></pre></div>
 <h3 data-number="13.6.2" id="define-bea_rcc_bdcr_offset"><span
 class="header-section-number">13.6.2</span> define
 <code>BEA_RCC_BDCR_OFFSET</code></h3>

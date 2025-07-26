@@ -207,7 +207,7 @@ bea_sd_write_blocks (uint32_t n_blocks, uint8_t *buffer, uint32_t start_addr)
   bea_gpio_set_value (SD_CHIP_SELECT, false);
 
   // Need this to enable CRC later
-  // bea_spi_disable_crc (SD_SPI_CHANNEL);
+  bea_spi_disable_crc (SD_SPI_CHANNEL);
   struct sd_cmd_response cmd_resp = sd_send_cmd (
       25, (sd_is_block_addressed) ? start_addr : start_addr * 512);
   if (cmd_resp.r1 != 0)
