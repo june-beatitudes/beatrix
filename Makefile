@@ -2,14 +2,17 @@ CC := $(realpath tools/ATfE-20.1.0-Linux-x86_64/bin/clang)
 LD := $(abspath tools/ATfE-20.1.0-Linux-x86_64/bin/ld.lld)
 CFLAGS := -c -Wall -g -O0 -ffreestanding \
 	  --target=thumbv7m-unknown-none-eabihf -mfpu=fpv4-sp-d16 \
-	  -fno-exceptions -fno-rtti -std=c99 -DDEBUG -DSEMIHOSTING
+	  -fno-exceptions -fno-rtti -std=c99 -DDEBUG -DSEMIHOSTING \
+	  -DBEA_KERNEL_INTERNAL
 COMPILER_URL := https://github.com/arm/arm-toolchain/releases/download/release-20.1.0-ATfE/ATfE-20.1.0-Linux-x86_64.tar.xz
 BUILTINSLIB := tools/ATfE-20.1.0-Linux-x86_64/lib/clang-runtimes/arm-none-eabi/armv7m_hard_fpv4_sp_d16/lib/libclang_rt.builtins.a
 
 cfiles := $(wildcard kernel/src/*.c) $(wildcard drivers/*.c) $(wildcard drivers/gpio/*.c) \
-	  $(wildcard drivers/spi/*.c) $(wildcard drivers/sd/*.c) $(wildcard drivers/display_direct/*c)
+	  $(wildcard drivers/spi/*.c) $(wildcard drivers/sd/*.c) $(wildcard drivers/display_direct/*c) \
+	  $(wildcard drivers/graphics/*.c)
 hfiles := $(wildcard kernel/include/*.h) $(wildcard drivers/*.h) $(wildcard drivers/gpio/*.h) \
-	  $(wildcard drivers/spi/*.h) $(wildcard drivers/sd/*.h) $(wildcard drivers/display_direct/*.h)
+	  $(wildcard drivers/spi/*.h) $(wildcard drivers/sd/*.h) $(wildcard drivers/display_direct/*.h) \
+	  $(wildcard drivers/graphics/*.h)
 mdfiles := $(wildcard *.md) $(wildcard kernel/*.md)
 
 setup:
@@ -48,7 +51,7 @@ drivers: setup
 openlibm: setup
 	cd extern && make build -f openlibm.mk CC="$(CC)" CFLAGS="$(CFLAGS)"
 
-ofiles := $(wildcard kernel/build/*.o) extern/openlibm/libopenlibm.a \
+ofiles := $(wildcard resources/build/*.o) $(wildcard kernel/build/*.o) extern/openlibm/libopenlibm.a \
 	  $(wildcard extern/umm_malloc/src/*.o) $(wildcard drivers/build/*.o)
 
 build: drivers kernel umm_malloc openlibm setup

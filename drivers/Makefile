@@ -1,4 +1,5 @@
-cfiles := $(wildcard *.c) $(wildcard gpio/*.c) $(wildcard spi/*.c) $(wildcard sd/*.c) $(wildcard display_direct/*.c)
+cfiles := $(wildcard *.c) $(wildcard gpio/*.c) $(wildcard spi/*.c) $(wildcard sd/*.c) \
+	  $(wildcard display_direct/*.c) $(wildcard graphics/*.c)
 ofiles := $(addprefix build/, $(addsuffix .o, $(basename $(notdir $(cfiles)))))
 
 INCLUDES := -I. -I../kernel/include
@@ -9,6 +10,9 @@ build/gpio.o: gpio/gpio.c
 	$(CC) $^ -o $@ $(CFLAGS) $(INCLUDES)
 
 build/spi.o: spi/spi.c
+	$(CC) $^ -o $@ $(CFLAGS) $(INCLUDES)
+
+build/graphics.o: graphics/graphics.c
 	$(CC) $^ -o $@ $(CFLAGS) $(INCLUDES)
 
 build/display_direct.o: display_direct/display_direct.c

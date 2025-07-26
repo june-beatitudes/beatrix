@@ -32,6 +32,10 @@
 	      gdb
 	      gnumake
 	      unzip
+	      gcc
+	      gfortran
+	      blas
+	      lapack
             ]
           );
       };
