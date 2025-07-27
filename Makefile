@@ -4,6 +4,9 @@ CFLAGS := -c -Wall -g -O0 -ffreestanding \
 	  --target=thumbv7m-unknown-none-eabihf -mfpu=fpv4-sp-d16 \
 	  -fno-exceptions -fno-rtti -std=c99 -DDEBUG -DSEMIHOSTING \
 	  -DBEA_KERNEL_INTERNAL
+SHELL_CFLAGS := -c -Wall -g -O0 -ffreestanding \
+	  --target=thumbv7m-unknown-none-eabihf -mfpu=fpv4-sp-d16 \
+	  -fno-exceptions -fno-rtti -std=c99
 COMPILER_URL := https://github.com/arm/arm-toolchain/releases/download/release-20.1.0-ATfE/ATfE-20.1.0-Linux-x86_64.tar.xz
 BUILTINSLIB := tools/ATfE-20.1.0-Linux-x86_64/lib/clang-runtimes/arm-none-eabi/armv7m_hard_fpv4_sp_d16/lib/libclang_rt.builtins.a
 
@@ -42,6 +45,9 @@ format:
 kernel: setup
 	cd kernel && make build CC="$(CC)" CFLAGS="$(CFLAGS) -Wall"
 
+shell: setup
+	cd shell && make build CC="$(CC)" SHELL_CFLAGS="$(SHELL_CFLAGS) -Wall"
+
 umm_malloc: setup
 	cd extern && make build -f umm_malloc.mk CC="$(CC)" CFLAGS="$(CFLAGS) -Wall"
 
@@ -55,7 +61,8 @@ fatfs: setup
 	cd extern && make build -f fatfs.mk CC="$(CC)" CFLAGS="$(CFLAGS) -Wall"
 
 ofiles := $(wildcard resources/build/*.o) $(wildcard kernel/build/*.o) extern/openlibm/libopenlibm.a \
-	  $(wildcard extern/umm_malloc/src/*.o) $(wildcard drivers/build/*.o) $(wildcard extern/fatfs/source/*.o)
+	  $(wildcard extern/umm_malloc/src/*.o) $(wildcard drivers/build/*.o) $(wildcard extern/fatfs/source/*.o) \
+	  $(wildcard shell/build/*.o)
 
-build: drivers kernel umm_malloc openlibm setup fatfs
+build: drivers kernel umm_malloc openlibm setup fatfs shell
 	$(LD) -o bin/main.elf -Tmain.ld $(ofiles) $(BUILTINSLIB)

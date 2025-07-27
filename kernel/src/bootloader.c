@@ -1,10 +1,11 @@
 #include <bootloader.h>
 #include <driver_table.h>
+#include <ff.h>
 #include <graphics/graphics.h>
 #include <logging.h>
 #include <sd/sd.h>
 #include <stdint.h>
-#include <ff.h>
+#include <shell_main.h>
 
 extern const uint8_t bea_logo[512];
 
@@ -37,50 +38,5 @@ bea_do_boot (void)
     .type = BEA_GRAPHICS_UPDATE_DISPLAY,
   };
   BEA_DRIVER_TABLE[4]->request (&updaterq, &_);
-  struct bea_sd_request_arg rq = {
-    .type = BEA_SD_IS_PRESENT,
-  };
-  struct bea_sd_request_response resp;
-  BEA_DRIVER_TABLE[2]->request (&rq, &resp);
-  if ((resp.err == BEA_SD_ERROR_NONE) && resp.is_present)
-    {
-      bea_log (BEA_LOG_INFO, "SD card is present");
-      rq.type = BEA_SD_ACTIVATE;
-      BEA_DRIVER_TABLE[2]->request (&rq, &resp);
-      if (resp.err == BEA_SD_ERROR_NONE)
-        {
-          bea_log (BEA_LOG_INFO, "SD card enabled");
-          rq.type = BEA_SD_COUNT_BLOCKS;
-          BEA_DRIVER_TABLE[2]->request (&rq, &resp);
-          __attribute__ ((unused)) uint32_t n_blocks = resp.block_count;
-          bea_log (BEA_LOG_INFO, "SD blocks counted");
-          uint8_t buf[512 * 10];
-          rq = (struct bea_sd_request_arg){
-            .type = BEA_SD_READ_BLOCKS,
-            .n_blocks = 10,
-            .block_addr = 0,
-            .buffer = buf,
-          };
-          BEA_DRIVER_TABLE[2]->request (&rq, &resp);
-          bea_log (BEA_LOG_INFO, "SD block 0 read");
-          rq.type = BEA_SD_WRITE_BLOCKS;
-          BEA_DRIVER_TABLE[2]->request (&rq, &resp);
-          if (resp.err != BEA_SD_ERROR_NONE)
-            {
-              bea_log (BEA_LOG_ERROR, "Write back unsuccessful");
-            }
-          else
-            {
-              bea_log (BEA_LOG_INFO, "Write back successful");
-            }
-        }
-      else
-        {
-          bea_log (BEA_LOG_ERROR, "SD card enable failed");
-        }
-    }
-  for (;;)
-    {
-      bea_log (BEA_LOG_INFO, "Busy looping");
-    }
+  shell_main ();
 }

@@ -1,12 +1,12 @@
 GIT_HASH := $(shell git rev-parse HEAD)
 INCLUDES := -I./include -I../extern/openlibm/include -I../extern/umm_malloc/src -I../drivers \
-			-I../extern/fatfs/source
+			-I../extern/fatfs/source -I../shell/include
 
 cfiles := $(wildcard src/*.c)
-hfiles := $(wildcard src/*.h)
+hfiles := $(wildcard include/*.h)
 ofiles := $(addprefix build/, $(addsuffix .o, $(basename $(notdir $(cfiles)))))
 
 build: $(ofiles)
 
-build/%.o: src/%.c $(hfiles)
+build/%.o: src/%.c
 	$(CC) $^ -o $@ $(CFLAGS) $(INCLUDES) -DBEA_GIT_HASH="\"$(GIT_HASH)\""
