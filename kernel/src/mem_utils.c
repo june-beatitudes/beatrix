@@ -58,15 +58,34 @@ memset (void *dest, int ch, size_t count)
   return dest;
 }
 
-char *strchr (const char *str, int ch)
+char *
+strchr (const char *str, int ch)
 {
   while (*str != '\0')
-  {
-    if (ch == *str)
     {
-      return str;
+      if (ch == *str)
+        {
+          return str;
+        }
+      str++;
     }
-    str++;
-  }
   return NULL;
+}
+
+int
+strcmp (const char *s1, const char *s2)
+{
+
+  if (s1 == s2)
+    {
+      return 0;
+    }
+  for (; *s1 != '\0' && *s2 != '\0'; ++s1, ++s2)
+    {
+      if (*s1 != *s2)
+        {
+          break;
+        }
+    }
+  return (*s1 == *s2) ? 0 : *s1 - *s2;
 }
