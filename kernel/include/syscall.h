@@ -39,8 +39,8 @@ enum bea_syscall
   BEA_SYSCALL_SPAWN,
   /// Request to kill either one of your child tasks or yourself
   BEA_SYSCALL_KILL,
-  /// Number of syscall reasons (when cast to a `uint32_t`)
-  BEA_NUM_SYSCALLS,
+  /// Get information about the current task
+  BEA_SYSCALL_TASKINFO,
 };
 
 #endif

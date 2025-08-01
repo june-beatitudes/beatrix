@@ -34,18 +34,46 @@ enum bea_task_state
  */
 struct bea_processor_state
 {
-  /// R0-R12
-  uint32_t general_regs[13];
-  /// S0-S15
-  float fp_regs[16];
-  /// SP
+  uint32_t regs[50];
   uint32_t stack_pointer;
-  /// LR
-  uint32_t link_register;
-  /// PC
-  uint32_t program_counter;
-  /// ASPR (Application Program Status Register)
-  uint32_t aspr;
+};
+
+enum bea_register_index
+{
+  BEA_R4_IND = 0,
+  BEA_R5_IND,
+  BEA_R6_IND,
+  BEA_R7_IND,
+  BEA_R8_IND,
+  BEA_R9_IND,
+  BEA_R10_IND,
+  BEA_R11_IND,
+  BEA_R0_IND,
+  BEA_R1_IND,
+  BEA_R2_IND,
+  BEA_R3_IND,
+  BEA_R12_IND,
+  BEA_LR_IND,
+  BEA_PC_IND,
+  BEA_ASPR_IND,
+  BEA_S0_IND = 16,
+  BEA_S1_IND = 18,
+  BEA_S2_IND = 20,
+  BEA_S3_IND = 22,
+  BEA_S4_IND = 24,
+  BEA_S5_IND = 26,
+  BEA_S6_IND = 28,
+  BEA_S7_IND = 30,
+  BEA_S8_IND = 32,
+  BEA_S9_IND = 34,
+  BEA_S10_IND = 36,
+  BEA_S11_IND = 38,
+  BEA_S12_IND = 40,
+  BEA_S13_IND = 42,
+  BEA_S14_IND = 44,
+  BEA_S15_IND = 46,
+  BEA_FPSCR_IND = 48,
+  BEA_REG_WORDS = 50,
 };
 
 /**
@@ -114,5 +142,7 @@ uint32_t bea_spawn_task (uint32_t priority, void (*entry) (void *), void *arg,
  * @param task_ind The index of the task to kill
  */
 void bea_kill_task (uint32_t task_ind);
+
+void bea_init_scheduler ();
 
 #endif

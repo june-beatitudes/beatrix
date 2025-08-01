@@ -1,51 +1,21 @@
+#include <processor.h>
 #include <register_utils.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <task.h>
 
-static uint64_t highest_task_num = 0;
-static uint32_t num_tasks = 0;
+static uint32_t num_tasks;
+struct bea_task bea_task_table[BEA_MAX_TASKS];
+static uint32_t current_task_ind;
 
-static struct bea_task bea_task_table[BEA_MAX_TASKS];
-static uint32_t current_task_ind = 0;
-
-__attribute__ ((noreturn)) void
-bea_do_scheduler (void)
+__attribute__ ((used)) uint32_t
+_bea_do_ctx_switch (uint32_t *to_save)
 {
-  // First, we save the current state
-  uint32_t *stack_pointer;
-  __asm__ volatile ("MOV [sp], SP" : [sp] "=r"(stack_pointer));
-  struct bea_task current = bea_task_table[current_task_ind];
-  __asm__ volatile ("MOV [r4], R4\n"
-                    "MOV [r5], R5\n"
-                    "MOV [r6], R6\n"
-                    "MOV [r7], R7\n"
-                    "MOV [r8], R8\n"
-                    "MOV [r9], R9\n"
-                    "MOV [r10], R10\n"
-                    "MOV [r11], R11\n"
-                    : [r4] "=r"(current.last_state.general_regs[4]),
-                      [r5] "=r"(current.last_state.general_regs[5]),
-                      [r6] "=r"(current.last_state.general_regs[6]),
-                      [r7] "=r"(current.last_state.general_regs[7]),
-                      [r8] "=r"(current.last_state.general_regs[8]),
-                      [r9] "=r"(current.last_state.general_regs[9]),
-                      [r10] "=r"(current.last_state.general_regs[10]),
-                      [r11] "=r"(current.last_state.general_regs[11]));
-  for (size_t i = 0; i < 4; ++i)
+  for (size_t i = 0; i < 33; ++i)
     {
-      current.last_state.general_regs[i] = stack_pointer[i];
+      bea_task_table[current_task_ind].last_state.regs[i] = to_save[i];
     }
-  current.last_state.general_regs[12] = stack_pointer[4];
-  current.last_state.link_register = stack_pointer[5];
-  current.last_state.program_counter = stack_pointer[6];
-  current.last_state.aspr = stack_pointer[7];
-  for (size_t i = 0; i < 16; ++i)
-    {
-      current.last_state.fp_regs[i] = ((float *)stack_pointer)[i + 8];
-    }
-
-  // Then select the next task
+  bea_task_table[current_task_ind].last_state.regs[BEA_PC_IND] |= 1;
   for (size_t i = 0; i < BEA_MAX_TASKS; ++i)
     {
       current_task_ind++;
@@ -55,49 +25,50 @@ bea_do_scheduler (void)
           break;
         }
     }
-  current = bea_task_table[current_task_ind];
+  return bea_task_table[current_task_ind].last_state.stack_pointer;
+}
 
-  // And load its state
-  __asm__ volatile ("MOV R4, [r4]\n"
-                    "MOV R5, [r5]\n"
-                    "MOV R6, [r6]\n"
-                    "MOV R7, [r7]\n"
-                    "MOV R8, [r8]\n"
-                    "MOV R9, [r9]\n"
-                    "MOV R10, [r10]\n"
-                    "MOV R11, [r11]\n"
-                    :
-                    : [r4] "r"(current.last_state.general_regs[4]),
-                      [r5] "r"(current.last_state.general_regs[5]),
-                      [r6] "r"(current.last_state.general_regs[6]),
-                      [r7] "r"(current.last_state.general_regs[7]),
-                      [r8] "r"(current.last_state.general_regs[8]),
-                      [r9] "r"(current.last_state.general_regs[9]),
-                      [r10] "r"(current.last_state.general_regs[10]),
-                      [r11] "r"(current.last_state.general_regs[11])
-                    : "memory", "r4", "r5", "r6", "r7", "r8", "r9", "r10",
-                      "r11");
-  for (size_t i = 0; i < 4; ++i)
+// Includes R0-3, R12, PC, LR, XSPR, S0-S15, FSPCR, and spacer
+#define STACK_PARTIAL_LOAD_BYTES 104
+
+__attribute__ ((used)) uint32_t *
+_bea_save_psp (uint32_t *psp)
+{
+  bea_task_table[current_task_ind].last_state.stack_pointer
+      = (uint32_t)psp + STACK_PARTIAL_LOAD_BYTES;
+  return psp;
+}
+
+#undef STACK_PARTIAL_LOAD_BYTES
+
+__attribute__ ((used)) uint32_t *
+_bea_fill_in_state (uint32_t *psp)
+{
+  for (size_t i = 0; i < 33; ++i)
     {
-      stack_pointer[i] = current.last_state.general_regs[i];
+      psp[i] = bea_task_table[current_task_ind].last_state.regs[i];
     }
-  stack_pointer[12] = current.last_state.general_regs[12];
-  stack_pointer[5] = current.last_state.link_register;
-  stack_pointer[6] = current.last_state.program_counter;
-  stack_pointer[7] = current.last_state.aspr;
-  for (size_t i = 0; i < 16; ++i)
+  return psp;
+}
+
+__attribute__ ((used)) uint32_t
+_bea_get_priority (void)
+{
+  return bea_task_table[current_task_ind].priority;
+}
+
+// Defined in scheduler_direct.S (best written in straight assembler)
+extern void bea_do_scheduler (void) __asm__ ("bea_do_scheduler");
+
+void
+bea_init_scheduler ()
+{
+  num_tasks = 0;
+  current_task_ind = 0;
+  for (size_t i = 0; i < BEA_MAX_TASKS; ++i)
     {
-      ((float *)stack_pointer)[i + 8] = current.last_state.fp_regs[i];
+      bea_task_table[i].state = BEA_TASK_DEAD;
     }
-
-  // Set up the SysTick timer
-  uint32_t *STK_CTRL = (uint32_t *)0xE000E010;
-  uint32_t *STK_LOAD = (uint32_t *)0xE000E014;
-  bea_set_reg_bits (STK_LOAD, 23, 0, current.priority);
-  bea_set_reg_bits (STK_CTRL, 1, 0, 0b11);
-
-  // Branch away
-  __asm__ volatile ("LDR LR, 0xFFFFFFED");
 }
 
 uint32_t
@@ -153,14 +124,17 @@ bea_spawn_task (uint32_t priority, void (*entry) (void *), void *arg,
       if (bea_task_table[cursor].state == BEA_TASK_DEAD)
         {
           bea_task_table[cursor] = new;
+          break;
         }
     }
   bea_task_table[cursor].ind = cursor;
   bea_task_table[cursor].parent_ind = parent_ind;
   bea_task_table[cursor].last_state.stack_pointer
       = (uint32_t)stack + stack_size;
-  bea_task_table[cursor].last_state.program_counter = (uint32_t)entry;
-  bea_task_table[cursor].last_state.general_regs[0] = (uint32_t)arg;
+  bea_task_table[cursor].last_state.regs[BEA_PC_IND] = (uint32_t)(entry);
+  bea_task_table[cursor].last_state.regs[BEA_R0_IND] = (uint32_t)(arg);
+  bea_task_table[cursor].last_state.regs[BEA_LR_IND] = ~0;
+  bea_task_table[cursor].last_state.regs[BEA_ASPR_IND] = 1 << 24;
   num_tasks++;
   return cursor;
 }
