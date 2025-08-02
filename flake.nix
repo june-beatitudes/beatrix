@@ -22,10 +22,7 @@
             zstd
             zsh
             bear
-            pandoc
             libz
-            doxygen
-            doxygen_gui
             uv
             git-lfs
             gdb
