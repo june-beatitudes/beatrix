@@ -18,30 +18,27 @@
         name = "bea-tooling-env";
         targetPkgs =
           pkgs:
-          (
-           with pkgs; [
-              zstd
-              zsh
-              bear
-              pandoc
-	      libz
-	      doxygen
-	      doxygen_gui
-	      uv
-	      git-lfs
-	      gdb
-	      gnumake
-	      unzip
-	      gcc
-	      gfortran
-	      blas
-	      lapack
-            ]
-          );
+          (with pkgs; [
+            zstd
+            zsh
+            bear
+            pandoc
+            libz
+            doxygen
+            doxygen_gui
+            uv
+            git-lfs
+            gdb
+            gnumake
+            unzip
+            gcc
+            gfortran
+            blas
+            lapack
+          ]);
       };
     in
     {
       devShells.${system}.default = fhs.env;
     };
 }
-
