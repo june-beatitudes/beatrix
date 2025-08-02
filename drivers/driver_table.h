@@ -15,4 +15,6 @@
 /// kernel to be able to initialize it
 const extern struct bea_driver *const BEA_DRIVER_TABLE[];
 
+const struct bea_driver *const bea_get_driver_by_name (const char *name);
+
 #endif
