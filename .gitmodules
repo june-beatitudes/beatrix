@@ -1,9 +1,6 @@
 [submodule "extern/openlibm"]
 	path = extern/openlibm
 	url = https://github.com/JuliaMath/openlibm.git
-[submodule "extern/doxybook"]
-	path = extern/doxybook
-	url = https://github.com/espressif/doxybook.git
 [submodule "extern/umm_malloc"]
 	path = extern/umm_malloc
 	url = https://github.com/rhempel/umm_malloc.git
