@@ -103,6 +103,12 @@ bea_render_text (uint8_t x, uint8_t y, const uint8_t *text, size_t n)
 }
 
 void
+bea_update_display ()
+{
+  bea_display_direct_render ((const uint8_t *)framebuffer);
+}
+
+void
 bea_graphics_request (void *request, void *response)
 {
   struct bea_graphics_request_arg arg
@@ -114,7 +120,7 @@ bea_graphics_request (void *request, void *response)
   switch (arg.type)
     {
     case BEA_GRAPHICS_UPDATE_DISPLAY:
-      bea_display_direct_render ((const uint8_t *)framebuffer);
+    bea_update_display();
       break;
     case BEA_GRAPHICS_DRAW_BMP:
       bea_render_bitmap (loc, arg.width, arg.height, arg.buf);

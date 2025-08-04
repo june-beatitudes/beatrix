@@ -85,6 +85,11 @@ struct bitmap_coord
 };
 
 /**
+ * @brief Directly update the display from the internal framebuffer
+ */
+void bea_update_display ();
+
+/**
  * @brief Render a bitmap directly to the screen
  *
  * @param loc The location of the upper-left corner of the bitmap
