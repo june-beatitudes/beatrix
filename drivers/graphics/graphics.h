@@ -23,6 +23,8 @@ enum bea_graphics_request_type
   BEA_GRAPHICS_UPDATE_DISPLAY,
   /// Draw a bitmap at a specified position on the display
   BEA_GRAPHICS_DRAW_BMP,
+  /// Clear the screen with a specific color
+  BEA_GRAPHICS_CLEAR_SCREEN,
   /// Render text at a specified position on the display
   BEA_GRAPHICS_DRAW_TEXT,
 };
@@ -37,10 +39,10 @@ struct bea_graphics_request_arg
   enum bea_graphics_request_type type;
   /// The x-coordinate of the upper-left corner to draw at (for drawing
   /// operations)
-  uint8_t x;
+  int16_t x;
   /// The y-coordinate of the upper-left corner to draw at (for drawing
   /// operations)
-  uint8_t y;
+  int16_t y;
   /// The width of the bitmap to draw to the screen (for bitmap rendering
   /// operations)
   uint8_t width;
@@ -53,6 +55,8 @@ struct bea_graphics_request_arg
   const uint8_t *buf;
   /// The number of characters to render (for text-rendering operations)
   size_t n_chars;
+  /// Color to clear the screen to (white is true, black is false)
+  bool clear_color;
   /// Reserved for future use
   bool centered;
 };
@@ -80,8 +84,8 @@ struct bea_graphics_request_response
  */
 struct bitmap_coord
 {
-  uint8_t x;
-  uint8_t y;
+  int16_t x;
+  int16_t y;
 };
 
 /**
@@ -101,14 +105,20 @@ void bea_render_bitmap (struct bitmap_coord loc, uint8_t width, uint8_t height,
                         const uint8_t *data);
 
 /**
- * @brief Render text directly to the screen
+ * @brief Render left-aligned text directly to the screen
  *
- * @param x The x-coordinate of the top-left corner of the text box
- * @param y The y-coordinate of the top-left corner of the text box
+ * @param loc The top-left corner of the text box
  * @param text The text to be rendered
  * @param n The number of characters to be rendered
  */
-void bea_render_text (uint8_t x, uint8_t y, const uint8_t *text, size_t n);
+void bea_render_text (struct bitmap_coord loc, const uint8_t *text, size_t n);
+
+/**
+ * @brief Flood the framebuffer with a specific color
+ *
+ * @param color true for "white", false for "black"
+ */
+void bea_clear_screen (bool color);
 
 bool bea_graphics_initialize (void);
 bool bea_graphics_deinitialize (void);

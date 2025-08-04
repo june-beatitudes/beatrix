@@ -1,9 +1,10 @@
 #include <display_direct/display_direct.h>
 #include <graphics/graphics.h>
 #include <stdbool.h>
+#include <stddef.h>
 #include <stdint.h>
 
-static uint8_t framebuffer[512];
+static uint8_t framebuffer[1024];
 
 extern const uint8_t bea_unifont[223][16];
 
@@ -51,20 +52,23 @@ void
 bea_render_bitmap (struct bitmap_coord loc, uint8_t width, uint8_t height,
                    const uint8_t *data)
 {
-  if (loc.x > 127 || loc.y > 63)
-    {
-      return;
-    }
+  uint8_t ymin = (loc.y > 0) ? loc.y : 0;
+  uint8_t xmin = (loc.x > 0) ? loc.x : 0;
   uint8_t ymax = (loc.y + height > 63) ? 63 : loc.y + height;
   uint8_t xmax = (loc.x + width > 127) ? 127 : loc.x + width;
-  for (uint16_t col = loc.x; col <= xmax; ++col)
+  for (int16_t col = xmin; col <= xmax; ++col)
     {
-      for (int8_t row = loc.y; row <= ymax; ++row)
+      for (int16_t row = ymin; row <= ymax; ++row)
         {
           struct bitmap_coord pixcoord = {
             .x = col,
             .y = row,
           };
+          if ((col - loc.x) >= width || (row - loc.y) >= height)
+            {
+              // Don't need to care, continue
+              continue;
+            }
           struct bitmap_coord bmpcoord = {
             .x = col - loc.x,
             .y = row - loc.y,
@@ -79,22 +83,22 @@ bea_render_bitmap (struct bitmap_coord loc, uint8_t width, uint8_t height,
 }
 
 void
-bea_render_text (uint8_t x, uint8_t y, const uint8_t *text, size_t n)
+bea_render_text (struct bitmap_coord screen_loc, const uint8_t *text, size_t n)
 {
-  uint8_t current_x = x;
+  int16_t current_x = screen_loc.x;
   for (size_t i = 0; i < n; ++i)
     {
       if (text[i] == '\n')
         {
-          y += 16;
-          current_x = x;
+          screen_loc.y += 16;
+          current_x = screen_loc.x;
         }
       else if (text[i] > 127 || (text[i] >= 32 && text[i] <= 126))
         {
           uint8_t ind = (text[i] > 127) ? text[i] - 33 : text[i] - 32;
           struct bitmap_coord loc = {
             .x = current_x,
-            .y = y,
+            .y = screen_loc.y,
           };
           bea_render_bitmap (loc, 8, 16, bea_unifont[ind]);
           current_x += 8;
@@ -109,6 +113,25 @@ bea_update_display ()
 }
 
 void
+bea_clear_screen (bool color)
+{
+  if (color)
+    {
+      for (size_t i = 0; i < 1024; ++i)
+        {
+          framebuffer[i] = 0xFF;
+        }
+    }
+  else
+    {
+      for (size_t i = 0; i < 1024; ++i)
+        {
+          framebuffer[i] = 0x00;
+        }
+    }
+}
+
+void
 bea_graphics_request (void *request, void *response)
 {
   struct bea_graphics_request_arg arg
@@ -120,13 +143,16 @@ bea_graphics_request (void *request, void *response)
   switch (arg.type)
     {
     case BEA_GRAPHICS_UPDATE_DISPLAY:
-    bea_update_display();
+      bea_update_display ();
       break;
     case BEA_GRAPHICS_DRAW_BMP:
       bea_render_bitmap (loc, arg.width, arg.height, arg.buf);
       break;
     case BEA_GRAPHICS_DRAW_TEXT:
-      bea_render_text (arg.x, arg.y, arg.buf, arg.n_chars);
+      bea_render_text (loc, arg.buf, arg.n_chars);
+      break;
+    case BEA_GRAPHICS_CLEAR_SCREEN:
+      bea_clear_screen (arg.clear_color);
       break;
     }
   struct bea_graphics_request_response resp = {
