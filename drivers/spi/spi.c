@@ -54,7 +54,7 @@ do_spi_channel_gpio_inits ()
 {
   const struct bea_gpio_line LINES[]
       = { SPI1_MISO, SPI1_MOSI, SPI1_SCK, SPI2_MISO, SPI2_MOSI, SPI2_SCK };
-  for (size_t i = 0; i < sizeof (LINES); ++i)
+  for (size_t i = 0; i < 6; ++i)
     {
       bea_gpio_set_mode (LINES[i], BEA_GPIO_ALT);
       bea_gpio_set_alt_func (LINES[i], BEA_GPIO_AF_SPI1_2);
@@ -65,7 +65,7 @@ static void
 do_spi_channel_inits ()
 {
   const enum bea_spi_channel CHANNELS[] = { BEA_SPI_CHAN1, BEA_SPI_CHAN2 };
-  for (size_t i = 0; i < sizeof (CHANNELS); ++i)
+  for (size_t i = 0; i < 2; ++i)
     {
       uint32_t cr1 = 0x0;
       // TODO: Holy magic constants, Batman!
