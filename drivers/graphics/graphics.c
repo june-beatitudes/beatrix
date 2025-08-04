@@ -52,6 +52,10 @@ void
 bea_render_bitmap (struct bitmap_coord loc, uint8_t width, uint8_t height,
                    const uint8_t *data)
 {
+  if (loc.y > 63 || loc.x > 127)
+    {
+      return;
+    }
   uint8_t ymin = (loc.y > 0) ? loc.y : 0;
   uint8_t xmin = (loc.x > 0) ? loc.x : 0;
   uint8_t ymax = (loc.y + height > 63) ? 63 : loc.y + height;
