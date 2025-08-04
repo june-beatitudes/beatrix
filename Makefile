@@ -1,9 +1,9 @@
 CC := $(realpath tools/ATfE-20.1.0-Linux-x86_64/bin/clang)
 LD := $(abspath tools/ATfE-20.1.0-Linux-x86_64/bin/ld.lld)
+OBJCOPY := $(abspath tools/ATfE-20.1.0-Linux-x86_64/bin/llvm-objcopy)
 CFLAGS := -c -Wall -g -O0 -ffreestanding \
 	  --target=thumbv7m-unknown-none-eabihf -mfpu=fpv4-sp-d16 \
-	  -fno-exceptions -fno-rtti -std=c99 -DDEBUG -DSEMIHOSTING \
-	  -DBEA_KERNEL_INTERNAL
+	  -fno-exceptions -fno-rtti -std=c99 -DBEA_KERNEL_INTERNAL # -DDEBUG -DSEMIHOSTING
 SHELL_CFLAGS := -c -Wall -g -O0 -ffreestanding \
 	  --target=thumbv7m-unknown-none-eabihf -mfpu=fpv4-sp-d16 \
 	  -fno-exceptions -fno-rtti -std=c99
@@ -66,3 +66,6 @@ ofiles := $(wildcard resources/build/*.o) $(wildcard kernel/build/*.o) extern/op
 
 build: drivers kernel umm_malloc openlibm setup fatfs shell
 	$(LD) -o bin/main.elf -Tmain.ld $(ofiles) $(BUILTINSLIB)
+
+release: build
+	$(OBJCOPY) -O binary bin/main.elf bin/release.bin
