@@ -10,11 +10,12 @@
 
 #include <driver.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 /// Driver table -- null terminated, each driver *must* have an entry for the
 /// kernel to be able to initialize it
 const extern struct bea_driver *const BEA_DRIVER_TABLE[];
 
-const struct bea_driver *const bea_get_driver_by_name (const char *name);
+uint32_t bea_get_driver_by_name (const char *name);
 
 #endif

@@ -16,3 +16,9 @@ const struct bea_version BEATRIX_VERSION
         .name = "Love Letters",
         .git_hash = BEA_GIT_HASH,
       };
+
+struct bea_version
+bea_get_version (void)
+{
+  return BEATRIX_VERSION;
+}

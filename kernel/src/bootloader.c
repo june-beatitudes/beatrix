@@ -34,17 +34,10 @@ bea_do_boot (void)
     .y = 0,
   };
   bea_render_bitmap (LOGO_LOC, 64, 64, bea_logo);
-  bea_update_display();
+  bea_update_display ();
   bea_init_scheduler ();
-  uint32_t *dummy_stack = (uint32_t *)0x20030000;
-  uint32_t *stack1 = dummy_stack + 256;
-  uint32_t *stack2 = stack1 + 1024;
-  uint32_t *heap1 = stack2 + 1024;
-  uint32_t *heap2 = heap1 + 256;
-  bea_spawn_task (1, NULL, NULL, dummy_stack, 256, NULL, 0,
-                  BEA_PARENTLESS_INDEX);
-  bea_spawn_task (1024, shell_main2, NULL, stack2, 1024, heap2, 256,
-                  BEA_PARENTLESS_INDEX);
+  uint32_t *stack1 = (uint32_t *)0x20030000;
+  uint32_t *heap1 = stack1 + 1024;
   bea_spawn_task (4096, shell_main, NULL, stack1, 1024, heap1, 256,
                   BEA_PARENTLESS_INDEX);
   __asm__ volatile ("MOV R0, %[stack_top]\n"
@@ -52,9 +45,9 @@ bea_do_boot (void)
                     "LDR R0, =0b111\n"
                     "MSR CONTROL, R0\n"
                     "ISB\n"
-                    "SVC #5\n"
                     :
-                    : [stack_top] "r"(dummy_stack + 256));
+                    : [stack_top] "r"(stack1 + 1024));
+  shell_main (NULL);
   __asm__ volatile ("_bdb_loop0:\n"
                     "B _bdb_loop0\n");
 }

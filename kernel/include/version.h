@@ -15,4 +15,6 @@ struct bea_version
   char git_hash[BEA_GIT_HASH_LEN];
 };
 
+struct bea_version bea_get_version (void);
+
 #endif

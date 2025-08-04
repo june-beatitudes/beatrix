@@ -10,12 +10,6 @@
 #define BEA_SYSCALL_H
 
 /**
- * @brief System call interrupt handler, fetches reason and argument from R0
- * and R1 respectively, return value is in R0
- */
-void bea_do_syscall (void);
-
-/**
  * @brief System call enumeration
  */
 enum bea_syscall
@@ -43,5 +37,11 @@ enum bea_syscall
   BEA_SYSCALL_TASKINFO,
   BEA_NUM_SYSCALLS,
 };
+
+/**
+ * @brief System call interrupt handler, fetches reason from instruction and
+ * arguments from R0 and R1 respectively, return value is in R0
+ */
+void bea_do_syscall (void);
 
 #endif
