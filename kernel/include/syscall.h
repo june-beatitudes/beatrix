@@ -41,6 +41,7 @@ enum bea_syscall
   BEA_SYSCALL_KILL,
   /// Get information about the current task
   BEA_SYSCALL_TASKINFO,
+  BEA_NUM_SYSCALLS,
 };
 
 #endif
